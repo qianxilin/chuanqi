@@ -75,3 +75,4 @@ Emerald/[Aa]ssets/[Ss]treamingAssets/aa/*
 
 #Server
 Build/
+Emerald/Assets/Settings.json
