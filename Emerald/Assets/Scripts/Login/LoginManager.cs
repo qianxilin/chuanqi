@@ -95,7 +95,7 @@ public class LoginManager : MonoBehaviour
         {
             AccountID = username,
             Password = password,
-            EMailAddress = "na",
+            EMailAddress = "na@na.com",
             BirthDate = DateTime.Now,
             UserName = "na",
             SecretQuestion = "na",

@@ -278,6 +278,31 @@ namespace EmeraldNetwork
                 case 0:
                     LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account creation is disabled.");
                     break;
+                case 1:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid account ID.");
+                    break;
+                case 2:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid password.");
+                    break;
+                case 3:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid email address.");
+                    break;
+                case 4:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid username.");
+                    break;
+                case 5:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid secret question.");
+                    break;
+                case 6:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid secret answer.");
+                    break;
+                case 7:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account ID already exists.");
+                    break;
+                case 8:
+                    LoginManager.GetComponent<LoginManager>().RegisterCancel_OnClick();
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account creation successful.");                    
+                    break;
             }
         }
 
