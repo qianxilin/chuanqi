@@ -7,6 +7,8 @@ using C = ClientPackets;
 
 public class LoginManager : MonoBehaviour
 {
+    //Connection
+    public GameObject ConnectBox;
     //Login
     public GameObject LoginBox;
     public GameObject UserName;
@@ -25,6 +27,7 @@ public class LoginManager : MonoBehaviour
     {
         LoginBox.SetActive(false);
         RegisterBox.SetActive(false);
+        ConnectBox.SetActive(true);
     }
 
     // Update is called once per frame
@@ -50,6 +53,7 @@ public class LoginManager : MonoBehaviour
     public void ShowLoginBox()
     {
         loginshown = true;
+        ConnectBox.SetActive(false);
         LoginBox.SetActive(true);
         UserName.GetComponent<TMP_InputField>().ActivateInputField();
     }

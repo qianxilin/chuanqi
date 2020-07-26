@@ -31,7 +31,6 @@ namespace EmeraldNetwork
                 Disconnect();
 
             ConnectAttempt++;
-            Debug.Log(ConnectAttempt);
 
             _client = new TcpClient {NoDelay = true};
             _client.BeginConnect(GameManager.networkInfo.IPAddress, GameManager.networkInfo.Port, Connection, null);
