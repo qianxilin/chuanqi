@@ -30,14 +30,28 @@ public class LoginManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!loginshown && Network.LoginConnected)
+        if (!loginshown)
+        {
+            if (Network.LoginConnected)
             ShowLoginBox();
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (UserName.GetComponent<TMP_InputField>().isFocused)
+                    Password.GetComponent<TMP_InputField>().Select();
+                else if (Password.GetComponent<TMP_InputField>().isFocused)
+                    UserName.GetComponent<TMP_InputField>().Select();
+            }
+        }
     }
 
     public void ShowLoginBox()
     {
         loginshown = true;
         LoginBox.SetActive(true);
+        UserName.GetComponent<TMP_InputField>().ActivateInputField();
     }
 
     public void LoginButton_OnClick()
