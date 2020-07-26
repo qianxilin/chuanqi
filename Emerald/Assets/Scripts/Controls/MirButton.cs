@@ -37,10 +37,7 @@ public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        image.sprite = DownButton;
-
-        if (clickSound != null)
-            clickSound.Play();
+        image.sprite = DownButton;        
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -49,7 +46,10 @@ public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
 
     public void OnPointerClick(PointerEventData eventData)
-    {        
+    {
+        if (clickSound != null)
+            clickSound.Play();
+
         if (ClickEvent == null) return;
         ClickEvent.Invoke();
     }
