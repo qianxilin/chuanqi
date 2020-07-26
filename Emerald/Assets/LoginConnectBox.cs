@@ -9,6 +9,6 @@ public class LoginConnectBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshProUGUI>().text = $"Connecting attempt: {Network.ConnectAttempt}";
+        GetComponent<TextMeshProUGUI>().text = $"Connection attempt: {Network.ConnectAttempt}";
     }
 }
