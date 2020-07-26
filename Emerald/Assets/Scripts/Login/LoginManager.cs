@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using TMPro;
 using Network = EmeraldNetwork.Network;
@@ -18,7 +17,6 @@ public class LoginManager : MonoBehaviour
     public GameObject RegisterUserName;
     public GameObject RegisterPassword;
     public GameObject ConfirmPassword;
-    public GameObject Email;
 
     private bool loginshown = false;
 
@@ -75,12 +73,11 @@ public class LoginManager : MonoBehaviour
         Password.GetComponent<TMP_InputField>().text = string.Empty;
     }
 
-    /*public void RegisterButton_OnClick()
+    public void RegisterButton_OnClick()
     {
-        string username = UserName.GetComponent<InputField>().text;
-        string email = Email.GetComponent<InputField>().text;
-        string password = Password.GetComponent<InputField>().text;
-        string confirm = ConfirmPassword.GetComponent<InputField>().text;
+        string username = RegisterUserName.GetComponent<TMP_InputField>().text;
+        string password = RegisterPassword.GetComponent<TMP_InputField>().text;
+        string confirm = ConfirmPassword.GetComponent<TMP_InputField>().text;
 
         if (username == string.Empty || password == string.Empty) return;
         if (confirm != password) return;
@@ -89,16 +86,25 @@ public class LoginManager : MonoBehaviour
         {
             AccountID = username,
             Password = password,
-            EMailAddress = email,
+            EMailAddress = "na",
             BirthDate = DateTime.Now,
             UserName = "na",
             SecretQuestion = "na",
             SecretAnswer = "na"
         });
+    }
 
-        UserName.GetComponent<InputField>().text = string.Empty;
-        Email.GetComponent<InputField>().text = string.Empty;
-        Password.GetComponent<InputField>().text = string.Empty;
-        ConfirmPassword.GetComponent<InputField>().text = string.Empty;
-    }*/
+    public void RegisterCancel_OnClick()
+    {
+        ClearRegisterBox();
+        RegisterBox.SetActive(false);
+        LoginBox.SetActive(true);
+    }
+
+    private void ClearRegisterBox()
+    {
+        RegisterUserName.GetComponent<TMP_InputField>().text = string.Empty;
+        RegisterPassword.GetComponent<TMP_InputField>().text = string.Empty;
+        ConfirmPassword.GetComponent<TMP_InputField>().text = string.Empty;
+    }
 }
