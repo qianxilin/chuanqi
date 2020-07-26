@@ -280,7 +280,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoginBox: {fileID: 1327569699}
+  UserName: {fileID: 758999677}
+  Password: {fileID: 426599885}
   RegisterBox: {fileID: 2026262321}
+  RegisterUserName: {fileID: 0}
+  RegisterPassword: {fileID: 0}
+  ConfirmPassword: {fileID: 0}
+  Email: {fileID: 0}
 --- !u!4 &21959868
 Transform:
   m_ObjectHideFlags: 0
@@ -557,7 +563,6 @@ GameObject:
   - component: {fileID: 209486172}
   - component: {fileID: 209486175}
   - component: {fileID: 209486174}
-  - component: {fileID: 209486176}
   - component: {fileID: 209486177}
   m_Layer: 5
   m_Name: Login Button
@@ -623,20 +628,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209486171}
   m_CullTransparentMesh: 0
---- !u!114 &209486176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209486171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08db7e0c599af794ab83178f4619cd07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UserName: {fileID: 758999677}
-  Password: {fileID: 426599885}
 --- !u!114 &209486177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,8 +646,8 @@ MonoBehaviour:
   onclick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 209486176}
-        m_MethodName: OnClick
+      - m_Target: {fileID: 21959867}
+        m_MethodName: LoginButton_OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
