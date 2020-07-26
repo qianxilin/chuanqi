@@ -8,42 +8,49 @@ using UnityEngine.Events;
 public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private Button button;
+    private AudioSource clickSound;
     private Image image;
-    public Sprite neutralButton;
-    public Sprite hoverButton;
-    public Sprite downButton;
-    public UnityEvent onclick;
+
+    public Sprite NeutralButton;
+    public Sprite HoverButton;
+    public Sprite DownButton;
+    public UnityEvent ClickEvent;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         button = GetComponent<Button>();
         image = GetComponent<Image>();
+        clickSound = GetComponent<AudioSource>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        image.sprite = hoverButton;
+        image.sprite = HoverButton;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.sprite = neutralButton;
+        image.sprite = NeutralButton;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        image.sprite = downButton;
+        image.sprite = DownButton;
+
+        if (clickSound != null)
+            clickSound.Play();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        image.sprite = neutralButton;
+        image.sprite = NeutralButton;
     }
 
     public void OnPointerClick(PointerEventData eventData)
-    {
-        if (onclick == null) return;
-        onclick.Invoke();
+    {        
+        if (ClickEvent == null) return;
+        ClickEvent.Invoke();
     }
 }

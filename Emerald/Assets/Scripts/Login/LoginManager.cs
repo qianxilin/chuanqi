@@ -38,7 +38,6 @@ public class LoginManager : MonoBehaviour
     {
         loginshown = true;
         LoginBox.SetActive(true);
-        RegisterBox.SetActive(true);
     }
 
     public void LoginButton_OnClick()
