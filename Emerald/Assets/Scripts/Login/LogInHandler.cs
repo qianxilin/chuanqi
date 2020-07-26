@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
 
@@ -11,8 +11,9 @@ public class LogInHandler : MonoBehaviour
 
     public void OnClick()
     {
-        string username = UserName.GetComponent<InputField>().text;
-        string password = Password.GetComponent<InputField>().text;
+        Debug.Log("Click");
+        string username = UserName.GetComponent<TMP_InputField>().text;
+        string password = Password.GetComponent<TMP_InputField>().text;
 
         if (username == string.Empty || password == string.Empty) return;
 
@@ -22,7 +23,7 @@ public class LogInHandler : MonoBehaviour
             Password = password
         });
 
-        UserName.GetComponent<InputField>().text = string.Empty;
-        Password.GetComponent<InputField>().text = string.Empty;
+        UserName.GetComponent<TMP_InputField>().text = string.Empty;
+        Password.GetComponent<TMP_InputField>().text = string.Empty;
     }
 }
