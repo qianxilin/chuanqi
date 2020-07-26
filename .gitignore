@@ -75,5 +75,7 @@ Emerald/[Aa]ssets/[Ss]treamingAssets/aa/*
 
 #Server
 Build/
+Server/obj/
+Server.MirForms/obj/
 Emerald/Assets/Settings.json
 Emerald/Assets/Settings.json.meta

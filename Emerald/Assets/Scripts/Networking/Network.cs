@@ -19,6 +19,8 @@ namespace EmeraldNetwork
         public static bool LoginConnected = false;
         public static DateTime TimeOutTime, TimeConnected;
 
+        public static GameObject LoginManager;
+
         private static ConcurrentQueue<Packet> _receiveList;
         private static ConcurrentQueue<Packet> _sendList;
 
@@ -188,8 +190,6 @@ namespace EmeraldNetwork
                 return;
             }
 
-
-
             while (_receiveList != null && !_receiveList.IsEmpty)
             {
                 Packet p;
@@ -237,6 +237,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ClientVersion:
                     ClientVersion((S.ClientVersion)p);
                     break;
+                case (short)ServerPacketIds.NewAccount:
+                    NewAccount((S.NewAccount)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -264,6 +267,18 @@ namespace EmeraldNetwork
         public static void ClientVersion(S.ClientVersion p)
         {
             LoginConnected = true;
+        }
+
+        public static void NewAccount(S.NewAccount p)
+        {
+            if (LoginManager == null) return;
+
+            switch (p.Result)
+            {
+                case 0:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account creation is disabled.");
+                    break;
+            }
         }
 
         public static void Enqueue(Packet p)

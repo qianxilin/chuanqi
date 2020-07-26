@@ -17,6 +17,8 @@ public class LoginManager : MonoBehaviour
     public GameObject RegisterUserName;
     public GameObject RegisterPassword;
     public GameObject ConfirmPassword;
+    //Misc
+    public GameObject MessageBox;
 
     private bool loginshown = false;
 
@@ -35,6 +37,7 @@ public class LoginManager : MonoBehaviour
         {
             if (Network.LoginConnected)
             ShowLoginBox();
+            Network.LoginManager = gameObject;
         }
         else
         {
@@ -54,6 +57,12 @@ public class LoginManager : MonoBehaviour
         ConnectBox.SetActive(false);
         LoginBox.SetActive(true);
         UserName.GetComponent<TMP_InputField>().ActivateInputField();
+    }
+
+    public void ShowMessageBox(string message)
+    {
+        MessageBox.GetComponentInChildren<TextMeshProUGUI>().text = message;
+        MessageBox.SetActive(true);
     }
 
     public void LoginButton_OnClick()
