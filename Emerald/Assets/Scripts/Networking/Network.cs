@@ -240,6 +240,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.NewAccount:
                     NewAccount((S.NewAccount)p);
                     break;
+                case (short)ServerPacketIds.ChangePassword:
+                    ChangePassword((S.ChangePassword)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -302,6 +305,37 @@ namespace EmeraldNetwork
                 case 8:
                     LoginManager.GetComponent<LoginManager>().RegisterCancel_OnClick();
                     LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account creation successful.");                    
+                    break;
+            }
+        }
+
+        public static void ChangePassword(S.ChangePassword p)
+        {
+            if (LoginManager == null) return;
+
+            switch (p.Result)
+            {
+                case 0:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Password change is disabled.");
+                    break;
+                case 1:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid account ID.");
+                    break;
+                case 2:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid password.");
+                    break;
+                case 3:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid new password.");
+                    break;
+                case 4:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account does not exist");
+                    break;
+                case 5:
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Can not use same password.");
+                    break;
+                case 6:
+                    LoginManager.GetComponent<LoginManager>().ChangeCancel_OnClick();
+                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Password change successful.");
                     break;
             }
         }
