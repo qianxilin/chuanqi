@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Effect_47_Distortion
   m_Shader: {fileID: 4800000, guid: 271e63546890440f4bac7dcaf5067939, type: 3}
   m_ShaderKeywords: 
@@ -43,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: 6c4ac7277a059274da9279e7e5bffe79, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -51,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 8f45d89a0dd877246820f08ee31a857f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9050f1f2775a9814283315e5fe7d1d0d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -72,7 +73,7 @@ Material:
     - _ColorRedFactor: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistortFactor: 200
+    - _DistortFactor: 150
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5

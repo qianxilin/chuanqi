@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class OpenDoors : MonoBehaviour
 {
-    protected Animation Animation;
-
-    public Animator anim;
-
-    void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
+    public Animator leftdoor, rightdoor, camera;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            anim.SetBool("openGate", true);
-        }
+            leftdoor.SetBool("openGate", true);
+            rightdoor.SetBool("openGate", true);
+            camera.SetBool("openGate", true);
+        }  
     }
 }
