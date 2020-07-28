@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
-{    
+{
     void ChangeScene()
     {
         SceneManager.LoadSceneAsync("CharSel");
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);        
     }
 }

@@ -8,6 +8,7 @@ public class LoginManager : MonoBehaviour
 {
     //Animations
     public Animator LeftDoor, RightDoor, Camera;
+    public AudioSource DoorOpenSound;
     //Connection
     public GameObject ConnectBox;
     //Login
@@ -160,6 +161,7 @@ public class LoginManager : MonoBehaviour
 
     public void LoginSuccess()
     {
+        DoorOpenSound.Play();
         LoginBox.SetActive(false);
         LeftDoor.SetBool("openGate", true);
         RightDoor.SetBool("openGate", true);
