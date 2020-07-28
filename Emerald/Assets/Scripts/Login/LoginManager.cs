@@ -6,6 +6,8 @@ using C = ClientPackets;
 
 public class LoginManager : MonoBehaviour
 {
+    //Animations
+    public Animator LeftDoor, RightDoor, Camera;
     //Connection
     public GameObject ConnectBox;
     //Login
@@ -43,7 +45,7 @@ public class LoginManager : MonoBehaviour
         {
             if (Network.LoginConnected)
             ShowLoginBox();
-            Network.LoginManager = gameObject;
+            Network.LoginManager = this;
         }
         else
         {
@@ -154,5 +156,13 @@ public class LoginManager : MonoBehaviour
         ChangeCurrentPassword.GetComponent<TMP_InputField>().text = string.Empty;
         ChangeNewPassword.GetComponent<TMP_InputField>().text = string.Empty;
         ChangeConfirmPassword.GetComponent<TMP_InputField>().text = string.Empty;
+    }
+
+    public void LoginSuccess()
+    {
+        LoginBox.SetActive(false);
+        LeftDoor.SetBool("openGate", true);
+        RightDoor.SetBool("openGate", true);
+        Camera.SetBool("openGate", true);
     }
 }

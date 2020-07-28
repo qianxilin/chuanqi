@@ -19,7 +19,7 @@ namespace EmeraldNetwork
         public static bool LoginConnected = false;
         public static DateTime TimeOutTime, TimeConnected;
 
-        public static GameObject LoginManager;
+        public static LoginManager LoginManager;
 
         private static ConcurrentQueue<Packet> _receiveList;
         private static ConcurrentQueue<Packet> _sendList;
@@ -243,6 +243,12 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ChangePassword:
                     ChangePassword((S.ChangePassword)p);
                     break;
+                case (short)ServerPacketIds.Login:
+                    Login((S.Login)p);
+                    break;
+                case (short)ServerPacketIds.LoginSuccess:
+                    LoginSuccess((S.LoginSuccess)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -279,32 +285,32 @@ namespace EmeraldNetwork
             switch (p.Result)
             {
                 case 0:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account creation is disabled.");
+                    LoginManager.ShowMessageBox("Account creation is disabled.");
                     break;
                 case 1:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid account ID.");
+                    LoginManager.ShowMessageBox("Invalid account ID.");
                     break;
                 case 2:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid password.");
+                    LoginManager.ShowMessageBox("Invalid password.");
                     break;
                 case 3:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid email address.");
+                    LoginManager.ShowMessageBox("Invalid email address.");
                     break;
                 case 4:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid username.");
+                    LoginManager.ShowMessageBox("Invalid username.");
                     break;
                 case 5:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid secret question.");
+                    LoginManager.ShowMessageBox("Invalid secret question.");
                     break;
                 case 6:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid secret answer.");
+                    LoginManager.ShowMessageBox("Invalid secret answer.");
                     break;
                 case 7:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account ID already exists.");
+                    LoginManager.ShowMessageBox("Account ID already exists.");
                     break;
                 case 8:
-                    LoginManager.GetComponent<LoginManager>().RegisterCancel_OnClick();
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account creation successful.");                    
+                    LoginManager.RegisterCancel_OnClick();
+                    LoginManager.ShowMessageBox("Account creation successful.");                    
                     break;
             }
         }
@@ -316,28 +322,59 @@ namespace EmeraldNetwork
             switch (p.Result)
             {
                 case 0:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Password change is disabled.");
+                    LoginManager.ShowMessageBox("Password change is disabled.");
                     break;
                 case 1:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid account ID.");
+                    LoginManager.ShowMessageBox("Invalid account ID.");
                     break;
                 case 2:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid password.");
+                    LoginManager.ShowMessageBox("Invalid password.");
                     break;
                 case 3:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Invalid new password.");
+                    LoginManager.ShowMessageBox("Invalid new password.");
                     break;
                 case 4:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Account does not exist");
+                    LoginManager.ShowMessageBox("Account does not exist");
                     break;
                 case 5:
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Can not use same password.");
+                    LoginManager.ShowMessageBox("Can not use same password.");
                     break;
                 case 6:
-                    LoginManager.GetComponent<LoginManager>().ChangeCancel_OnClick();
-                    LoginManager.GetComponent<LoginManager>().ShowMessageBox("Password change successful.");
+                    LoginManager.ChangeCancel_OnClick();
+                    LoginManager.ShowMessageBox("Password change successful.");
                     break;
             }
+        }
+
+        public static void Login(S.Login p)
+        {
+            if (LoginManager == null) return;
+
+            switch (p.Result)
+            {
+                case 0:
+                    LoginManager.ShowMessageBox("Login is disabled.");
+                    break;
+                case 1:
+                    LoginManager.ShowMessageBox("Invalid account ID.");
+                    break;
+                case 2:
+                    LoginManager.ShowMessageBox("Invalid password.");
+                    break;
+                case 3:
+                    LoginManager.ShowMessageBox("Account does not exist.");
+                    break;
+                case 4:
+                    LoginManager.ShowMessageBox("Wrong password");
+                    break;
+            }
+        }
+
+        public static void LoginSuccess(S.LoginSuccess p)
+        {
+            if (LoginManager == null) return;
+
+            LoginManager.LoginSuccess();
         }
 
         public static void Enqueue(Packet p)
