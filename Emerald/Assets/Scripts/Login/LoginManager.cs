@@ -57,6 +57,14 @@ public class LoginManager : MonoBehaviour
                 else if (Password.GetComponent<TMP_InputField>().isFocused)
                     UserName.GetComponent<TMP_InputField>().Select();
             }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                string username = UserName.GetComponent<TMP_InputField>().text;
+                string password = Password.GetComponent<TMP_InputField>().text;
+
+                if (username != string.Empty && password != string.Empty)
+                    LoginButton_OnClick();
+            }
         }
     }
 
