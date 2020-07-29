@@ -7,7 +7,6 @@ using UnityEngine.Events;
 
 public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
-    private Button button;
     private AudioSource clickSound;
     private Image image;
 
@@ -20,13 +19,13 @@ public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     // Start is called before the first frame update
     void Start()
     {
-        button = GetComponent<Button>();
         image = GetComponent<Image>();
         clickSound = GetComponent<AudioSource>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("Enter");
         image.sprite = HoverButton;
     }
 
