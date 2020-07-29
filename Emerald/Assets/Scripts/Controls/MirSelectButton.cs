@@ -5,14 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
-public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
+public class MirSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     private AudioSource clickSound;
     private Image image;
+    private bool Selected;
 
-    public Sprite NeutralButton;
-    public Sprite HoverButton;
-    public Sprite DownButton;
+    public Sprite NeutralImage;
+    public Sprite HoverImage;
+    public Sprite DownImage;
+    public Sprite SelectImage;
     public UnityEvent ClickEvent;
     
 
@@ -23,24 +25,37 @@ public class MirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         clickSound = GetComponent<AudioSource>();
     }
 
+    public void Select(bool select)
+    {
+        Selected = select;
+        image.sprite = GetNeutralButton();
+    }
+
+    public Sprite GetNeutralButton()
+    {
+        return Selected ? SelectImage : NeutralImage;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        image.sprite = HoverButton;
+        if (Selected) return;
+        image.sprite = HoverImage;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        image.sprite = NeutralButton;
+        if (Selected) return;
+        image.sprite = GetNeutralButton();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        image.sprite = DownButton;        
+        image.sprite = DownImage;        
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        image.sprite = NeutralButton;
+        image.sprite = GetNeutralButton();
     }
 
     public void OnPointerClick(PointerEventData eventData)
