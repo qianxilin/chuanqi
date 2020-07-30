@@ -20,6 +20,7 @@ namespace EmeraldNetwork
         public static DateTime TimeOutTime, TimeConnected;
 
         public static LoginManager LoginManager;
+        public static CharSelManager CharSelManager;
 
         private static ConcurrentQueue<Packet> _receiveList;
         private static ConcurrentQueue<Packet> _sendList;
@@ -223,6 +224,9 @@ namespace EmeraldNetwork
                 case GameStage.Login:
                     ProcessLoginPacket(p);
                     break;
+                case GameStage.Select:
+                    ProcessCharSelPacket(p);
+                    break;
             }            
         }
 
@@ -248,6 +252,25 @@ namespace EmeraldNetwork
                     break;
                 case (short)ServerPacketIds.LoginSuccess:
                     LoginSuccess((S.LoginSuccess)p);
+                    break;
+                default:
+                    //base.ProcessPacket(p);
+                    break;
+            }
+        }
+
+        public static void ProcessCharSelPacket(Packet p)
+        {
+            switch (p.Index)
+            {
+                case (short)ServerPacketIds.SelectCharacters:
+                    Debug.Log("infooooo");
+                    break;
+                case (short)ServerPacketIds.NewCharacter:
+                    NewCharacter((S.NewCharacter)p);
+                    break;
+                case (short)ServerPacketIds.NewCharacterSuccess:
+                    NewCharacterSuccess((S.NewCharacterSuccess)p);
                     break;
                 default:
                     //base.ProcessPacket(p);
@@ -375,6 +398,39 @@ namespace EmeraldNetwork
             if (LoginManager == null) return;
 
             LoginManager.LoginSuccess();
+        }
+
+        public static void NewCharacter(S.NewCharacter p)
+        {
+            if (CharSelManager == null) return;
+
+            switch (p.Result)
+            {
+                case 0:
+                    LoginManager.ShowMessageBox("Character creation is disabled.");
+                    break;
+                case 1:
+                    LoginManager.ShowMessageBox("Invalid character name.");
+                    break;
+                case 3:
+                    LoginManager.ShowMessageBox("Selected role not supported.");
+                    break;
+                case 4:
+                    LoginManager.ShowMessageBox("Maximum characters on account reached.");
+                    break;
+                case 5:
+                    LoginManager.ShowMessageBox("Name already exists.");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static void NewCharacterSuccess(S.NewCharacterSuccess p)
+        {
+            if (CharSelManager == null) return;
+
+            CharSelManager.NewCharacterSuccess(p.CharInfo);
         }
 
         public static void Enqueue(Packet p)

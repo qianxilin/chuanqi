@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Server.MirNetwork
 {
-    public enum GameStage { None, Login, Select, Game, Disconnected }
+    //public enum GameStage { None, Login, Select, Game, Disconnected }
 
     public class MirConnection
     {
@@ -243,6 +243,9 @@ namespace Server.MirNetwork
                     break;
                 case (short)ClientPacketIds.Login:
                     Login((C.Login) p);
+                    break;
+                case (short)ClientPacketIds.RequestCharacters:
+                    RequestCharacters();
                     break;
                 case (short)ClientPacketIds.NewCharacter:
                     NewCharacter((C.NewCharacter) p);
@@ -751,6 +754,12 @@ namespace Server.MirNetwork
 
             MessageQueue.Enqueue(SessionID + ", " + IPAddress + ", User logging in.");
             Envir.Login(p, this);
+        }
+        private void RequestCharacters()
+        {
+            if (Stage != GameStage.Select) return;
+
+            Envir.RequestCharacters(this);
         }
         private void NewCharacter(C.NewCharacter p)
         {

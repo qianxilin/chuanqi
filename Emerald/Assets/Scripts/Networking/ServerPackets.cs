@@ -223,6 +223,21 @@ namespace ServerPackets
             get { return (short)ServerPacketIds.LoginSuccess; }
         }
 
+        protected override void ReadPacket(BinaryReader reader)
+        {
+        }
+
+        protected override void WritePacket(BinaryWriter writer)
+        {
+        }
+    }
+    public sealed class SelectCharacters : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ServerPacketIds.SelectCharacters; }
+        }
+
         public List<SelectInfo> Characters = new List<SelectInfo>();
 
         protected override void ReadPacket(BinaryReader reader)
