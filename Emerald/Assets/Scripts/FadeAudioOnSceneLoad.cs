@@ -29,6 +29,6 @@ public class FadeAudioOnSceneLoad : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }    
 }

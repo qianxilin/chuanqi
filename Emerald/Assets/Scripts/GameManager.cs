@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     public static NetworkInfo networkInfo;
     public static GameStage gameStage;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

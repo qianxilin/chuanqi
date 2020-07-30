@@ -154,6 +154,7 @@ MonoBehaviour:
   LeftDoor: {fileID: 1173660108}
   RightDoor: {fileID: 1792597940}
   Camera: {fileID: 1597746327}
+  DoorFX: {fileID: 6547393437199749742}
   DoorOpenSound: {fileID: 145777783}
   ConnectBox: {fileID: 492200913}
   LoginBox: {fileID: 1327569699}
@@ -8293,3 +8294,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba9949a5b44a4fb47b3bac4ad8c83f23, type: 3}
+--- !u!1 &6547393437199749741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2331048712068472474, guid: ba9949a5b44a4fb47b3bac4ad8c83f23,
+    type: 3}
+  m_PrefabInstance: {fileID: 6547393437199749740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6547393437199749742
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6547393437199749741}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 901438b7b27521349a5b25512cdb124c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
