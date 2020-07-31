@@ -13,19 +13,19 @@ public class LoginManager : MonoBehaviour
     public GameObject ConnectBox;
     //Login
     public GameObject LoginBox;
-    public GameObject UserName;
-    public GameObject Password;
+    public TMP_InputField UserName;
+    public TMP_InputField Password;
     //Register
     public GameObject RegisterBox;
-    public GameObject RegisterUserName;
-    public GameObject RegisterPassword;
-    public GameObject ConfirmPassword;
+    public TMP_InputField RegisterUserName;
+    public TMP_InputField RegisterPassword;
+    public TMP_InputField ConfirmPassword;
     //Change Password
     public GameObject ChangePasswordBox;
-    public GameObject ChangeUserName;
-    public GameObject ChangeCurrentPassword;
-    public GameObject ChangeNewPassword;
-    public GameObject ChangeConfirmPassword;
+    public TMP_InputField ChangeUserName;
+    public TMP_InputField ChangeCurrentPassword;
+    public TMP_InputField ChangeNewPassword;
+    public TMP_InputField ChangeConfirmPassword;
     //Misc
     public GameObject MessageBox;
 
@@ -52,15 +52,15 @@ public class LoginManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (UserName.GetComponent<TMP_InputField>().isFocused)
-                    Password.GetComponent<TMP_InputField>().Select();
-                else if (Password.GetComponent<TMP_InputField>().isFocused)
-                    UserName.GetComponent<TMP_InputField>().Select();
+                if (UserName.isFocused)
+                    Password.Select();
+                else if (Password.isFocused)
+                    UserName.Select();
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                string username = UserName.GetComponent<TMP_InputField>().text;
-                string password = Password.GetComponent<TMP_InputField>().text;
+                string username = UserName.text;
+                string password = Password.text;
 
                 if (username != string.Empty && password != string.Empty)
                     LoginButton_OnClick();
@@ -78,7 +78,7 @@ public class LoginManager : MonoBehaviour
         loginshown = true;
         ConnectBox.SetActive(false);
         LoginBox.SetActive(true);
-        UserName.GetComponent<TMP_InputField>().ActivateInputField();
+        UserName.ActivateInputField();
     }
 
     public void ShowMessageBox(string message)
@@ -89,8 +89,8 @@ public class LoginManager : MonoBehaviour
 
     public void LoginButton_OnClick()
     {
-        string username = UserName.GetComponent<TMP_InputField>().text;
-        string password = Password.GetComponent<TMP_InputField>().text;
+        string username = UserName.text;
+        string password = Password.text;
 
         if (username == string.Empty || password == string.Empty) return;
 
@@ -100,15 +100,15 @@ public class LoginManager : MonoBehaviour
             Password = password
         });
 
-        UserName.GetComponent<TMP_InputField>().text = string.Empty;
-        Password.GetComponent<TMP_InputField>().text = string.Empty;
+        UserName.text = string.Empty;
+        Password.text = string.Empty;
     }
 
     public void RegisterButton_OnClick()
     {
-        string username = RegisterUserName.GetComponent<TMP_InputField>().text;
-        string password = RegisterPassword.GetComponent<TMP_InputField>().text;
-        string confirm = ConfirmPassword.GetComponent<TMP_InputField>().text;
+        string username = RegisterUserName.text;
+        string password = RegisterPassword.text;
+        string confirm = ConfirmPassword.text;
 
         if (username == string.Empty || password == string.Empty) return;
         if (confirm != password) return;
@@ -134,17 +134,17 @@ public class LoginManager : MonoBehaviour
 
     private void ClearRegisterBox()
     {
-        RegisterUserName.GetComponent<TMP_InputField>().text = string.Empty;
-        RegisterPassword.GetComponent<TMP_InputField>().text = string.Empty;
-        ConfirmPassword.GetComponent<TMP_InputField>().text = string.Empty;
+        RegisterUserName.text = string.Empty;
+        RegisterPassword.text = string.Empty;
+        ConfirmPassword.text = string.Empty;
     }
 
     public void ChangePasswordButton_OnClick()
     {
-        string username = ChangeUserName.GetComponent<TMP_InputField>().text;
-        string password = ChangeCurrentPassword.GetComponent<TMP_InputField>().text;
-        string newpassword = ChangeNewPassword.GetComponent<TMP_InputField>().text;
-        string confirm = ChangeConfirmPassword.GetComponent<TMP_InputField>().text;
+        string username = ChangeUserName.text;
+        string password = ChangeCurrentPassword.text;
+        string newpassword = ChangeNewPassword.text;
+        string confirm = ChangeConfirmPassword.text;
 
         if (username == string.Empty || password == string.Empty || newpassword == string.Empty) return;
         if (confirm != newpassword) return;
@@ -166,10 +166,10 @@ public class LoginManager : MonoBehaviour
 
     private void ClearChangeBox()
     {
-        ChangeUserName.GetComponent<TMP_InputField>().text = string.Empty;
-        ChangeCurrentPassword.GetComponent<TMP_InputField>().text = string.Empty;
-        ChangeNewPassword.GetComponent<TMP_InputField>().text = string.Empty;
-        ChangeConfirmPassword.GetComponent<TMP_InputField>().text = string.Empty;
+        ChangeUserName.text = string.Empty;
+        ChangeCurrentPassword.text = string.Empty;
+        ChangeNewPassword.text = string.Empty;
+        ChangeConfirmPassword.text = string.Empty;
     }
 
     public void LoginSuccess()

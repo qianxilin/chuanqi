@@ -158,17 +158,17 @@ MonoBehaviour:
   DoorOpenSound: {fileID: 145777783}
   ConnectBox: {fileID: 492200913}
   LoginBox: {fileID: 1327569699}
-  UserName: {fileID: 758999677}
-  Password: {fileID: 426599885}
+  UserName: {fileID: 758999679}
+  Password: {fileID: 426599887}
   RegisterBox: {fileID: 225175546}
-  RegisterUserName: {fileID: 1587204449}
-  RegisterPassword: {fileID: 1997504188}
-  ConfirmPassword: {fileID: 641950872}
+  RegisterUserName: {fileID: 1587204451}
+  RegisterPassword: {fileID: 1997504190}
+  ConfirmPassword: {fileID: 641950874}
   ChangePasswordBox: {fileID: 116583096}
-  ChangeUserName: {fileID: 156426628}
-  ChangeCurrentPassword: {fileID: 167541438}
-  ChangeNewPassword: {fileID: 1647904333}
-  ChangeConfirmPassword: {fileID: 1866427700}
+  ChangeUserName: {fileID: 156426630}
+  ChangeCurrentPassword: {fileID: 167541440}
+  ChangeNewPassword: {fileID: 1647904335}
+  ChangeConfirmPassword: {fileID: 1866427702}
   MessageBox: {fileID: 1412441743}
 --- !u!4 &21959868
 Transform:
