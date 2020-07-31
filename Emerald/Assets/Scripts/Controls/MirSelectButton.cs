@@ -9,7 +9,7 @@ public class MirSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 {
     private AudioSource clickSound;
     private Image image;
-    private bool Selected;
+    public bool Selected;
 
     public Sprite NeutralImage;
     public Sprite HoverImage;
@@ -19,7 +19,7 @@ public class MirSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         image = GetComponent<Image>();
         clickSound = GetComponent<AudioSource>();

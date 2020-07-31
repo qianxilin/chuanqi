@@ -8,12 +8,7 @@ using C = ClientPackets;
 using S = ServerPackets;
 using System.Linq;
 
-public enum GameStage : byte
-{
-    Login = 0,
-    CharSel = 1,
-    Game = 2
-}
+public enum GameStage { None, Login, Select, Game, Disconnected }
 
 public enum PanelType : byte
 {
@@ -1273,6 +1268,7 @@ public enum ServerPacketIds : short
     Login,
     LoginBanned,
     LoginSuccess,
+    SelectCharacters,
     NewCharacter,
     NewCharacterSuccess,
     DeleteCharacter,
@@ -1516,6 +1512,7 @@ public enum ClientPacketIds : short
     NewAccount,
     ChangePassword,
     Login,
+    RequestCharacters,
     NewCharacter,
     DeleteCharacter,
     StartGame,
@@ -4478,6 +4475,8 @@ public abstract class Packet
                 return new C.ChangePassword();
             case (short)ClientPacketIds.Login:
                 return new C.Login();
+            case (short)ClientPacketIds.RequestCharacters:
+                return new C.RequestCharacters();
             case (short)ClientPacketIds.NewCharacter:
                 return new C.NewCharacter();
             case (short)ClientPacketIds.DeleteCharacter:
@@ -4761,6 +4760,8 @@ public abstract class Packet
                 return new S.LoginBanned();
             case (short)ServerPacketIds.LoginSuccess:
                 return new S.LoginSuccess();
+            case (short)ServerPacketIds.SelectCharacters:
+                return new S.SelectCharacters();
             case (short)ServerPacketIds.NewCharacter:
                 return new S.NewCharacter();
             case (short)ServerPacketIds.NewCharacterSuccess:

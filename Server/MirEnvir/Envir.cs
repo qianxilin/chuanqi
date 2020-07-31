@@ -2318,7 +2318,12 @@ namespace Server.MirEnvir
             account.LastIP = c.IPAddress;
 
             MessageQueue.Enqueue(account.Connection.SessionID + ", " + account.Connection.IPAddress + ", User logged in.");
-            c.Enqueue(new ServerPackets.LoginSuccess { Characters = account.GetSelectInfo() });
+            c.Enqueue(new ServerPackets.LoginSuccess { });
+        }
+
+        public void RequestCharacters(MirConnection c)
+        {
+            c.Enqueue(new ServerPackets.SelectCharacters { Characters = c.Account.GetSelectInfo() });
         }
 
         public int HTTPLogin(string AccountID, string Password)

@@ -134,6 +134,20 @@ namespace ClientPackets
             writer.Write(Password);
         }
     }
+    public sealed class RequestCharacters : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ClientPacketIds.RequestCharacters; }
+        }
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+        }
+        protected override void WritePacket(BinaryWriter writer)
+        {
+        }
+    }
     public sealed class NewCharacter : Packet
     {
         public override short Index { get { return (short)ClientPacketIds.NewCharacter; } }

@@ -7,7 +7,7 @@ using C = ClientPackets;
 public class LoginManager : MonoBehaviour
 {
     //Animations
-    public Animator LeftDoor, RightDoor, Camera;
+    public Animator LeftDoor, RightDoor, Camera, DoorFX;
     public AudioSource DoorOpenSound;
     //Connection
     public GameObject ConnectBox;
@@ -65,6 +65,11 @@ public class LoginManager : MonoBehaviour
                 if (username != string.Empty && password != string.Empty)
                     LoginButton_OnClick();
             }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            LoginSuccess();
         }
     }
 
@@ -174,5 +179,6 @@ public class LoginManager : MonoBehaviour
         LeftDoor.SetBool("openGate", true);
         RightDoor.SetBool("openGate", true);
         Camera.SetBool("openGate", true);
+        DoorFX.SetBool("openGate", true);
     }
 }
