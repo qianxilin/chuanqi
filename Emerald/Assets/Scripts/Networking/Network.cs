@@ -264,7 +264,7 @@ namespace EmeraldNetwork
             switch (p.Index)
             {
                 case (short)ServerPacketIds.SelectCharacters:
-                    Debug.Log("infooooo");
+                    SelectCharacters((S.SelectCharacters)p);
                     break;
                 case (short)ServerPacketIds.NewCharacter:
                     NewCharacter((S.NewCharacter)p);
@@ -407,19 +407,19 @@ namespace EmeraldNetwork
             switch (p.Result)
             {
                 case 0:
-                    LoginManager.ShowMessageBox("Character creation is disabled.");
+                    CharSelManager.ShowMessageBox("Character creation is disabled.");
                     break;
                 case 1:
-                    LoginManager.ShowMessageBox("Invalid character name.");
+                    CharSelManager.ShowMessageBox("Invalid character name.");
                     break;
                 case 3:
-                    LoginManager.ShowMessageBox("Selected role not supported.");
+                    CharSelManager.ShowMessageBox("Selected role not supported.");
                     break;
                 case 4:
-                    LoginManager.ShowMessageBox("Maximum characters on account reached.");
+                    CharSelManager.ShowMessageBox("Maximum characters on account reached.");
                     break;
                 case 5:
-                    LoginManager.ShowMessageBox("Name already exists.");
+                    CharSelManager.ShowMessageBox("Name already exists.");
                     break;
                 default:
                     break;
@@ -431,6 +431,14 @@ namespace EmeraldNetwork
             if (CharSelManager == null) return;
 
             CharSelManager.NewCharacterSuccess(p.CharInfo);
+        }
+
+        public static void SelectCharacters(S.SelectCharacters p)
+        {
+            if (CharSelManager == null) return;
+
+            foreach (SelectInfo s in p.Characters)
+                CharSelManager.AddCharacter(s);
         }
 
         public static void Enqueue(Packet p)

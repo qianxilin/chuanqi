@@ -27,6 +27,8 @@ public class MirSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void Select(bool select)
     {
+        if (image == null) return;
+
         Selected = select;
         image.sprite = GetNeutralButton();
     }
