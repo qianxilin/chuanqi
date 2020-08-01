@@ -6,6 +6,8 @@ using TMPro;
 
 public class MirMessageBox : MonoBehaviour
 {
+    public enum MessageBoxResult { None, Ok, Cancel }
+
     public TextMeshProUGUI Text;
     public GameObject OKButton;
     public GameObject CancelButton;
@@ -22,10 +24,11 @@ public class MirMessageBox : MonoBehaviour
     {
         Text.text = s;
         OKButton.SetActive(okbutton);
-        CancelButton.gameObject.SetActive(cancelbutton);
+        CancelButton.SetActive(cancelbutton);
         Result = MessageBoxResult.None;
         gameObject.SetActive(true);
         gameObject.transform.SetAsLastSibling();
+
         OK = null;
         Cancel = null;
 
