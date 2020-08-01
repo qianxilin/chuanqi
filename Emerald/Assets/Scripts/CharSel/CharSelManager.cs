@@ -43,8 +43,7 @@ public class CharSelManager : MonoBehaviour
 
     public void ShowMessageBox(string message)
     {
-        MessageBox.GetComponentInChildren<TextMeshProUGUI>().text = message;
-        MessageBox.gameObject.SetActive(true);
+        MessageBox.Show(message);
     }
 
     public void Create_Click()
@@ -135,7 +134,6 @@ public class CharSelManager : MonoBehaviour
 
         MessageBox.Show($"Delete {selectedCharacter.Name}?", true, true);
         MessageBox.OK += () => { Debug.Log("Delete"); };
-        MessageBox.Cancel += () => { Debug.Log("Cancel"); };
     }
 
 }

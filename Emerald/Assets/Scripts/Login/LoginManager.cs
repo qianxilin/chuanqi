@@ -27,8 +27,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField ChangeNewPassword;
     public TMP_InputField ChangeConfirmPassword;
     //Misc
-    public GameObject MessageBox;
-    public GameObject MessageBoxPanel;
+    public MirMessageBox MessageBox;
 
     private bool loginshown = false;
 
@@ -84,9 +83,7 @@ public class LoginManager : MonoBehaviour
 
     public void ShowMessageBox(string message)
     {
-        MessageBox.GetComponentInChildren<TextMeshProUGUI>().text = message;
-        MessageBoxPanel.SetActive(true);
-        MessageBoxPanel.transform.SetAsLastSibling();
+        MessageBox.Show(message);
     }
 
     public void LoginButton_OnClick()

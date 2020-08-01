@@ -18,13 +18,14 @@ public class MirMessageBox : MonoBehaviour
     public OKDelegate Cancel;
 
 
-    public async void Show(string s, bool okbutton, bool cancelbutton)
+    public async void Show(string s, bool okbutton = true, bool cancelbutton = false)
     {
         Text.text = s;
         OKButton.SetActive(okbutton);
         CancelButton.gameObject.SetActive(cancelbutton);
         Result = MessageBoxResult.None;
         gameObject.SetActive(true);
+        gameObject.transform.SetAsLastSibling();
         OK = null;
         Cancel = null;
 

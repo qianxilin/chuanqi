@@ -169,8 +169,7 @@ MonoBehaviour:
   ChangeCurrentPassword: {fileID: 167541440}
   ChangeNewPassword: {fileID: 1647904335}
   ChangeConfirmPassword: {fileID: 1866427702}
-  MessageBox: {fileID: 0}
-  MessageBoxPanel: {fileID: 0}
+  MessageBox: {fileID: 2010890291}
 --- !u!4 &21959868
 Transform:
   m_ObjectHideFlags: 0
@@ -8135,7 +8134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.0000305, y: -9.9999695}
+  m_AnchoredPosition: {x: -1, y: -9.9999695}
   m_SizeDelta: {x: -634.49994, y: -438.1988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2010890291
