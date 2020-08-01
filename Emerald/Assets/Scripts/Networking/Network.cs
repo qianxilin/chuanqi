@@ -439,6 +439,8 @@ namespace EmeraldNetwork
 
             foreach (SelectInfo s in p.Characters)
                 CharSelManager.AddCharacter(s);
+
+            CharSelManager.Refresh();
         }
 
         public static void Enqueue(Packet p)

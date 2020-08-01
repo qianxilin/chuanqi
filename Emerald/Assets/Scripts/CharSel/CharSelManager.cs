@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,12 +13,9 @@ public class CharSelManager : MonoBehaviour
     private SelectInfo[] characters = new SelectInfo[Globals.MaxCharacterCount];
     public MirButton[] CreateButtons = new MirButton[Globals.MaxCharacterCount];
     public MirSelectButton[] CharacterButtons = new MirSelectButton[Globals.MaxCharacterCount];
-    public MirSelectButton WarriorButton;
-    public MirSelectButton WizardButton;
-    public MirSelectButton TaoistButton;
-    public MirSelectButton AssassinButton;
-    public MirSelectButton ArcherButton;
-    public MirSelectButton MaleButton;
+    public MirSelectButton[] ClassButtons = new MirSelectButton[Enum.GetNames(typeof(MirClass)).Length];
+    public MirSelectButton[] GenderButtons = new MirSelectButton[Enum.GetNames(typeof(MirGender)).Length];
+    public MirButton DeleteButton;
     public TMP_InputField NameInput;
     //Windows
     public GameObject SelectCharacterBox;
@@ -25,6 +24,8 @@ public class CharSelManager : MonoBehaviour
     public GameObject MessageBox;
 
     private SelectInfo selectedCharacter;
+    private MirClass selectedClass;
+    private MirGender selectedGender;
 
     void Start()
     {
@@ -35,8 +36,8 @@ public class CharSelManager : MonoBehaviour
 
     public void ClearCreateBox()
     {
-        WarriorButton.Select(true);
-        MaleButton.Select(true);
+        ClassButtons[0].Select(true);
+        GenderButtons[0].Select(true);
         NameInput.text = string.Empty;
     }
 
@@ -48,29 +49,23 @@ public class CharSelManager : MonoBehaviour
 
     public void Create_Click()
     {
-        if (NameInput.text.Length < 5) return;
-
-        MirClass newclass = MirClass.Warrior;
-        MirGender newgender = MirGender.Male;
-
-        if (WizardButton.Selected)
-            newclass = MirClass.Wizard;
-        if (TaoistButton.Selected)
-            newclass = MirClass.Taoist;
-        if (AssassinButton.Selected)
-            newclass = MirClass.Assassin;
-        if (ArcherButton.Selected)
-            newclass = MirClass.Archer;
-
-        if (!MaleButton.Selected)
-            newgender = MirGender.Female;
+        if (NameInput.text.Length < 5)
+        {
+            ShowMessageBox("Name must be minimum 5 characters");
+            return;
+        }        
 
         Network.Enqueue(new C.NewCharacter
         {
             Name = NameInput.text,
-            Class = newclass,
-            Gender = newgender
+            Class = selectedClass,
+            Gender = selectedGender
         });
+    }
+
+    public void Refresh()
+    {
+        DeleteButton.gameObject.SetActive(characters.Any(x => x != null));
     }
 
     public void NewCharacterSuccess(SelectInfo info)
@@ -85,7 +80,6 @@ public class CharSelManager : MonoBehaviour
         for (int i = 0; i < characters.Length; i++)
         {
             if (characters[i] != null) continue;
-
             characters[i] = info;
             CreateButtons[i].gameObject.SetActive(false);
             CharacterButtons[i].gameObject.SetActive(true);
@@ -93,11 +87,18 @@ public class CharSelManager : MonoBehaviour
             CharacterButtons[i].HoverImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_2");
             CharacterButtons[i].DownImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
             CharacterButtons[i].SelectImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_3");
-            CharacterButtons[i].gameObject.GetComponent<Image>().sprite = CharacterButtons[i].GetNeutralButton();
-
             CharacterButtons[i].gameObject.transform.Find("Username").GetComponent<TextMeshProUGUI>().text = info.Name;
             CharacterButtons[i].gameObject.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = $"Level {info.Level}";
             CharacterButtons[i].gameObject.transform.Find("Class").GetComponent<TextMeshProUGUI>().text = info.Class.ToString();
+
+            if (selectedCharacter == null)
+            {
+                selectedCharacter = info;
+                CharacterButtons[i].Select(true);
+            }
+            CharacterButtons[i].gameObject.GetComponent<Image>().sprite = CharacterButtons[i].GetNeutralButton();
+
+            
             break;
         }
     }
@@ -108,13 +109,29 @@ public class CharSelManager : MonoBehaviour
 
         selectedCharacter = characters[i];
 
-        for (int j = 0; j < characters.Length; j++)
+        for (int j = 0; j < CharacterButtons.Length; j++)
             CharacterButtons[j].Select(i == j);
+    }
+
+    public void SelectClass(int i)
+    {
+        selectedClass = (MirClass)i;
+
+        for (int j = 0; j < ClassButtons.Length; j++)
+            ClassButtons[j].Select(i == j);
+    }
+
+    public void SelectGender(int i)
+    {
+        selectedGender = (MirGender)i;
+
+        for (int j = 0; j < GenderButtons.Length; j++)
+            GenderButtons[j].Select(i == j);
     }
 
     public async void DeleteCharacter_OnClick()
     {
-
+        if (selectedCharacter == null) return;
     }
 
 }

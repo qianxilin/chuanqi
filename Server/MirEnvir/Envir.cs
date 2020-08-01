@@ -2383,7 +2383,7 @@ namespace Server.MirEnvir
                 return;
             }
 
-            if (!CharacterReg.IsMatch(p.Name))
+            if (!CharacterReg.IsMatch(p.Name) || p.Name.Length < 5)
             {
                 c.Enqueue(new ServerPackets.NewCharacter {Result = 1});
                 return;
