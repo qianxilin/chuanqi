@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -130,19 +129,13 @@ public class CharSelManager : MonoBehaviour
             GenderButtons[j].Select(i == j);
     }
 
-    public async void DeleteCharacter_OnClick()
+    public void DeleteCharacter_OnClick()
     {
         if (selectedCharacter == null) return;
-        MessageBox.Show($"Delete {selectedCharacter.Name}?", true, true);
-        while (MirMessageBox.Result == MessageBoxResult.None)
-        {
-            await Task.Yield();
-        }
 
-        if (MirMessageBox.Result == MessageBoxResult.Ok)
-            Debug.Log("delete");
-        else
-            Debug.Log("cancel");
+        MessageBox.Show($"Delete {selectedCharacter.Name}?", true, true);
+        MessageBox.OK += () => { Debug.Log("Delete"); };
+        MessageBox.Cancel += () => { Debug.Log("Cancel"); };
     }
 
 }
