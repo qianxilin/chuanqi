@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -21,7 +22,7 @@ public class CharSelManager : MonoBehaviour
     public GameObject SelectCharacterBox;
     public GameObject NewCharacterBox;
     //Misc
-    public GameObject MessageBox;
+    public MirMessageBox MessageBox;
 
     private SelectInfo selectedCharacter;
     private MirClass selectedClass;
@@ -44,7 +45,7 @@ public class CharSelManager : MonoBehaviour
     public void ShowMessageBox(string message)
     {
         MessageBox.GetComponentInChildren<TextMeshProUGUI>().text = message;
-        MessageBox.SetActive(true);
+        MessageBox.gameObject.SetActive(true);
     }
 
     public void Create_Click()
@@ -132,6 +133,16 @@ public class CharSelManager : MonoBehaviour
     public async void DeleteCharacter_OnClick()
     {
         if (selectedCharacter == null) return;
+        MessageBox.Show($"Delete {selectedCharacter.Name}?", true, true);
+        while (MirMessageBox.Result == MessageBoxResult.None)
+        {
+            await Task.Yield();
+        }
+
+        if (MirMessageBox.Result == MessageBoxResult.Ok)
+            Debug.Log("delete");
+        else
+            Debug.Log("cancel");
     }
 
 }

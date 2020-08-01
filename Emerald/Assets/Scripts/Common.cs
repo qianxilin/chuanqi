@@ -9,6 +9,7 @@ using S = ServerPackets;
 using System.Linq;
 
 public enum GameStage { None, Login, Select, Game, Disconnected }
+public enum MessageBoxResult { None, Ok, Cancel }
 
 public enum PanelType : byte
 {
