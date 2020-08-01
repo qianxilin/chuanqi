@@ -18,8 +18,13 @@ public class CharSelManager : MonoBehaviour
     public MirSelectButton ArcherButton;
     public MirSelectButton MaleButton;
     public TMP_InputField NameInput;
+    //Windows
+    public GameObject SelectCharacterBox;
+    public GameObject NewCharacterBox;
     //Misc
     public GameObject MessageBox;
+
+    private SelectInfo selectedCharacter;
 
     void Start()
     {
@@ -71,6 +76,8 @@ public class CharSelManager : MonoBehaviour
     public void NewCharacterSuccess(SelectInfo info)
     {
         AddCharacter(info);
+        NewCharacterBox.SetActive(false);
+        SelectCharacterBox.SetActive(true);
     }
 
     public void AddCharacter(SelectInfo info)
@@ -93,6 +100,21 @@ public class CharSelManager : MonoBehaviour
             CharacterButtons[i].gameObject.transform.Find("Class").GetComponent<TextMeshProUGUI>().text = info.Class.ToString();
             break;
         }
+    }
+
+    public void SelectCharacter(int i)
+    {
+        if (characters[i] == null) return;
+
+        selectedCharacter = characters[i];
+
+        for (int j = 0; j < characters.Length; j++)
+            CharacterButtons[j].Select(i == j);
+    }
+
+    public async void DeleteCharacter_OnClick()
+    {
+
     }
 
 }
