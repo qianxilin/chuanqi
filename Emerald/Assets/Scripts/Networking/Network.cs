@@ -232,6 +232,8 @@ namespace EmeraldNetwork
 
         public static void ProcessLoginPacket(Packet p)
         {
+            if (LoginManager == null) return;
+
             switch (p.Index)
             {
                 case (short)ServerPacketIds.Connected:
@@ -261,6 +263,8 @@ namespace EmeraldNetwork
 
         public static void ProcessCharSelPacket(Packet p)
         {
+            if (CharSelManager == null) return;
+
             switch (p.Index)
             {
                 case (short)ServerPacketIds.SelectCharacters:
@@ -271,6 +275,12 @@ namespace EmeraldNetwork
                     break;
                 case (short)ServerPacketIds.NewCharacterSuccess:
                     NewCharacterSuccess((S.NewCharacterSuccess)p);
+                    break;
+                case (short)ServerPacketIds.DeleteCharacter:
+                    DeleteCharacter((S.DeleteCharacter)p);
+                    break;
+                case (short)ServerPacketIds.DeleteCharacterSuccess:
+                    DeleteCharacterSuccess((S.DeleteCharacterSuccess)p);
                     break;
                 default:
                     //base.ProcessPacket(p);
@@ -303,8 +313,6 @@ namespace EmeraldNetwork
 
         public static void NewAccount(S.NewAccount p)
         {
-            if (LoginManager == null) return;
-
             switch (p.Result)
             {
                 case 0:
@@ -340,8 +348,6 @@ namespace EmeraldNetwork
 
         public static void ChangePassword(S.ChangePassword p)
         {
-            if (LoginManager == null) return;
-
             switch (p.Result)
             {
                 case 0:
@@ -371,8 +377,6 @@ namespace EmeraldNetwork
 
         public static void Login(S.Login p)
         {
-            if (LoginManager == null) return;
-
             switch (p.Result)
             {
                 case 0:
@@ -395,15 +399,11 @@ namespace EmeraldNetwork
 
         public static void LoginSuccess(S.LoginSuccess p)
         {
-            if (LoginManager == null) return;
-
             LoginManager.LoginSuccess();
         }
 
         public static void NewCharacter(S.NewCharacter p)
-        {
-            if (CharSelManager == null) return;
-
+        {           
             switch (p.Result)
             {
                 case 0:
@@ -428,19 +428,32 @@ namespace EmeraldNetwork
 
         public static void NewCharacterSuccess(S.NewCharacterSuccess p)
         {
-            if (CharSelManager == null) return;
-
             CharSelManager.NewCharacterSuccess(p.CharInfo);
         }
 
         public static void SelectCharacters(S.SelectCharacters p)
         {
-            if (CharSelManager == null) return;
+                CharSelManager.AddCharacters(p.Characters);
+        }
 
-            foreach (SelectInfo s in p.Characters)
-                CharSelManager.AddCharacter(s);
+        public static void DeleteCharacter(S.DeleteCharacter p)
+        {
+            switch (p.Result)
+            {
+                case 0:
+                    CharSelManager.ShowMessageBox("Character deletion is disabled.");
+                    break;
+                case 1:
+                    CharSelManager.ShowMessageBox("Character not found.");
+                    break;
+                default:
+                    break;
+            }
+        }
 
-            CharSelManager.Refresh();
+        public static void DeleteCharacterSuccess(S.DeleteCharacterSuccess p)
+        {
+            CharSelManager.DeleteCharacterSuccess(p.CharacterIndex);
         }
 
         public static void Enqueue(Packet p)

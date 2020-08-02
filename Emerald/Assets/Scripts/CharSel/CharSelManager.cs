@@ -10,7 +10,7 @@ using C = ClientPackets;
 
 public class CharSelManager : MonoBehaviour
 {
-    private SelectInfo[] characters = new SelectInfo[Globals.MaxCharacterCount];
+    private List<SelectInfo> characters = new List<SelectInfo>();
     public MirButton[] CreateButtons = new MirButton[Globals.MaxCharacterCount];
     public MirSelectButton[] CharacterButtons = new MirSelectButton[Globals.MaxCharacterCount];
     public MirSelectButton[] ClassButtons = new MirSelectButton[Enum.GetNames(typeof(MirClass)).Length];
@@ -64,6 +64,35 @@ public class CharSelManager : MonoBehaviour
 
     public void Refresh()
     {
+        for (int i = 0; i < Globals.MaxCharacterCount; i++)
+        {
+            if (i >= characters.Count)
+            {
+                CreateButtons[i].gameObject.SetActive(true);
+                CharacterButtons[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                SelectInfo info = characters[i];
+                CreateButtons[i].gameObject.SetActive(false);
+                CharacterButtons[i].gameObject.SetActive(true);
+                CharacterButtons[i].NeutralImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
+                CharacterButtons[i].HoverImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_2");
+                CharacterButtons[i].DownImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
+                CharacterButtons[i].SelectImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_3");
+                CharacterButtons[i].gameObject.transform.Find("Username").GetComponent<TextMeshProUGUI>().text = info.Name;
+                CharacterButtons[i].gameObject.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = $"Level {info.Level}";
+                CharacterButtons[i].gameObject.transform.Find("Class").GetComponent<TextMeshProUGUI>().text = info.Class.ToString();
+
+                if (selectedCharacter == null)
+                {
+                    selectedCharacter = info;
+                    CharacterButtons[i].Select(true);
+                }
+                CharacterButtons[i].gameObject.GetComponent<Image>().sprite = CharacterButtons[i].GetNeutralButton();
+            }
+        }
+
         DeleteButton.gameObject.SetActive(characters.Any(x => x != null));
     }
 
@@ -74,32 +103,17 @@ public class CharSelManager : MonoBehaviour
         SelectCharacterBox.SetActive(true);
     }
 
+    public void AddCharacters(List<SelectInfo> infos)
+    {
+        characters = infos;
+        Refresh();
+    }
+
     public void AddCharacter(SelectInfo info)
     {
-        for (int i = 0; i < characters.Length; i++)
-        {
-            if (characters[i] != null) continue;
-            characters[i] = info;
-            CreateButtons[i].gameObject.SetActive(false);
-            CharacterButtons[i].gameObject.SetActive(true);
-            CharacterButtons[i].NeutralImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
-            CharacterButtons[i].HoverImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_2");
-            CharacterButtons[i].DownImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
-            CharacterButtons[i].SelectImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_3");
-            CharacterButtons[i].gameObject.transform.Find("Username").GetComponent<TextMeshProUGUI>().text = info.Name;
-            CharacterButtons[i].gameObject.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = $"Level {info.Level}";
-            CharacterButtons[i].gameObject.transform.Find("Class").GetComponent<TextMeshProUGUI>().text = info.Class.ToString();
-
-            if (selectedCharacter == null)
-            {
-                selectedCharacter = info;
-                CharacterButtons[i].Select(true);
-            }
-            CharacterButtons[i].gameObject.GetComponent<Image>().sprite = CharacterButtons[i].GetNeutralButton();
-
-            
-            break;
-        }
+        if (characters.Count >= Globals.MaxCharacterCount) return;
+        characters.Add(info);
+        Refresh();
     }
 
     public void SelectCharacter(int i)
@@ -133,7 +147,17 @@ public class CharSelManager : MonoBehaviour
         if (selectedCharacter == null) return;
 
         MessageBox.Show($"Delete {selectedCharacter.Name}?", true, true);
-        MessageBox.OK += () => { Debug.Log("Delete"); };
+        MessageBox.OK += () => 
+        {
+            Network.Enqueue(new C.DeleteCharacter() { CharacterIndex = selectedCharacter.Index });
+        };
+    }
+
+    public void DeleteCharacterSuccess(int index)
+    {
+        selectedCharacter = null;
+        characters.RemoveAll(x => x.Index == index);
+        Refresh();
     }
 
 }
