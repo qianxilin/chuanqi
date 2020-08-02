@@ -1268,6 +1268,7 @@ public enum ServerPacketIds : short
     Login,
     LoginBanned,
     LoginSuccess,
+    LogoutSuccess,
     SelectCharacters,
     NewCharacter,
     NewCharacterSuccess,
@@ -1512,6 +1513,7 @@ public enum ClientPacketIds : short
     NewAccount,
     ChangePassword,
     Login,
+    Logout,
     RequestCharacters,
     NewCharacter,
     DeleteCharacter,
@@ -4475,6 +4477,8 @@ public abstract class Packet
                 return new C.ChangePassword();
             case (short)ClientPacketIds.Login:
                 return new C.Login();
+            case (short)ClientPacketIds.Logout:
+                return new C.Logout();
             case (short)ClientPacketIds.RequestCharacters:
                 return new C.RequestCharacters();
             case (short)ClientPacketIds.NewCharacter:
@@ -4760,6 +4764,8 @@ public abstract class Packet
                 return new S.LoginBanned();
             case (short)ServerPacketIds.LoginSuccess:
                 return new S.LoginSuccess();
+            case (short)ServerPacketIds.LogoutSuccess:
+                return new S.LogoutSuccess();
             case (short)ServerPacketIds.SelectCharacters:
                 return new S.SelectCharacters();
             case (short)ServerPacketIds.NewCharacter:

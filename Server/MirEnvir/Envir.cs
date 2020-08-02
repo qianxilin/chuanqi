@@ -2321,6 +2321,13 @@ namespace Server.MirEnvir
             c.Enqueue(new ServerPackets.LoginSuccess { });
         }
 
+        public void Logout(ClientPackets.Logout p, MirConnection c)
+        {
+            c.Account = null;
+            c.Stage = GameStage.Login;
+            c.Enqueue(new ServerPackets.LogoutSuccess { });
+        }
+
         public void RequestCharacters(MirConnection c)
         {
             c.Enqueue(new ServerPackets.SelectCharacters { Characters = c.Account.GetSelectInfo() });

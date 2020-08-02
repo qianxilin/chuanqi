@@ -231,6 +231,21 @@ namespace ServerPackets
         {
         }
     }
+    public sealed class LogoutSuccess : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ServerPacketIds.LogoutSuccess; }
+        }
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+        }
+
+        protected override void WritePacket(BinaryWriter writer)
+        {
+        }
+    }
     public sealed class SelectCharacters : Packet
     {
         public override short Index

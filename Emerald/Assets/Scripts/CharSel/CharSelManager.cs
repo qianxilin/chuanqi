@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
@@ -160,4 +161,14 @@ public class CharSelManager : MonoBehaviour
         Refresh();
     }
 
+    public void LogoutButton_OnClick()
+    {
+        Network.Enqueue(new C.Logout() { });
+    }
+
+    public void LogoutSuccess()
+    {
+        SceneManager.LoadSceneAsync("Login");
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
 }

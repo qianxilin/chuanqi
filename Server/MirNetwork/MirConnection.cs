@@ -244,6 +244,9 @@ namespace Server.MirNetwork
                 case (short)ClientPacketIds.Login:
                     Login((C.Login) p);
                     break;
+                case (short)ClientPacketIds.Logout:
+                    Logout((C.Logout)p);
+                    break;
                 case (short)ClientPacketIds.RequestCharacters:
                     RequestCharacters();
                     break;
@@ -754,6 +757,13 @@ namespace Server.MirNetwork
 
             MessageQueue.Enqueue(SessionID + ", " + IPAddress + ", User logging in.");
             Envir.Login(p, this);
+        }
+        private void Logout(C.Logout p)
+        {
+            if (Stage != GameStage.Select) return;
+
+            MessageQueue.Enqueue(SessionID + ", " + IPAddress + ", User logging out.");
+            Envir.Logout(p, this);
         }
         private void RequestCharacters()
         {

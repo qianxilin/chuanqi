@@ -282,6 +282,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.DeleteCharacterSuccess:
                     DeleteCharacterSuccess((S.DeleteCharacterSuccess)p);
                     break;
+                case (short)ServerPacketIds.LogoutSuccess:
+                    LogoutSuccess((S.LogoutSuccess)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -454,6 +457,11 @@ namespace EmeraldNetwork
         public static void DeleteCharacterSuccess(S.DeleteCharacterSuccess p)
         {
             CharSelManager.DeleteCharacterSuccess(p.CharacterIndex);
+        }
+
+        public static void LogoutSuccess(S.LogoutSuccess p)
+        {
+            CharSelManager.LogoutSuccess();
         }
 
         public static void Enqueue(Packet p)
