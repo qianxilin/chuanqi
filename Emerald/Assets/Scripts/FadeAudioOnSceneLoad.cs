@@ -13,22 +13,29 @@ public class FadeAudioOnSceneLoad : MonoBehaviour
     [Range(0f, 10f)]
     public float musicFadeSpeed;
 
+    void Awake()
+    {        
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {       
         fade = true;
     }
 
     void Update()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+    {        
         if (fade == true)
         {
-            m_AudioSource.volume = Mathf.Lerp(m_AudioSource.volume, 0, musicFadeSpeed * Time.deltaTime);
+            float oldvolume = m_AudioSource.volume;
+            m_AudioSource.volume = Mathf.Max(0, m_AudioSource.volume - musicFadeSpeed * Time.deltaTime);
+            if (m_AudioSource.volume <= 0)
+                Destroy(gameObject);
         }
-    }
-
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }    
+    }   
 }
