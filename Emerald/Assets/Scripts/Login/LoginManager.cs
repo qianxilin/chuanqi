@@ -6,6 +6,8 @@ using C = ClientPackets;
 
 public class LoginManager : MonoBehaviour
 {
+    //Manager
+    public GameObject GameManagement;
     //Animations
     public Animator LeftDoor, RightDoor, Camera, DoorFX;
     public AudioSource DoorOpenSound;
@@ -30,6 +32,12 @@ public class LoginManager : MonoBehaviour
     public MirMessageBox MessageBox;
 
     private bool loginshown = false;
+
+    void Awake()
+    {
+        if (GameManager.gameStage == GameStage.None)
+            GameManagement.SetActive(true);
+    }
 
     // Start is called before the first frame update
     void Start()

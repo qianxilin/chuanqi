@@ -2323,13 +2323,14 @@ namespace Server.MirEnvir
 
         public void Logout(ClientPackets.Logout p, MirConnection c)
         {
+            c.Account.Connection = null;
             c.Account = null;
             c.Stage = GameStage.Login;
             c.Enqueue(new ServerPackets.LogoutSuccess { });
         }
 
         public void RequestCharacters(MirConnection c)
-        {
+        {            
             c.Enqueue(new ServerPackets.SelectCharacters { Characters = c.Account.GetSelectInfo() });
         }
 

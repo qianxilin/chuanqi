@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ed74fb1879efb4dbb042d9fbd8d2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManagement: {fileID: 728742557}
   LeftDoor: {fileID: 1173660108}
   RightDoor: {fileID: 1792597940}
   Camera: {fileID: 1597746327}
@@ -4409,7 +4410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &728742558
 Transform:
   m_ObjectHideFlags: 0
