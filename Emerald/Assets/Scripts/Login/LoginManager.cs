@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using TMPro;
 using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
@@ -59,20 +60,30 @@ public class LoginManager : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (!MessageBox.gameObject.activeSelf)
             {
-                if (UserName.isFocused)
-                    Password.Select();
-                else if (Password.isFocused)
-                    UserName.Select();
-            }
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                string username = UserName.text;
-                string password = Password.text;
+                if (Input.GetKeyDown(KeyCode.Tab))
+                {
+                    GameObject current = EventSystem.current.currentSelectedGameObject;
+                    if (current != null)
+                    {
+                        TMP_InputField input = current.GetComponent<TMP_InputField>();
+                        if (input != null)
+                        {
+                            Selectable next = input.FindSelectableOnDown();
+                            if (next != null)
+                                next.Select();
+                        }
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    string username = UserName.text;
+                    string password = Password.text;
 
-                if (username != string.Empty && password != string.Empty)
-                    LoginButton_OnClick();
+                    if (username != string.Empty && password != string.Empty)
+                        LoginButton_OnClick();
+                }
             }
         }
 
@@ -138,6 +149,7 @@ public class LoginManager : MonoBehaviour
         ClearRegisterBox();
         RegisterBox.SetActive(false);
         LoginBox.SetActive(true);
+        UserName.Select();
     }
 
     private void ClearRegisterBox()
@@ -170,6 +182,7 @@ public class LoginManager : MonoBehaviour
         ClearChangeBox();
         ChangePasswordBox.SetActive(false);
         LoginBox.SetActive(true);
+        UserName.Select();
     }
 
     private void ClearChangeBox()

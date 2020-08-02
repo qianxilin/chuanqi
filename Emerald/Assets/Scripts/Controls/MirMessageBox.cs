@@ -19,7 +19,6 @@ public class MirMessageBox : MonoBehaviour
     public delegate void CancelDelegate();
     public OKDelegate Cancel;
 
-
     public async void Show(string s, bool okbutton = true, bool cancelbutton = false)
     {
         Text.text = s;
@@ -46,6 +45,14 @@ public class MirMessageBox : MonoBehaviour
                 Cancel?.Invoke();
                 break;
         }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && OKButton.activeSelf)
+            OKButton_Click();
+        if (Input.GetKeyDown(KeyCode.Escape) && CancelButton.activeSelf)
+            CancelButton_Click();
     }
 
     public void OKButton_Click()

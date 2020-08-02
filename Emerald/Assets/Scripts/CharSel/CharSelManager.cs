@@ -174,6 +174,5 @@ public class CharSelManager : MonoBehaviour
     {
         GameManager.gameStage = GameStage.Login;
         SceneManager.LoadSceneAsync("Login");
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 }
