@@ -202,4 +202,14 @@ public class LoginManager : MonoBehaviour
         Camera.SetBool("openGate", true);
         DoorFX.SetBool("openGate", true);
     }
+
+    public void ExitButton_Click()
+    {
+        Application.Quit();
+    }
+
+    public void SiteButton_Click()
+    {
+        Application.OpenURL("https://www.lomcn.org/forum/");
+    }
 }
