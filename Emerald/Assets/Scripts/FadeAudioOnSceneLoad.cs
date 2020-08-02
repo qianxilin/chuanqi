@@ -7,11 +7,13 @@ using UnityEngine.Audio;
 
 public class FadeAudioOnSceneLoad : MonoBehaviour
 {
-    public bool fade = false;
-    public AudioSource m_AudioSource; // Probably be better to fade in "Music" audio mixer only
-    public AudioMixer m_AudioMixer;   // by using this instead m_AudioMixer.SetFloat("musicVol", value)
+    private bool fade = false;
+    public AudioMixer audioMixer;   // by using this instead m_AudioMixer.SetFloat("musicVol", value)
+    public string ChannelName;    
     [Range(0f, 10f)]
     public float musicFadeSpeed;
+    public bool DestroyAfterFade;
+    public bool ResetAfterFade;
 
     void Awake()
     {        
@@ -32,10 +34,16 @@ public class FadeAudioOnSceneLoad : MonoBehaviour
     {        
         if (fade == true)
         {
-            float oldvolume = m_AudioSource.volume;
-            m_AudioSource.volume = Mathf.Max(0, m_AudioSource.volume - musicFadeSpeed * Time.deltaTime);
-            if (m_AudioSource.volume <= 0)
-                Destroy(gameObject);
+            audioMixer.GetFloat(ChannelName, out float currentvolume);
+            float newvolume = Mathf.Max(-80f, currentvolume - musicFadeSpeed * Time.deltaTime);
+            audioMixer.SetFloat(ChannelName, newvolume);
+            if (newvolume < -50f)
+            {
+                if (ResetAfterFade)
+                    audioMixer.SetFloat(ChannelName, 0);
+                if (DestroyAfterFade)
+                    Destroy(gameObject);
+            }
         }
     }   
 }

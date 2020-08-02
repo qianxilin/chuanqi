@@ -163,7 +163,11 @@ public class CharSelManager : MonoBehaviour
 
     public void LogoutButton_OnClick()
     {
-        Network.Enqueue(new C.Logout() { });
+        MessageBox.Show($"Return to Login?", true, true);
+        MessageBox.OK += () =>
+        {
+            Network.Enqueue(new C.Logout() { });
+        };       
     }
 
     public void LogoutSuccess()
