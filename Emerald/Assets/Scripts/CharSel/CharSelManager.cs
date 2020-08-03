@@ -16,6 +16,7 @@ public class CharSelManager : MonoBehaviour
     public MirSelectButton[] CharacterButtons = new MirSelectButton[Globals.MaxCharacterCount];
     public MirSelectButton[] ClassButtons = new MirSelectButton[Enum.GetNames(typeof(MirClass)).Length];
     public MirSelectButton[] GenderButtons = new MirSelectButton[Enum.GetNames(typeof(MirGender)).Length];
+    public GameObject[] NewCharacterModels = new GameObject[Enum.GetNames(typeof(MirClass)).Length * Enum.GetNames(typeof(MirGender)).Length];
     public MirButton DeleteButton;
     public TMP_InputField NameInput;
     //Windows
@@ -27,11 +28,20 @@ public class CharSelManager : MonoBehaviour
     private SelectInfo selectedCharacter;
     private MirClass selectedClass;
     private MirGender selectedGender;
+    private GameObject selectedModel;
+    private GameObject activeLocation;
+    private GameObject inactiveLocation;
+
+    void Awake()
+    {
+        activeLocation = GameObject.Find("ActiveLocation");
+        inactiveLocation = GameObject.Find("InactiveLocation");
+    }
 
     void Start()
     {
         GameManager.gameStage = GameStage.Select;
-        Network.CharSelManager = this;
+        Network.CharSelManager = this;        
         Network.Enqueue(new C.RequestCharacters{});
     }
 
@@ -40,6 +50,9 @@ public class CharSelManager : MonoBehaviour
         ClassButtons[0].Select(true);
         GenderButtons[0].Select(true);
         NameInput.text = string.Empty;
+        if (selectedModel != null)
+            selectedModel.transform.SetPositionAndRotation(inactiveLocation.transform.position, inactiveLocation.transform.rotation);
+        selectedModel = null;
     }
 
     public void ShowMessageBox(string message)
@@ -97,6 +110,15 @@ public class CharSelManager : MonoBehaviour
         DeleteButton.gameObject.SetActive(characters.Any(x => x != null));
     }
 
+    public void RefreshModel()
+    {
+        if (selectedModel != null)
+            selectedModel.transform.SetPositionAndRotation(inactiveLocation.transform.position, inactiveLocation.transform.rotation);
+
+        selectedModel = NewCharacterModels[(byte)selectedClass * 2 + (byte)selectedGender];
+        selectedModel.transform.SetPositionAndRotation(activeLocation.transform.position, activeLocation.transform.rotation);
+    }
+
     public void NewCharacterSuccess(SelectInfo info)
     {
         AddCharacter(info);
@@ -131,6 +153,8 @@ public class CharSelManager : MonoBehaviour
     {
         selectedClass = (MirClass)i;
 
+        RefreshModel();
+
         for (int j = 0; j < ClassButtons.Length; j++)
             ClassButtons[j].Select(i == j);
     }
@@ -138,6 +162,8 @@ public class CharSelManager : MonoBehaviour
     public void SelectGender(int i)
     {
         selectedGender = (MirGender)i;
+
+        RefreshModel();
 
         for (int j = 0; j < GenderButtons.Length; j++)
             GenderButtons[j].Select(i == j);
