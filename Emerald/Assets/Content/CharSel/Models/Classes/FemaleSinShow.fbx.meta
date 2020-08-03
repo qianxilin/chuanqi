@@ -18,7 +18,57 @@ ModelImporter:
   - first:
       74: 666532943263824769
     second: V_AG_F_Show_Model.ao|show
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_1_INST
+    second: {fileID: 2100000, guid: f24b9f6f40141f94db18431805d5bf05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_2_INST
+    second: {fileID: 2100000, guid: 00f7a7f46466b2b4583ad86f0e504fb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_4_INST
+    second: {fileID: 2100000, guid: c114c9b11f671b749a861352fea39015, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_5_INST
+    second: {fileID: 2100000, guid: 40bb69ef8a9e9c54ebb986ed3f31a212, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_6_INST
+    second: {fileID: 2100000, guid: e827d1a913c7b3c4e9d80038843291dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_7_INST
+    second: {fileID: 2100000, guid: bbbe9982bec44a94f9a5bd5d5f46014a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_AG_F_Face_HH
+    second: {fileID: 2100000, guid: e0de0ad2a9c6eaa45b667fc879632fcd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_AG_F_Hair_H
+    second: {fileID: 2100000, guid: fefb3fff3e95da740878099246a93a00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MT_M_Cap
+    second: {fileID: 2100000, guid: 9ef1ba82d2febe847a8d939c5f024e37, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_8
+    second: {fileID: 2100000, guid: 65d00094439f1414c9e2d4cb424ca1e1, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
