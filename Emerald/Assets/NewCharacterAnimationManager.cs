@@ -6,6 +6,11 @@ public class NewCharacterAnimationManager : MonoBehaviour
 {
     public static int IdleCount;
 
+    public void Activate()
+    {
+       gameObject.GetComponent<AudioSource>().Play();
+    }
+
     public void IncreaseCount()
     {
         IdleCount++;

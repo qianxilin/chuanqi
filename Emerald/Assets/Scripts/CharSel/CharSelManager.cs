@@ -118,7 +118,7 @@ public class CharSelManager : MonoBehaviour
         selectedModel = NewCharacterModels[(byte)selectedClass * 2 + (byte)selectedGender];
         selectedModel.transform.SetPositionAndRotation(activeLocation.transform.position, activeLocation.transform.rotation);
         selectedModel.GetComponent<Animator>().SetBool("selected", true);
-        
+ 
     }
 
     public void NewCharacterSuccess(SelectInfo info)
