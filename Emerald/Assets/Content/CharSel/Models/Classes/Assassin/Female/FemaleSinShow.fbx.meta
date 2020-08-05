@@ -1,14 +1,23 @@
 fileFormatVersion: 2
-guid: a1132430cfb6ad649a53125ce126b312
+guid: 03da553071fe9884eb36e931c4d510e5
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: 7838040371494102298
-    second: V_AG_F_Show_Model.ao|Idle
+      74: 3208173748434068645
+    second: ag_f_set_07gao.ao|Idle
   - first:
-      74: -6163519616132016127
-    second: V_AG_F_Show_Model.ao|Talk
+      74: -7513074332163293772
+    second: ag_f_set_07gao.ao|IdleShow
+  - first:
+      74: -2354308477965828652
+    second: ag_f_set_07gao.ao|idleshow2
+  - first:
+      74: -49146898745469036
+    second: ag_f_set_07gao.ao|SelectModel
+  - first:
+      74: 8554438577491679830
+    second: ag_f_set_07gao.ao|show
   externalObjects: {}
   materials:
     materialImportMode: 1

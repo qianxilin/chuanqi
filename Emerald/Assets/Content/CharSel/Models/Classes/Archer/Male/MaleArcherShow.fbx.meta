@@ -1,26 +1,26 @@
 fileFormatVersion: 2
-guid: e3ddcf2d72ffbf84daeffd8af2840453
+guid: 613a5b2835083494490933c6b678684c
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
-      74: -7722979133613197944
-    second: V_AR_M_Show_Model.ao|Idle
+      74: 130169773145809328
+    second: ar_m_set_12.ao|Idle
   - first:
-      74: 8691675323879488195
-    second: V_AR_M_Show_Model.ao|IdleShow
+      74: 7773378331470057898
+    second: ar_m_set_12.ao|IdleShow
   - first:
-      74: -3600292011776382610
-    second: V_AR_M_Show_Model.ao|IdleShow_Old
+      74: -8097467764076638982
+    second: ar_m_set_12.ao|IdleShow_Old
   - first:
-      74: -1997572216687141211
-    second: V_AR_M_Show_Model.ao|show
+      74: 3700657113789990706
+    second: ar_m_set_12.ao|show
   - first:
-      74: 2868725571499898332
-    second: V_AR_M_Show_Model.ao|show_Old
+      74: -7924338810020929827
+    second: ar_m_set_12.ao|show_Old
   - first:
-      74: 35647018408162337
-    second: V_AR_M_Show_Model.ao|Standby
+      74: -3948346878536484574
+    second: ar_m_set_12.ao|Standby
   externalObjects: {}
   materials:
     materialImportMode: 1
