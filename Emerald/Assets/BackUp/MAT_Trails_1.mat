@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Light_FX_01
-  m_Shader: {fileID: 4800000, guid: 825914e30a8cd3648b29c2ca1d55ba87, type: 3}
+  m_Name: MAT_Trails_1
+  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -40,11 +40,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2f1cb75ec3b719f498a6835f4cb9474f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MonsterUD003_Tex:
+        m_Texture: {fileID: 2800000, guid: 832a8b550e9337440882164953b62821, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -55,34 +59,63 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SubUV:
+        m_Texture: {fileID: 2800000, guid: c09f707cbbe311f4790a2839b5532dbb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_FX_DarkHit01_Mask01:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _T_FX_LuoS_cirray02:
-        m_Texture: {fileID: 2800000, guid: dd9ed62f57d59fd48882c8e1fa5a9eb1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _T_Gate_001:
-        m_Texture: {fileID: 2800000, guid: 91441120dc887124db3d116c642e4d37, type: 3}
+    - _T_FX_LuoS_cirray02a:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _T_fxflametilewhite:
-        m_Texture: {fileID: 2800000, guid: 5f9bcb203ac6a5848be59b1814c0164f, type: 3}
+    - _T_FX_LuoS_cirray02b:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_purify_01:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tech_1:
+        m_Texture: {fileID: 2800000, guid: 6ed89b0fdd368ca4e862c94fc1a65b1f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Tech_2:
+        m_Texture: {fileID: 2800000, guid: 6ed89b0fdd368ca4e862c94fc1a65b1f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample:
+        m_Texture: {fileID: 2800000, guid: e02cae72e363514498163e2ac7464f51, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: dd9ed62f57d59fd48882c8e1fa5a9eb1, type: 3}
+        m_Texture: {fileID: 2800000, guid: cfdc0a7c8ba7cd847959422825d098f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _fxflametilewhite:
-        m_Texture: {fileID: 2800000, guid: 1c9f7ab8463e91249a14d12e47d5e9fe, type: 3}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 3e96708b363110649b662debb45b234c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _trails01:
+        m_Texture: {fileID: 2800000, guid: d8c19e4c970ded44589294b71920bb8e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Distortion: -9.57
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -91,12 +124,21 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Shininess: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TransAmbient: 0.2
+    - _TransDirect: 1
+    - _TransNormalDistortion: 0.1
+    - _TransScattering: 2
+    - _TransShadow: 0.9
+    - _Translucency: 1
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.9823973, b: 0.759434, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0, g: 0, b: 0, a: 1}

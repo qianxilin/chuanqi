@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Light_FX_01
-  m_Shader: {fileID: 4800000, guid: 825914e30a8cd3648b29c2ca1d55ba87, type: 3}
+  m_Name: Effect_07_Particle
+  m_Shader: {fileID: 4800000, guid: eee4f23a9611584428cd8df8a4792f02, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7fa857e3ae350144eb1c9a31733f8c61, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -55,38 +55,21 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _T_FX_LuoS_cirray02:
-        m_Texture: {fileID: 2800000, guid: dd9ed62f57d59fd48882c8e1fa5a9eb1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _T_Gate_001:
-        m_Texture: {fileID: 2800000, guid: 91441120dc887124db3d116c642e4d37, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _T_fxflametilewhite:
-        m_Texture: {fileID: 2800000, guid: 5f9bcb203ac6a5848be59b1814c0164f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: dd9ed62f57d59fd48882c8e1fa5a9eb1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _fxflametilewhite:
-        m_Texture: {fileID: 2800000, guid: 1c9f7ab8463e91249a14d12e47d5e9fe, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AllColorFactor: 1
+    - _BlendDst: 10
+    - _BlendSrc: 5
     - _BumpScale: 1
+    - _ColorBlueFactor: 1
+    - _ColorGreenFactor: 1
+    - _ColorRedFactor: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _InvFade: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -96,7 +79,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _TintColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
