@@ -9,4 +9,9 @@ public class SceneChange : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("CharSel");             
     }
+
+    void CameraFadeOut()
+    {
+        GetComponent<CameraFade>().enabled = true;
+    }
 }
