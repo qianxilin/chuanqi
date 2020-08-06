@@ -15,10 +15,20 @@ public class NewCharacterAnimationManager : MonoBehaviour
     {
         IdleCount++;
 
-        if (IdleCount >= 7)
+        if (IdleCount >= 5)
         {
             IdleCount = 0;
             gameObject.GetComponent<Animator>().SetBool("bored", true);
         }
+    }
+
+    public void Intro_AnimationEnd()
+    {
+        gameObject.GetComponent<Animator>().SetBool("selected", false);
+    }
+
+    public void Bored_AnimationEnd()
+    {
+        gameObject.GetComponent<Animator>().SetBool("bored", false);
     }
 }
