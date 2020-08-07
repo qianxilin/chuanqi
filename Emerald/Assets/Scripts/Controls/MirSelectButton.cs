@@ -22,7 +22,7 @@ public class MirSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     void Awake()
     {
         image = GetComponent<Image>();
-        clickSound = GetComponent<AudioSource>();
+        clickSound = gameObject.GetComponent<AudioSource>();
     }
 
     public void Select(bool select)

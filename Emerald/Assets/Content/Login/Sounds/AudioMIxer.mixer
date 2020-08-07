@@ -19,20 +19,6 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &-8478500040262273944
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: 42db5d7f03f7d224cbdfcc4169e766f1
-  m_EffectName: Attenuation
-  m_MixLevel: 8d361254ef760ed41ade25335464a18d
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!244 &-4748635893017238163
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -85,25 +71,6 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!243 &-2359268679830406129
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Login Music
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: ab2c41ee9daa12c4a8873b40784390d5
-  m_Children: []
-  m_Volume: 76da98845ebea7d4a9f55d2b6f5c9f2b
-  m_Pitch: 74c251fb74d398c4d919829709042688
-  m_Send: 00000000000000000000000000000000
-  m_Effects:
-  - {fileID: -8478500040262273944}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
 --- !u!243 &-709114991039069867
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -138,9 +105,7 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters:
-  - guid: 76da98845ebea7d4a9f55d2b6f5c9f2b
-    name: LoginVolume
+  m_ExposedParameters: []
   m_AudioMixerGroupViews:
   - guids:
     - 75e559710bcdce744b6dc648d033f862
@@ -148,7 +113,6 @@ AudioMixerController:
     - 91e50a4222b4fe540b4a310729a841d6
     - 87915d708a49a5148b52667c269e8040
     - 5eb9825a5d999eb44bf23695d12be343
-    - ab2c41ee9daa12c4a8873b40784390d5
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -163,7 +127,6 @@ AudioMixerGroupController:
   m_GroupID: 75e559710bcdce744b6dc648d033f862
   m_Children:
   - {fileID: -8801917273581265411}
-  - {fileID: -2359268679830406129}
   - {fileID: -2683213891714520529}
   - {fileID: -709114991039069867}
   - {fileID: -3806936244277559320}

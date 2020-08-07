@@ -53,6 +53,8 @@ public class LoginManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gameStage != GameStage.Login) return;
+
         if (!loginshown)
         {
             if (Network.LoginConnected)

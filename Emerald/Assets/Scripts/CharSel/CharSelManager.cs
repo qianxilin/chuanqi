@@ -32,17 +32,18 @@ public class CharSelManager : MonoBehaviour
     private GameObject activeLocation;
     private GameObject inactiveLocation;
 
-    void Awake()
+    void Start()
     {
         activeLocation = GameObject.Find("ActiveLocation");
         inactiveLocation = GameObject.Find("InactiveLocation");
+        Network.CharSelManager = this;
     }
 
-    void Start()
+    public void OnLoaded()
     {
+        SelectCharacterBox.SetActive(true);
         GameManager.gameStage = GameStage.Select;
-        Network.CharSelManager = this;        
-        Network.Enqueue(new C.RequestCharacters{});
+        Network.Enqueue(new C.RequestCharacters { });
     }
 
     public void ClearCreateBox()
