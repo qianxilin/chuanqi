@@ -14,6 +14,7 @@ public class AudioFader : MonoBehaviour
     [Range(0f, 10f)]
     public float musicFadeSpeed;
     public bool DestroyAfterFade;
+    public bool ResetOnFaded;
     public UnityEvent FadedEvent;
 
     void Awake()
@@ -29,6 +30,12 @@ public class AudioFader : MonoBehaviour
         fade = true;
     }
 
+    public void Reset()
+    {
+        fade = false;
+        audioSource.volume = 1f;
+    }
+
     void Update()
     {        
         if (fade == true)
@@ -37,8 +44,10 @@ public class AudioFader : MonoBehaviour
             audioSource.volume = Mathf.Max(0, audioSource.volume - musicFadeSpeed * Time.deltaTime);
             if (audioSource.volume <= 0)
             {
-                fade = false;
+                audioSource.Stop();
                 FadedEvent?.Invoke();
+                if (ResetOnFaded)
+                    Reset();
                 if (DestroyAfterFade)
                     Destroy(gameObject);
             }

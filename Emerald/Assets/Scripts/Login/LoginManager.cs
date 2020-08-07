@@ -33,6 +33,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField ChangeConfirmPassword;
     //Misc
     public MirMessageBox MessageBox;
+    public AudioSource audioSource;
 
     private bool loginshown = false;
 
@@ -45,9 +46,21 @@ public class LoginManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OnLoaded();
+    }
+
+    public void OnLoaded()
+    {
+        loginshown = false;
+        LeftDoor.SetBool("openGate", false);
+        RightDoor.SetBool("openGate", false);
+        Camera.SetBool("openGate", false);
+        DoorGlow.SetBool("openGate", false);
         LoginBox.SetActive(false);
         RegisterBox.SetActive(false);
         ConnectBox.SetActive(true);
+        audioSource.GetComponent<AudioFader>().Reset();
+        audioSource.Play();
     }
 
     // Update is called once per frame

@@ -16,7 +16,7 @@ public class CameraFade : MonoBehaviour
     {
         _done = false;
         _alpha = 1;
-        _time = 10;
+        _time = 0;
     }
 
     [RuntimeInitializeOnLoadMethod]

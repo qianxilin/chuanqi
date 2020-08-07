@@ -375,6 +375,7 @@ MonoBehaviour:
   ChangeNewPassword: {fileID: 1647904335}
   ChangeConfirmPassword: {fileID: 1866427702}
   MessageBox: {fileID: 2010890291}
+  audioSource: {fileID: 2096336559}
 --- !u!4 &21959868
 Transform:
   m_ObjectHideFlags: 0
@@ -35657,6 +35658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f23a1e05335224b8d22a3c069156e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoginManager: {fileID: 21959867}
   CreateButtons:
   - {fileID: 995208574}
   - {fileID: 436999382}
@@ -37765,7 +37767,7 @@ GameObject:
   - component: {fileID: 1671783881}
   m_Layer: 0
   m_Name: CharSelCamera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37777,8 +37779,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671783875}
-  m_LocalRotation: {x: -0.0000000016340785, y: 0.999962, z: -0.008726558, w: -0.00000018724639}
-  m_LocalPosition: {x: -96.5, y: 0.5, z: -76.6}
+  m_LocalRotation: {x: -0.0000000016340793, y: 0.9999619, z: -0.008726559, w: -0.00000018724637}
+  m_LocalPosition: {x: -96.5, y: 0.50000286, z: -76.60003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 654385439}
@@ -47027,7 +47029,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -8801917273581265411, guid: 7f89bac7e67a96548a1b99ba68b81ddd,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9477dff12f7b6e34083e51838e3851b2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -47126,6 +47128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicFadeSpeed: 0.3
   DestroyAfterFade: 0
+  ResetOnFaded: 1
   FadedEvent:
     m_PersistentCalls:
       m_Calls: []

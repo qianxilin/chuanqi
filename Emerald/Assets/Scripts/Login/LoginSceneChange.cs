@@ -31,6 +31,7 @@ public class LoginSceneChange : MonoBehaviour
 
     void CameraFadeOut()
     {
+        GetComponent<CameraFade>().Reset();
         GetComponent<CameraFade>().enabled = true;
     }
 }

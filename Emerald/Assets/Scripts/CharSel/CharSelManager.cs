@@ -12,6 +12,10 @@ using C = ClientPackets;
 public class CharSelManager : MonoBehaviour
 {
     private List<SelectInfo> characters = new List<SelectInfo>();
+    private GameObject loginCamera;
+    private GameObject charselCamera;
+
+    public LoginManager LoginManager;
     public MirButton[] CreateButtons = new MirButton[Globals.MaxCharacterCount];
     public MirSelectButton[] CharacterButtons = new MirSelectButton[Globals.MaxCharacterCount];
     public MirSelectButton[] ClassButtons = new MirSelectButton[Enum.GetNames(typeof(MirClass)).Length];
@@ -38,6 +42,8 @@ public class CharSelManager : MonoBehaviour
     {
         activeLocation = GameObject.Find("ActiveLocation");
         inactiveLocation = GameObject.Find("InactiveLocation");
+        loginCamera = GameObject.Find("LoginCamera");
+        charselCamera = GameObject.Find("CharSelCamera");
         Network.CharSelManager = this;
     }
 
@@ -211,6 +217,25 @@ public class CharSelManager : MonoBehaviour
     public void LogoutSuccess()
     {
         GameManager.gameStage = GameStage.Login;
-        SceneManager.LoadSceneAsync("Login");
+        ChangeScene(GameManager.gameStage);
+    }
+
+    void ChangeScene(GameStage stage)
+    {
+        charselCamera.GetComponent<CameraFade>().Reset();
+        switch (stage)
+        {
+            case GameStage.Login:
+                charselCamera.GetComponent<Camera>().enabled = false;
+                charselCamera.GetComponent<CameraFade>().enabled = false;
+                charselCamera.GetComponent<AudioListener>().enabled = false;
+                loginCamera.GetComponent<Camera>().enabled = true;
+                loginCamera.GetComponent<CameraFade>().Reset();
+                loginCamera.GetComponent<CameraFade>().enabled = false;
+                loginCamera.GetComponent<AudioListener>().enabled = true;
+                audioSource.Stop();
+                LoginManager.OnLoaded();
+                break;
+        }        
     }
 }
