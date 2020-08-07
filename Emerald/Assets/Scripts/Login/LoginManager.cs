@@ -56,6 +56,7 @@ public class LoginManager : MonoBehaviour
         RightDoor.SetBool("openGate", false);
         Camera.SetBool("openGate", false);
         DoorGlow.SetBool("openGate", false);
+        DoorFX.Stop();
         LoginBox.SetActive(false);
         RegisterBox.SetActive(false);
         ConnectBox.SetActive(true);
