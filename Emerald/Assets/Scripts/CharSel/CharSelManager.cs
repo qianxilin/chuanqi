@@ -18,12 +18,14 @@ public class CharSelManager : MonoBehaviour
     public MirSelectButton[] GenderButtons = new MirSelectButton[Enum.GetNames(typeof(MirGender)).Length];
     public GameObject[] NewCharacterModels = new GameObject[Enum.GetNames(typeof(MirClass)).Length * Enum.GetNames(typeof(MirGender)).Length];
     public MirButton DeleteButton;
+    public MirButton LogOutButton;
     public TMP_InputField NameInput;
     //Windows
     public GameObject SelectCharacterBox;
     public GameObject NewCharacterBox;
     //Misc
     public MirMessageBox MessageBox;
+    public AudioSource audioSource;
 
     private SelectInfo selectedCharacter;
     private MirClass selectedClass;
@@ -41,7 +43,9 @@ public class CharSelManager : MonoBehaviour
 
     public void OnLoaded()
     {
+        audioSource.Play();
         SelectCharacterBox.SetActive(true);
+        LogOutButton.gameObject.SetActive(true);
         GameManager.gameStage = GameStage.Select;
         Network.Enqueue(new C.RequestCharacters { });
     }

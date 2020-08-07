@@ -6393,7 +6393,7 @@ MonoBehaviour:
   ClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1436262009}
         m_MethodName: DeleteCharacter_OnClick
         m_Mode: 1
         m_Arguments:
@@ -10164,7 +10164,7 @@ MonoBehaviour:
   ClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1436262009}
         m_MethodName: LogoutButton_OnClick
         m_Mode: 1
         m_Arguments:
@@ -35688,10 +35688,12 @@ MonoBehaviour:
   - {fileID: 607699313}
   - {fileID: 215100473}
   DeleteButton: {fileID: 170136964}
+  LogOutButton: {fileID: 406495172}
   NameInput: {fileID: 1899861058}
   SelectCharacterBox: {fileID: 947216649}
   NewCharacterBox: {fileID: 861456177}
   MessageBox: {fileID: 2010890291}
+  audioSource: {fileID: 1937869991}
 --- !u!1 &1445359726
 GameObject:
   m_ObjectHideFlags: 0
@@ -35701,7 +35703,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445359727}
-  - component: {fileID: 1445359728}
   m_Layer: 0
   m_Name: Sound
   m_TagString: Untagged
@@ -35724,23 +35725,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1445359728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445359726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f87f35bc106c394e8f7947870b60a31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 7f89bac7e67a96548a1b99ba68b81ddd, type: 2}
-  ChannelName: LoginVolume
-  musicFadeSpeed: 8
-  DestroyAfterFade: 1
-  ResetAfterFade: 1
 --- !u!1 &1456891791
 GameObject:
   m_ObjectHideFlags: 0
@@ -37011,6 +36995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharselManager: {fileID: 1436262009}
+  audioFader: {fileID: 2096336560}
 --- !u!95 &1597746327
 Animator:
   serializedVersion: 3
@@ -37773,11 +37758,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1671783876}
   - component: {fileID: 1671783882}
-  - component: {fileID: 1671783881}
   - component: {fileID: 1671783880}
   - component: {fileID: 1671783879}
   - component: {fileID: 1671783878}
   - component: {fileID: 1671783877}
+  - component: {fileID: 1671783881}
   m_Layer: 0
   m_Name: CharSelCamera
   m_TagString: MainCamera
@@ -37864,6 +37849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharselManager: {fileID: 0}
+  audioFader: {fileID: 0}
 --- !u!95 &1671783880
 Animator:
   serializedVersion: 3
@@ -37872,7 +37858,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671783875}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0e994669bdf439e4683a1c9d6180aa58, type: 2}
   m_CullingMode: 0
@@ -37890,7 +37876,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671783875}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &1671783882
 Camera:
   m_ObjectHideFlags: 0
@@ -47007,6 +46993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2096336558}
   - component: {fileID: 2096336559}
+  - component: {fileID: 2096336560}
   m_Layer: 0
   m_Name: LoginMusic
   m_TagString: Untagged
@@ -47125,6 +47112,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2096336560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096336557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f87f35bc106c394e8f7947870b60a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicFadeSpeed: 0.3
+  DestroyAfterFade: 0
+  FadedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2115408053
 GameObject:
   m_ObjectHideFlags: 0

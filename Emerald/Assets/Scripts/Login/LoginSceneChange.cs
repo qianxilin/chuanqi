@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChange : MonoBehaviour
+public class LoginSceneChange : MonoBehaviour
 {
     private GameObject loginCamera;
     private GameObject charselCamera;
     public CharSelManager CharselManager;
+    public AudioFader audioFader;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class SceneChange : MonoBehaviour
         charselCamera.GetComponent<Camera>().enabled = true;        
         charselCamera.GetComponent<CameraFade>().enabled = true;
         charselCamera.GetComponent<AudioListener>().enabled = true;
+        audioFader.Begin();
 
         CharselManager.OnLoaded();
     }
