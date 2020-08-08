@@ -141,6 +141,7 @@ public class CharSelManager : MonoBehaviour
     {
         AddCharacter(info);
         NewCharacterBox.SetActive(false);
+        LogOutButton.gameObject.SetActive(true);
         SelectCharacterBox.SetActive(true);
     }
 
@@ -175,6 +176,8 @@ public class CharSelManager : MonoBehaviour
 
         for (int j = 0; j < ClassButtons.Length; j++)
             ClassButtons[j].Select(i == j);
+
+        NameInput.ActivateInputField();
     }
 
     public void SelectGender(int i)
@@ -185,6 +188,8 @@ public class CharSelManager : MonoBehaviour
 
         for (int j = 0; j < GenderButtons.Length; j++)
             GenderButtons[j].Select(i == j);
+
+        NameInput.ActivateInputField();
     }
 
     public void DeleteCharacter_OnClick()
