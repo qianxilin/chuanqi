@@ -243,4 +243,24 @@ public class CharSelManager : MonoBehaviour
                 break;
         }        
     }
+
+    public void PlayButton_Click()
+    {
+        if (selectedCharacter == null) return;
+
+        StartGame();
+    }
+
+    void StartGame()
+    {
+        Network.Enqueue(new C.StartGame()
+        {
+            CharacterIndex = selectedCharacter.Index
+        });
+    }
+
+    public void StartGameSuccess(int allowedResolution)
+    {
+        GameManager.gameStage = GameStage.Game;
+    }
 }

@@ -102,13 +102,13 @@ namespace Server.MirEnvir
                             Cells[x, y].location = new UnityLocation();
 
                             offSet ++;
-                            Cells[x, y].location.x = BitConverter.ToInt32(fileBytes, offSet);
+                            Cells[x, y].location.x = BitConverter.ToSingle(fileBytes, offSet);
 
                             offSet += 4;
-                            Cells[x, y].location.y = BitConverter.ToInt32(fileBytes, offSet);
+                            Cells[x, y].location.y = BitConverter.ToSingle(fileBytes, offSet);
 
                             offSet += 4;
-                            Cells[x, y].location.z = BitConverter.ToInt32(fileBytes, offSet);
+                            Cells[x, y].location.z = BitConverter.ToSingle(fileBytes, offSet);
 
                             offSet += 4;
                         }
@@ -1930,7 +1930,7 @@ namespace Server.MirEnvir
     }
     public class UnityLocation
     {
-        public int x, y, z;
+        public float x, y, z;
     }
     public class Cell
     {

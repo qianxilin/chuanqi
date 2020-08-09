@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using C = ClientPackets;
 using S = ServerPackets;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace EmeraldNetwork
@@ -24,6 +25,8 @@ namespace EmeraldNetwork
 
         private static ConcurrentQueue<Packet> _receiveList;
         private static ConcurrentQueue<Packet> _sendList;
+
+        private static GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         static byte[] _rawData = new byte[0];
 
@@ -227,6 +230,9 @@ namespace EmeraldNetwork
                 case GameStage.Select:
                     ProcessCharSelPacket(p);
                     break;
+                case GameStage.Game:
+                    ProcessGamePacket(p);
+                    break;
             }            
         }
 
@@ -284,6 +290,25 @@ namespace EmeraldNetwork
                     break;
                 case (short)ServerPacketIds.LogoutSuccess:
                     LogoutSuccess((S.LogoutSuccess)p);
+                    break;
+                case (short)ServerPacketIds.StartGame:
+                    StartGame((S.StartGame)p);
+                    break;
+                default:
+                    //base.ProcessPacket(p);
+                    break;
+            }
+        }
+
+        public static void ProcessGamePacket(Packet p)
+        {
+            switch (p.Index)
+            {
+                case (short)ServerPacketIds.MapInformation:
+                    MapInformation((S.MapInformation)p);
+                    break;
+                case (short)ServerPacketIds.UserInformation:
+                    UserInformation((S.UserInformation)p);
                     break;
                 default:
                     //base.ProcessPacket(p);
@@ -462,6 +487,37 @@ namespace EmeraldNetwork
         public static void LogoutSuccess(S.LogoutSuccess p)
         {
             CharSelManager.LogoutSuccess();
+        }
+
+        public static void StartGame(S.StartGame p)
+        {
+            switch (p.Result)
+            {
+                case 0:
+                    CharSelManager.ShowMessageBox("Entering the game is disabled.");
+                    break;
+                case 1:
+                    CharSelManager.ShowMessageBox("Account not found.");
+                    break;
+                case 2:
+                    CharSelManager.ShowMessageBox("Character not found.");
+                    break;
+                case 4:
+                    CharSelManager.StartGameSuccess(p.Resolution);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static void MapInformation(S.MapInformation p)
+        {
+            SceneManager.LoadSceneAsync(p.FileName);
+        }
+
+        public static void UserInformation(S.UserInformation p)
+        {
+            gameManager.UserInformation(p);
         }
 
         public static void Enqueue(Packet p)

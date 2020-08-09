@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Network = EmeraldNetwork.Network;
+using S = ServerPackets;
 
 public class GameManager : MonoBehaviour
 {
     public static NetworkInfo networkInfo;
     public static GameStage gameStage;
+
+    public GameObject UserObject;
 
     void Awake()
     {
@@ -38,6 +41,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Network.Process();
+    }
+
+    public void UserInformation(S.UserInformation p)
+    {
+        UserObject.SetActive(true);
+        UserObject.transform.position = new Vector3(p.x, p.y, p.z);
     }
 
     public class NetworkInfo
