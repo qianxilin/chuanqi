@@ -512,7 +512,7 @@ namespace EmeraldNetwork
 
         public static void MapInformation(S.MapInformation p)
         {
-            SceneManager.LoadSceneAsync(p.FileName);
+            SceneManager.LoadSceneAsync(p.FileName, LoadSceneMode.Additive);
         }
 
         public static void UserInformation(S.UserInformation p)

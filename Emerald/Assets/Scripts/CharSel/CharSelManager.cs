@@ -262,5 +262,6 @@ public class CharSelManager : MonoBehaviour
     public void StartGameSuccess(int allowedResolution)
     {
         GameManager.gameStage = GameStage.Game;
+        SceneManager.LoadScene("GameScene");
     }
 }
