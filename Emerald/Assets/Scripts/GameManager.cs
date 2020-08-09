@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void UserInformation(S.UserInformation p)
     {
         UserObject.SetActive(true);
-        UserObject.transform.position = new Vector3(p.x, p.y, p.z);
+        UserObject.transform.position = new Vector3(p.x, p.y + UserObject.GetComponent<CapsuleCollider>().height / 2, p.z);
     }
 
     public class NetworkInfo
