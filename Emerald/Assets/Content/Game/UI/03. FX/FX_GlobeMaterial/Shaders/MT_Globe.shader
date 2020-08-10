@@ -147,7 +147,7 @@ Shader "MT_Globe"
 
 		ENDCG
 		CGPROGRAM
-		#pragma surface surf StandardSpecular keepalpha fullforwardshadows exclude_path:deferred 
+		#pragma surface surf StandardSpecular alpha:fade keepalpha fullforwardshadows exclude_path:deferred 
 
 		ENDCG
 		Pass

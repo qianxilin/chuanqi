@@ -183,7 +183,7 @@ Material:
     - _PanDirUpSpeed1: 0.1
     - _Parallax: 0.02
     - _Percent: 0
-    - _Percent1: 0.46
+    - _Percent1: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SplitWaveSpeed: -0.5
@@ -211,6 +211,6 @@ Material:
     - _LightColor: {r: 0.49507797, g: 1, b: 0, a: 1}
     - _LineColor: {r: 0.23529413, g: 0.32156864, b: 0.7294118, a: 1}
     - _SplitLineUVTiling: {r: 1, g: 1, b: 0, a: 1}
-    - _SplitLineUVTiling1: {r: 1, g: 1, b: 0, a: 1}
+    - _SplitLineUVTiling1: {r: 1, g: 2.05, b: 0, a: 1}
     - _UVTiling: {r: 0.125, g: 0.125, b: 0, a: 1}
     - _UVTiling1: {r: 0.125, g: 0.125, b: 0, a: 1}

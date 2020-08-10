@@ -171,14 +171,14 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _PanDirRightUp1Speed: 0.4
+    - _PanDirRightUp1Speed: 0.3
     - _PanDirRightUp1Speed1: 0.1
     - _PanDirRightUp2Speed: 0.6
     - _PanDirRightUp2Speed1: 0.2
-    - _PanDirUpSpeed: 0.3
+    - _PanDirUpSpeed: 0.12
     - _PanDirUpSpeed1: 0.1
     - _Parallax: 0.02
-    - _Percent: -0.03
+    - _Percent: 0.44
     - _Percent1: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
