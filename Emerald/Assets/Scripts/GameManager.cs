@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public static NetworkInfo networkInfo;
     public static GameStage gameStage;
-    public GameObject UserObject;
+    public UserObject User;
+    public List<GameObject> WarriorModels;
+    public static MirScene CurrentScene;
 
     void Awake()
     {
@@ -39,13 +41,29 @@ public class GameManager : MonoBehaviour
 
     public void UserInformation(S.UserInformation p)
     {
-        UserObject.SetActive(true);
-        UserObject.transform.position = new Vector3(p.x, p.y + UserObject.GetComponent<CapsuleCollider>().height / 2, p.z);
+        User.transform.position =new Vector3(p.x, p.y, p.z);
+        User.gameObject.SetActive(true);
+        User.Class = p.Class;
+        User.Gender = p.Gender;
     }
 
     void Update()
     {
         Network.Process();
+
+        ProcessScene();
+    }
+
+    void ProcessScene()
+    {
+        if (CurrentScene == null) return;
+        if (!User.gameObject.activeSelf) return;
+
+        if (CurrentScene.UserObject == null)
+        {
+            CurrentScene.UserObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
+            CurrentScene.UserObject.GetComponent<PlayerObject>().Camera.SetActive(true);
+        }
     }
 
     public class NetworkInfo

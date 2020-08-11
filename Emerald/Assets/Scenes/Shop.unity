@@ -619,6 +619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450652131857305}
+  - component: {fileID: 919132148482853156}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -626,6 +627,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132148482853156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148482853155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f0babad06a75b48b25fa16c1a32f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserObject: {fileID: 0}
 --- !u!4 &1235565573214082555
 Transform:
   m_ObjectHideFlags: 0
