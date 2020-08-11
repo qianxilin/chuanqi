@@ -1,14 +1,21 @@
 fileFormatVersion: 2
-guid: e2ff60db26d81204b81942692cb0f2b0
+guid: 03c17c13a08d37a4b8a7ef0eec4b5feb
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_taijie
-    second: {fileID: 2100000, guid: eb673496e9825e64a9e981e8a49b2dc3, type: 2}
+      74: 4904190784842243728
+    second: wa_m_body_01.ao|Idle
+  - first:
+      74: -6258490555661454119
+    second: wa_m_body_01.ao|Run
+  - first:
+      74: 6637409075656154546
+    second: wa_m_body_01.ao|Standby
+  - first:
+      74: -7614707094677883042
+    second: wa_m_body_01.ao|Walk
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -104,10 +104,10 @@ public class LoginManager : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             LoginSuccess();
-        }
+        }*/
     }
 
     public void ShowLoginBox()
