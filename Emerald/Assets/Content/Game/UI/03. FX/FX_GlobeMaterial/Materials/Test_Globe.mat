@@ -51,6 +51,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissivePanner_RO_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissivePanner_RO_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _GlobeMask:
         m_Texture: {fileID: 2800000, guid: b6f14b5fcfe696a40bacb1915ff8cd56, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -73,6 +81,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _HPPercentMask1:
         m_Texture: {fileID: 2800000, guid: 177aa5074130b5448b3a715be48283dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -176,6 +188,7 @@ Material:
     - _LowPercentWarn: 0.8
     - _LtexPower: 1.8
     - _LtexPower02: 1.5
+    - _LtxePower: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -186,7 +199,7 @@ Material:
     - _PanDirUpSpeed: 0.3
     - _PanDirUpSpeed1: 0.1
     - _Parallax: 0.02
-    - _Percent: 0.45
+    - _Percent: -0.55
     - _Percent1: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

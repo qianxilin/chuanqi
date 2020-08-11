@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Login.unity
     guid: d85b3e8ca8c86fb469b7d62648d883f1
   - enabled: 1
-    path: Assets/Scenes/CharSel.unity
-    guid: 2fdc2613b87dc2b449414209191d4f25
-  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 2594823f08c246743950dae427d103a0
   - enabled: 1

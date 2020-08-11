@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static NetworkInfo networkInfo;
     public static GameStage gameStage;
-
     public GameObject UserObject;
 
     void Awake()
@@ -38,15 +37,15 @@ public class GameManager : MonoBehaviour
         Network.Connect();
     }
 
-    void Update()
-    {
-        Network.Process();
-    }
-
     public void UserInformation(S.UserInformation p)
     {
         UserObject.SetActive(true);
         UserObject.transform.position = new Vector3(p.x, p.y + UserObject.GetComponent<CapsuleCollider>().height / 2, p.z);
+    }
+
+    void Update()
+    {
+        Network.Process();
     }
 
     public class NetworkInfo

@@ -9,7 +9,6 @@ using S = ServerPackets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace EmeraldNetwork
 {
     static class Network
