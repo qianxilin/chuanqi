@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_GlobeMage
+  m_Name: M_GlobeMage_Half
   m_Shader: {fileID: 4800000, guid: 65f66581ae005bd44a49961e8482378c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GlobeMask:
-        m_Texture: {fileID: 2800000, guid: de70a0f3e31b6b04d989fcfa5ef5e2f0, type: 3}
+        m_Texture: {fileID: 2800000, guid: b6f14b5fcfe696a40bacb1915ff8cd56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HPPercentMask:
@@ -100,7 +100,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TexWaveUp:
-        m_Texture: {fileID: 2800000, guid: 1e90d58ac14b7c548853eb344cefb900, type: 3}
+        m_Texture: {fileID: 2800000, guid: 710051aba815a8a4ca9a8ab9fdc5897a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -131,7 +131,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SplitWaveSpeed: 0.3
-    - _SpliwaveYOffset: 0.05
+    - _SpliwaveYOffset: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseD3Algorithm: 0

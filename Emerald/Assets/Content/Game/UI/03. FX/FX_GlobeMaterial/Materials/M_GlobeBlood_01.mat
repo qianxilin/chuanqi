@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_GlobeMage
+  m_Name: M_GlobeBlood_01
   m_Shader: {fileID: 4800000, guid: 65f66581ae005bd44a49961e8482378c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -116,34 +116,34 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeartbeatAmplify: 0
+    - _HeartbeatAmplify: 0.5
     - _HeartbeatFreq: 1
     - _HighlightPower: 16
     - _LowPercentWarn: 0.8
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _PanDirRightUp1Speed: 0.05
-    - _PanDirRightUp2Speed: 0.3
-    - _PanDirUpSpeed: 0.15
+    - _PanDirRightUp1Speed: 0.4
+    - _PanDirRightUp2Speed: 0.6
+    - _PanDirUpSpeed: 0.2
     - _Parallax: 0.02
     - _Percent: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SplitWaveSpeed: 0.3
-    - _SpliwaveYOffset: 0.05
+    - _SplitWaveSpeed: -0.5
+    - _SpliwaveYOffset: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseD3Algorithm: 0
     - _WaveDirRot: 0
     - _ZWrite: 1
-    - _Zoom: 2
+    - _Zoom: 10
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DarkColor: {r: 0.21960786, g: 0, b: 0.43137258, a: 1}
+    - _DarkColor: {r: 0.4352942, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HighlightColor: {r: 0.5882353, g: 0.227451, b: 1, a: 1}
-    - _LightColor: {r: 0.53333336, g: 0.07058824, b: 1, a: 1}
+    - _HighlightColor: {r: 1, g: 0, b: 0, a: 1}
+    - _LightColor: {r: 1, g: 0, b: 0, a: 1}
     - _SplitLineUVTiling: {r: 1, g: 1, b: 0, a: 1}
     - _UVTiling: {r: 0.125, g: 0.125, b: 0, a: 1}

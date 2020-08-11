@@ -137,7 +137,7 @@ Material:
     - _UseD3Algorithm: 0
     - _WaveDirRot: 0
     - _ZWrite: 1
-    - _Zoom: 1
+    - _Zoom: 2
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

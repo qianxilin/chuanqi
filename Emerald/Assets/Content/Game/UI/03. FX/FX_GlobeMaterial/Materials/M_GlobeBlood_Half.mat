@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_GlobeBlood_Half
   m_Shader: {fileID: 4800000, guid: 65f66581ae005bd44a49961e8482378c, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55,18 +55,6 @@ Material:
         m_Texture: {fileID: 2800000, guid: 306abaa57e8465a4fb21f3fe7f9963f8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _GlobeMask1:
-        m_Texture: {fileID: 2800000, guid: de70a0f3e31b6b04d989fcfa5ef5e2f0, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _HLTex01:
-        m_Texture: {fileID: 2800000, guid: fe871f3db624aa5489cefdf3e4d56b92, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _HLTex02:
-        m_Texture: {fileID: 2800000, guid: fe871f3db624aa5489cefdf3e4d56b92, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _HPPercentMask:
         m_Texture: {fileID: 2800000, guid: 177aa5074130b5448b3a715be48283dd, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -83,20 +71,12 @@ Material:
         m_Texture: {fileID: 2800000, guid: 118f1ce94accb6a488abdabd8d6809a1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Normal1:
-        m_Texture: {fileID: 2800000, guid: 118f1ce94accb6a488abdabd8d6809a1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _PercentMask:
-        m_Texture: {fileID: 2800000, guid: 177aa5074130b5448b3a715be48283dd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SplitLineColor:
@@ -107,15 +87,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: e03755e10e66f8c4096865c22a3b4992, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SplitLineWave1:
-        m_Texture: {fileID: 2800000, guid: e03755e10e66f8c4096865c22a3b4992, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SplitLineWave2:
-        m_Texture: {fileID: 2800000, guid: e03755e10e66f8c4096865c22a3b4992, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SplitLineWave3:
         m_Texture: {fileID: 2800000, guid: e03755e10e66f8c4096865c22a3b4992, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -127,24 +99,8 @@ Material:
         m_Texture: {fileID: 2800000, guid: 1e90d58ac14b7c548853eb344cefb900, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _TexWaveRightUp3:
-        m_Texture: {fileID: 2800000, guid: 82cba806424294648bb836a75f829b26, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _TexWaveUp:
         m_Texture: {fileID: 2800000, guid: 1e90d58ac14b7c548853eb344cefb900, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TexWaveUp1:
-        m_Texture: {fileID: 2800000, guid: bf39788e4ed6b084486c6b81738e67dd, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 769c2b13daa8f1f40a63c6deed6dc494, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample1:
-        m_Texture: {fileID: 2800000, guid: 7588f9918aee8484b83b4d2c09886b08, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -152,7 +108,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _BgPower: 0.5
     - _BumpScale: 1
     - _ColorPower: 2
     - _Cutoff: 0.5
@@ -161,52 +116,34 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HLPower: 2
     - _HeartbeatAmplify: 0.5
     - _HeartbeatFreq: 1
     - _HighlightPower: 16
     - _LowPercentWarn: 0.3
-    - _LtexPower: 1
-    - _LtexPower02: 1.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _PanDirRightUp1Speed: 0.3
-    - _PanDirRightUp1Speed1: 0.1
+    - _PanDirRightUp1Speed: 0.4
     - _PanDirRightUp2Speed: 0.6
-    - _PanDirRightUp2Speed1: 0.2
-    - _PanDirUpSpeed: 0.12
-    - _PanDirUpSpeed1: 0.1
+    - _PanDirUpSpeed: 0.2
     - _Parallax: 0.02
-    - _Percent: 0.44
-    - _Percent1: 1
+    - _Percent: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SplitWaveSpeed: -0.3
-    - _SplitWaveSpeed1: -0.1
     - _SpliwaveYOffset: 0.05
-    - _SpliwaveYOffset1: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseD3Algorithm: 0
     - _WaveDirRot: 0
     - _ZWrite: 1
-    - _Zoom: 1
-    - _Zoom1: 2
+    - _Zoom: 2
     - __dirty: 0
     m_Colors:
-    - _BgColor01: {r: 0.3529412, g: 0, b: 1, a: 1}
-    - _BgColor02: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DarkColor: {r: 0.3921569, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighlightColor: {r: 0.121568635, g: 0, b: 0, a: 1}
-    - _HlColor: {r: 1, g: 0.482353, b: 1, a: 1}
-    - _LColor01: {r: 0, g: 0, b: 0, a: 1}
-    - _LColor02: {r: 1, g: 1, b: 1, a: 1}
-    - _LightColor: {r: 1, g: 0, b: 0, a: 1}
-    - _LineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LightColor: {r: 0.79215693, g: 0, b: 0, a: 1}
     - _SplitLineUVTiling: {r: 1, g: 1, b: 0, a: 1}
-    - _SplitLineUVTiling1: {r: 1, g: 1, b: 0, a: 1}
     - _UVTiling: {r: 0.125, g: 0.125, b: 0, a: 1}
-    - _UVTiling1: {r: 0.125, g: 0.125, b: 0, a: 1}
