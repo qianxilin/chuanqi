@@ -2319,6 +2319,52 @@ public static class Functions
         return source.Y < dest.Y ? MirDirection.Down : MirDirection.Up;
     }
 
+    public static MirDirection MirDrectionFromAngle(float angle)
+    {
+        if (Between(angle, 60, 120))
+        {
+            return MirDirection.Down;
+        }
+        if (Between(angle, 240, 300))
+        {
+            return MirDirection.Up;
+        }
+        if (Between(angle, 330, 360) || Between(angle, 0, 30))
+        {
+            return MirDirection.Right;
+        }
+        if (Between(angle, 150, 210))
+        {
+            return MirDirection.Left;
+        }
+        if (Between(angle, 120, 150))
+        {
+            return MirDirection.DownLeft;
+        }
+        if (Between(angle, 30, 60))
+        {
+            return MirDirection.DownRight;
+        }
+        if (Between(angle, 210, 240))
+        {
+            return MirDirection.UpLeft;
+        }
+        if (Between(angle, 300, 330))
+        {
+            return MirDirection.UpRight;
+        }
+        return MirDirection.Up;
+    }
+
+    public static bool Between(float angle, float A, float B)
+    {
+        if (angle < B && angle > A)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
 
     public static Size Add(this Size p1, Size p2)

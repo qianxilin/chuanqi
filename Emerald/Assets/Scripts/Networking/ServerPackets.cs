@@ -599,12 +599,12 @@ namespace ServerPackets
             writer.Write(NameColour.ToArgb());
             writer.Write((byte)Class);
             writer.Write((byte)Gender);
-            writer.Write(Level);
-            writer.Write(Location.X);
-            writer.Write(Location.Y);
+            writer.Write(Level);            
             writer.Write(x);
             writer.Write(y);
             writer.Write(z);
+            writer.Write(Location.X);
+            writer.Write(Location.Y);
             writer.Write((byte)Direction);
             writer.Write(Hair);
             writer.Write(HP);

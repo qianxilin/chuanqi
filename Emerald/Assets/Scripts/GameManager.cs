@@ -41,10 +41,11 @@ public class GameManager : MonoBehaviour
 
     public void UserInformation(S.UserInformation p)
     {
-        User.transform.position =new Vector3(p.x, p.y, p.z);
+        User.transform.position = new Vector3(p.x, p.y, p.z);
         User.gameObject.SetActive(true);
         User.Class = p.Class;
         User.Gender = p.Gender;
+        User.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
     }
 
     void Update()
@@ -62,7 +63,27 @@ public class GameManager : MonoBehaviour
         if (CurrentScene.UserObject == null)
         {
             CurrentScene.UserObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
-            CurrentScene.UserObject.GetComponent<PlayerObject>().Camera.SetActive(true);
+            CurrentScene.UserObject.GetComponent<PlayerObject>().Camera.SetActive(true);            
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
+
+            Vector2 v2 = (mousePosition - middle);
+            float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+            if (angle < 0)
+                angle = 360 + angle;
+            angle = 360 - angle;
+
+            System.Drawing.Point newpos = Functions.PointMove(new System.Drawing.Point((int)User.CurrentLocation.x, (int)User.CurrentLocation.y), Functions.MirDrectionFromAngle(angle), 1);
+            Vector3 targetpos = CurrentScene.Cells[newpos.X, newpos.Y].position;
+
+            var lookPos = targetpos - CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.rotation = rotation;
         }
     }
 
