@@ -6,6 +6,16 @@ public class PlayerObject : MonoBehaviour
 {
     public GameObject Camera;
     public GameObject Model;
+    [Range(0f, 10f)]
+    public float MoveSpeed;
+    //[HideInInspector]
+    public bool IsMoving;
+    //[HideInInspector]
+    public Vector3 TargetPosition;
+    //[HideInInspector]
+    public Vector3 StartPosition;
+    //[HideInInspector]
+    public float TargetDistance;
 
     [HideInInspector]
     public MirClass Class;
@@ -18,7 +28,17 @@ public class PlayerObject : MonoBehaviour
     {
     }
 
-    void LateUpdate()
+    void Update()
     {
+        if (IsMoving)
+        {
+            if (Vector3.Distance(StartPosition, transform.position) > TargetDistance)
+            {
+                transform.position = TargetPosition;
+                IsMoving = false;
+                return;
+            }
+            transform.position += (TargetPosition - StartPosition) * MoveSpeed * Time.deltaTime;
+        }
     }
 }

@@ -130,6 +130,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 5827424936646246914}
   Model: {fileID: 8447126569704725765}
+  MoveSpeed: 1.2
+  IsMoving: 0
+  TargetPosition: {x: 0, y: 0, z: 0}
+  StartPosition: {x: 0, y: 0, z: 0}
+  TargetDistance: 0
   Class: 0
   Gender: 0
   CurrentLocation: {x: 0, y: 0}

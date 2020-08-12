@@ -63,27 +63,41 @@ public class GameManager : MonoBehaviour
         if (CurrentScene.UserObject == null)
         {
             CurrentScene.UserObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
-            CurrentScene.UserObject.GetComponent<PlayerObject>().Camera.SetActive(true);            
+            CurrentScene.UserObject.GetComponent<PlayerObject>().Camera.SetActive(true);
         }
 
         if (Input.GetMouseButton(0))
         {
-            Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
+            if (!CurrentScene.UserObject.GetComponent<PlayerObject>().IsMoving)
+            {
+                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
 
-            Vector2 v2 = (mousePosition - middle);
-            float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
-            if (angle < 0)
-                angle = 360 + angle;
-            angle = 360 - angle;
+                Vector2 v2 = (mousePosition - middle);
+                float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+                if (angle < 0)
+                    angle = 360 + angle;
+                angle = 360 - angle;
 
-            System.Drawing.Point newpos = Functions.PointMove(new System.Drawing.Point((int)User.CurrentLocation.x, (int)User.CurrentLocation.y), Functions.MirDrectionFromAngle(angle), 1);
-            Vector3 targetpos = CurrentScene.Cells[newpos.X, newpos.Y].position;
 
-            var lookPos = targetpos - CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.position;
-            lookPos.y = 0;
-            var rotation = Quaternion.LookRotation(lookPos);
-            CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.rotation = rotation;
+                System.Drawing.Point newpos = Functions.PointMove(new System.Drawing.Point((int)User.CurrentLocation.x, (int)User.CurrentLocation.y), Functions.MirDrectionFromAngle(angle), 1);
+                User.CurrentLocation = new Vector2(newpos.X, newpos.Y);
+                Vector3 targetpos = CurrentScene.Cells[newpos.X, newpos.Y].position;
+                Vector3 lookpos = new Vector3(targetpos.x, CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.position.y, targetpos.z);
+
+                CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.LookAt(lookpos);
+
+                CurrentScene.UserObject.GetComponent<PlayerObject>().TargetPosition = targetpos;
+                CurrentScene.UserObject.GetComponent<PlayerObject>().StartPosition = CurrentScene.UserObject.transform.position;
+                CurrentScene.UserObject.GetComponent<PlayerObject>().TargetDistance = Vector3.Distance(CurrentScene.UserObject.transform.position, targetpos);
+                CurrentScene.UserObject.GetComponent<PlayerObject>().IsMoving = true;
+                CurrentScene.UserObject.GetComponentInChildren<Animator>().SetBool("canWalk", true);
+            }
+        }
+        else
+        {
+            if (!CurrentScene.UserObject.GetComponent<PlayerObject>().IsMoving)
+                CurrentScene.UserObject.GetComponentInChildren<Animator>().SetBool("canWalk", false);
         }
     }
 
