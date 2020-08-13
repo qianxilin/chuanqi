@@ -91,7 +91,7 @@ Material:
     - _BumpOutline: 0
     - _ColorMask: 15
     - _Diffuse: 0.5
-    - _FaceDilate: 0.5
+    - _FaceDilate: 1
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
     - _GlowInner: 0.05
@@ -105,12 +105,12 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.5
+    - _OutlineWidth: 1
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.7017544
-    - _ScaleRatioB: 0.26041666
-    - _ScaleRatioC: 0.26041666
+    - _ScaleRatioA: 0.3809524
+    - _ScaleRatioB: 0
+    - _ScaleRatioC: 0
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hashCode: -874414284
   material: {fileID: -932406728233156051}
-  materialHashCode: 2039662911
+  materialHashCode: -625551468
   m_Version: 1.1.0
   m_SourceFontFileGUID: f666c3a07c6befa4ebacfa59033d1174
   m_SourceFontFile_EditorRef: {fileID: 0}
@@ -1951,6 +1951,7 @@ MonoBehaviour:
   m_AtlasTextures:
   - {fileID: -2250541354246782267}
   m_AtlasTextureIndex: 0
+  m_IsMultiAtlasTexturesEnabled: 0
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0
