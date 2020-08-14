@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static NetworkInfo networkInfo;
     public static GameStage gameStage;
-    public UserObject User;
+    private GameObject UserGameObject;
+    public static UserObject User;
     public List<GameObject> WarriorModels;
     public static MirScene CurrentScene;
 
@@ -43,9 +44,13 @@ public class GameManager : MonoBehaviour
     {
         User.transform.position = new Vector3(p.x, p.y, p.z);
         User.gameObject.SetActive(true);
-        User.Class = p.Class;
-        User.Gender = p.Gender;
-        User.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+
+        UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
+        DontDestroyOnLoad(UserGameObject);
+        User.Player = UserGameObject.GetComponent<PlayerObject>();
+        User.Player.Class = p.Class;
+        User.Player.Gender = p.Gender;
+        User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
     }
 
     void Update()
@@ -57,18 +62,15 @@ public class GameManager : MonoBehaviour
 
     void ProcessScene()
     {
-        if (CurrentScene == null) return;
-        if (!User.gameObject.activeSelf) return;
+        if (CurrentScene == null) return;        
+        if (User.Player == null) return;
 
-        if (CurrentScene.UserObject == null)
-        {
-            CurrentScene.UserObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
-            CurrentScene.UserObject.GetComponent<PlayerObject>().Camera.SetActive(true);
-        }
+        if (!User.Player.Camera.activeSelf)
+            User.Player.Camera.SetActive(true);
 
         if (Input.GetMouseButton(0))
         {
-            if (!CurrentScene.UserObject.GetComponent<PlayerObject>().IsMoving)
+            if (!User.Player.IsMoving)
             {
                 Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -80,24 +82,24 @@ public class GameManager : MonoBehaviour
                 angle = 360 - angle;
 
 
-                System.Drawing.Point newpos = Functions.PointMove(new System.Drawing.Point((int)User.CurrentLocation.x, (int)User.CurrentLocation.y), Functions.MirDrectionFromAngle(angle), 1);
-                User.CurrentLocation = new Vector2(newpos.X, newpos.Y);
+                System.Drawing.Point newpos = Functions.PointMove(new System.Drawing.Point((int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y), Functions.MirDrectionFromAngle(angle), 1);
+                User.Player.CurrentLocation = new Vector2(newpos.X, newpos.Y);
                 Vector3 targetpos = CurrentScene.Cells[newpos.X, newpos.Y].position;
-                Vector3 lookpos = new Vector3(targetpos.x, CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.position.y, targetpos.z);
+                Vector3 lookpos = new Vector3(targetpos.x, User.Player.Model.transform.position.y, targetpos.z);
 
-                CurrentScene.UserObject.GetComponent<PlayerObject>().Model.transform.LookAt(lookpos);
+                User.Player.Model.transform.LookAt(lookpos);
 
-                CurrentScene.UserObject.GetComponent<PlayerObject>().TargetPosition = targetpos;
-                CurrentScene.UserObject.GetComponent<PlayerObject>().StartPosition = CurrentScene.UserObject.transform.position;
-                CurrentScene.UserObject.GetComponent<PlayerObject>().TargetDistance = Vector3.Distance(CurrentScene.UserObject.transform.position, targetpos);
-                CurrentScene.UserObject.GetComponent<PlayerObject>().IsMoving = true;
-                CurrentScene.UserObject.GetComponentInChildren<Animator>().SetBool("canWalk", true);
+                User.Player.TargetPosition = targetpos;
+                User.Player.StartPosition = User.Player.gameObject.transform.position;
+                User.Player.TargetDistance = Vector3.Distance(User.Player.transform.position, targetpos);
+                User.Player.IsMoving = true;
+                User.Player.GetComponentInChildren<Animator>().SetBool("canWalk", true);
             }
         }
         else
         {
-            if (!CurrentScene.UserObject.GetComponent<PlayerObject>().IsMoving)
-                CurrentScene.UserObject.GetComponentInChildren<Animator>().SetBool("canWalk", false);
+            if (!User.Player.IsMoving)
+                User.Player.GetComponentInChildren<Animator>().SetBool("canWalk", false);
         }
     }
 

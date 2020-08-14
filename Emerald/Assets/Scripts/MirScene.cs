@@ -17,7 +17,6 @@ public class MirScene : MonoBehaviour
     private int Height;
     public Cell[,] Cells;
 
-    public GameObject UserObject;
     // Start is called before the first frame update
     void Start()
     {
