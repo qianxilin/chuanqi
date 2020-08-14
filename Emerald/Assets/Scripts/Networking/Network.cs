@@ -309,6 +309,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.UserInformation:
                     UserInformation((S.UserInformation)p);
                     break;
+                case (short)ServerPacketIds.UserLocation:
+                    UserLocation((S.UserLocation)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -517,6 +520,11 @@ namespace EmeraldNetwork
         public static void UserInformation(S.UserInformation p)
         {
             gameManager.UserInformation(p);
+        }
+
+        public static void UserLocation(S.UserLocation p)
+        {
+            gameManager.UserLocation(p);
         }
 
         public static void Enqueue(Packet p)

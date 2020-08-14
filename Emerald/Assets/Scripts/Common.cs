@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using C = ClientPackets;
 using S = ServerPackets;
 using System.Linq;
+using UnityEngine;
+using Random = System.Random;
 
 public enum GameStage { None, Login, Select, Game, Disconnected }
 
@@ -2403,6 +2405,37 @@ public static class Functions
                 break;
             case MirDirection.UpLeft:
                 p.Offset(-i, -i);
+                break;
+        }
+        return p;
+    }
+    public static Vector2 VectorMove(Vector2 p, MirDirection d, int i)
+    {
+        switch (d)
+        {
+            case MirDirection.Up:
+                p += Vector2.down;
+                break;
+            case MirDirection.UpRight:
+                p += Vector2.down + Vector2.right;
+                break;
+            case MirDirection.Right:
+                p += Vector2.right;
+                break;
+            case MirDirection.DownRight:
+                p += Vector2.up + Vector2.right;
+                break;
+            case MirDirection.Down:
+                p += Vector2.up;
+                break;
+            case MirDirection.DownLeft:
+                p += Vector2.up + Vector2.left;
+                break;
+            case MirDirection.Left:
+                p += Vector2.left;
+                break;
+            case MirDirection.UpLeft:
+                p += Vector2.down + Vector2.left;
                 break;
         }
         return p;

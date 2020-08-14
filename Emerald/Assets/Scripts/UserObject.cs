@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class UserObject : MonoBehaviour
 {
-    public PlayerObject Player; 
+    public PlayerObject Player;
 
     void Awake()
     {
         GameManager.User = this;
     }
+
 }

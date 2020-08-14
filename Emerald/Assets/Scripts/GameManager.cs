@@ -7,12 +7,22 @@ using S = ServerPackets;
 
 public class GameManager : MonoBehaviour
 {
-    public static NetworkInfo networkInfo;
-    public static GameStage gameStage;
-    private GameObject UserGameObject;
-    public static UserObject User;
     public List<GameObject> WarriorModels;
+
+    private GameObject UserGameObject;
+
+    [HideInInspector]
+    public static NetworkInfo networkInfo;
+    [HideInInspector]
+    public static GameStage gameStage;    
+    [HideInInspector]
+    public static UserObject User;    
+    [HideInInspector]
     public static MirScene CurrentScene;
+    [HideInInspector]
+    public static float NextAction;
+    [HideInInspector]
+    public static float InputDelay;
 
     void Awake()
     {
@@ -53,6 +63,11 @@ public class GameManager : MonoBehaviour
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
     }
 
+    public void UserLocation(S.UserLocation p)
+    {
+        NextAction = 0;
+    }
+
     void Update()
     {
         Network.Process();
@@ -70,7 +85,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            if (!User.Player.IsMoving)
+            if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
             {
                 Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -81,26 +96,37 @@ public class GameManager : MonoBehaviour
                     angle = 360 + angle;
                 angle = 360 - angle;
 
-
-                System.Drawing.Point newpos = Functions.PointMove(new System.Drawing.Point((int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y), Functions.MirDrectionFromAngle(angle), 1);
-                User.Player.CurrentLocation = new Vector2(newpos.X, newpos.Y);
-                Vector3 targetpos = CurrentScene.Cells[newpos.X, newpos.Y].position;
-                Vector3 lookpos = new Vector3(targetpos.x, User.Player.Model.transform.position.y, targetpos.z);
-
-                User.Player.Model.transform.LookAt(lookpos);
-
-                User.Player.TargetPosition = targetpos;
-                User.Player.StartPosition = User.Player.gameObject.transform.position;
-                User.Player.TargetDistance = Vector3.Distance(User.Player.transform.position, targetpos);
-                User.Player.IsMoving = true;
-                User.Player.GetComponentInChildren<Animator>().SetBool("canWalk", true);
+                MirDirection direction = Functions.MirDrectionFromAngle(angle);
+                Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
+                if (CanWalk(newlocation))
+                    User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });              
             }
         }
-        else
+        else if(Input.GetMouseButton(1))
         {
-            if (!User.Player.IsMoving)
-                User.Player.GetComponentInChildren<Animator>().SetBool("canWalk", false);
+            if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
+            {
+                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
+
+                Vector2 v2 = (mousePosition - middle);
+                float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+                if (angle < 0)
+                    angle = 360 + angle;
+                angle = 360 - angle;
+
+                MirDirection direction = Functions.MirDrectionFromAngle(angle);
+                Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
+                Vector2 farlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 2);
+                if (CanWalk(newlocation) && CanWalk(farlocation))
+                    User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation });
+            }
         }
+    }
+
+    bool CanWalk(Vector2 location)
+    {
+        return CurrentScene.Cells[(int)location.x, (int)location.y].walkable;
     }
 
     public class NetworkInfo
