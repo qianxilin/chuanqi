@@ -312,6 +312,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.UserLocation:
                     UserLocation((S.UserLocation)p);
                     break;
+                case (short)ServerPacketIds.ObjectPlayer:
+                    ObjectPlayer((S.ObjectPlayer)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -511,20 +514,21 @@ namespace EmeraldNetwork
                     break;
             }
         }
-
         public static void MapInformation(S.MapInformation p)
         {
             SceneManager.LoadSceneAsync(p.FileName, LoadSceneMode.Additive);
         }
-
         public static void UserInformation(S.UserInformation p)
         {
             gameManager.UserInformation(p);
         }
-
         public static void UserLocation(S.UserLocation p)
         {
             gameManager.UserLocation(p);
+        }
+        public static void ObjectPlayer(S.ObjectPlayer p)
+        {
+            gameManager.ObjectPlayer(p);
         }
 
         public static void Enqueue(Packet p)

@@ -138,6 +138,8 @@ MonoBehaviour:
   Class: 0
   Gender: 0
   CurrentLocation: {x: 0, y: 0}
+  Direction: 0
+  CurrentAction: 0
 --- !u!1 &8447126569704725765
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +151,7 @@ GameObject:
   - component: {fileID: 8447126569704725764}
   - component: {fileID: 1181668666261108332}
   - component: {fileID: 8347930016662242860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

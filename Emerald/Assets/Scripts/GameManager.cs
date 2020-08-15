@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> WarriorModels;
 
     private GameObject UserGameObject;
+    private Dictionary<uint, PlayerObject> Players = new Dictionary<uint, PlayerObject>();
 
     [HideInInspector]
     public static NetworkInfo networkInfo;
@@ -70,6 +71,26 @@ public class GameManager : MonoBehaviour
         NextAction = 0;
     }
 
+    public void ObjectPlayer(S.ObjectPlayer p)
+    {
+        PlayerObject player;
+        if (Players.TryGetValue(p.ObjectID, out player))
+        {
+            player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+            player.Direction = p.Direction;
+            player.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
+            player.Model.transform.rotation = Functions.GetRotation(p.Direction);
+            player.gameObject.SetActive(true);
+            return;
+        }
+
+        player = Instantiate(WarriorModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<PlayerObject>();
+        player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        player.Direction = p.Direction;
+        player.Model.transform.rotation = Functions.GetRotation(p.Direction);
+        Players.Add(p.ObjectID, player);        
+    }
+
     void Update()
     {
         Network.Process();
@@ -112,8 +133,7 @@ public class GameManager : MonoBehaviour
             else if (Input.GetMouseButton(1))
             {
                 MirDirection direction = MouseDirection();
-                Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
-
+                Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);                
                 if (User.WalkStep < 1)
                 {
                     if (CanWalk(newlocation))

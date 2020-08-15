@@ -65,7 +65,8 @@ public class PlayerObject : MonoBehaviour
         if (ActionFeed.Count == 0)
         {
             CurrentAction = MirAction.Standing;
-            GameManager.User.WalkStep = 0;
+            if (this == GameManager.User.Player)
+                GameManager.User.WalkStep = 0;
         }
         else
         {
