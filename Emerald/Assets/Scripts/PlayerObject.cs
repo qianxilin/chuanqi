@@ -27,6 +27,8 @@ public class PlayerObject : MonoBehaviour
     [HideInInspector]
     public Vector2 CurrentLocation;
     [HideInInspector]
+    public MirDirection Direction;
+    [HideInInspector]
     public List<QueuedAction> ActionFeed = new List<QueuedAction>();
     //[HideInInspector]
     public MirAction CurrentAction;
@@ -37,10 +39,11 @@ public class PlayerObject : MonoBehaviour
     }
 
     void Update()
-    {       
+    {
         if (CurrentAction == MirAction.Standing)
         {
             SetAction();
+            return;
         }
 
         if (IsMoving)
@@ -52,7 +55,8 @@ public class PlayerObject : MonoBehaviour
                 SetAction();
                 return;
             }
-            transform.position += (TargetPosition - StartPosition) * MoveSpeed * (int)CurrentAction * Time.deltaTime;
+
+            transform.position += (TargetPosition - StartPosition) * MoveSpeed * Time.deltaTime;
         }
     }
 
@@ -70,26 +74,18 @@ public class PlayerObject : MonoBehaviour
             ActionFeed.RemoveAt(0);
 
             CurrentAction = action.Action;
+            Direction = action.Direction;
 
             switch (CurrentAction)
             {
                 case MirAction.Walking:
+                case MirAction.Running:
                     Vector3 targetpos = GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].position;
-                    Vector3 lookpos = new Vector3(targetpos.x, Model.transform.position.y, targetpos.z);
-                    Model.transform.LookAt(lookpos);
+                    Model.transform.rotation = Functions.GetRotation(Direction);
                     TargetPosition = targetpos;
                     StartPosition = gameObject.transform.position;
                     TargetDistance = Vector3.Distance(transform.position, targetpos);
                     IsMoving = true;                    
-                    break;
-                case MirAction.Running:
-                    targetpos = GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].position;
-                    lookpos = new Vector3(targetpos.x, Model.transform.position.y, targetpos.z);
-                    Model.transform.LookAt(lookpos);
-                    TargetPosition = targetpos;
-                    StartPosition = gameObject.transform.position;
-                    TargetDistance = Vector3.Distance(transform.position, targetpos);
-                    IsMoving = true;
                     break;
             }
 
@@ -101,6 +97,11 @@ public class PlayerObject : MonoBehaviour
                 {
                     case MirAction.Walking:
                         Network.Enqueue(new C.Walk { Direction = action.Direction });
+                        GameManager.NextAction = Time.time + 2.5f;
+                        GameManager.InputDelay = Time.time + 0.5f;
+                        break;
+                    case MirAction.Running:
+                        Network.Enqueue(new C.Run { Direction = action.Direction });
                         GameManager.NextAction = Time.time + 2.5f;
                         GameManager.InputDelay = Time.time + 0.5f;
                         break;

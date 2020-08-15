@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        User.Player.Direction = p.Direction;
+        User.Player.Model.transform.rotation = Functions.GetRotation(User.Player.Direction);
     }
 
     public void UserLocation(S.UserLocation p)
@@ -75,6 +77,20 @@ public class GameManager : MonoBehaviour
         ProcessScene();
     }
 
+    MirDirection MouseDirection()
+    {
+        Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        Vector2 v2 = (mousePosition - middle);
+        float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+        if (angle < 0)
+            angle = 360 + angle;
+        angle = 360 - angle;
+
+        return Functions.MirDrectionFromAngle(angle);
+    }
+
     void ProcessScene()
     {
         if (CurrentScene == null) return;        
@@ -87,16 +103,8 @@ public class GameManager : MonoBehaviour
         {
             if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
             {
-                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
-
-                Vector2 v2 = (mousePosition - middle);
-                float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
-                if (angle < 0)
-                    angle = 360 + angle;
-                angle = 360 - angle;
-
-                MirDirection direction = Functions.MirDrectionFromAngle(angle);
+                MirDirection direction = MouseDirection();
+                
                 Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
                 if (CanWalk(newlocation))
                     User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });              
@@ -106,16 +114,8 @@ public class GameManager : MonoBehaviour
         {
             if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
             {
-                Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
+                MirDirection direction = MouseDirection();
 
-                Vector2 v2 = (mousePosition - middle);
-                float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
-                if (angle < 0)
-                    angle = 360 + angle;
-                angle = 360 - angle;
-
-                MirDirection direction = Functions.MirDrectionFromAngle(angle);
                 Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
                 Vector2 farlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 2);
                 if (CanWalk(newlocation) && CanWalk(farlocation))
