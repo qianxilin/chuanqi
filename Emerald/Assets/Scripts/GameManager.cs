@@ -99,27 +99,33 @@ public class GameManager : MonoBehaviour
         if (!User.Player.Camera.activeSelf)
             User.Player.Camera.SetActive(true);
 
-        if (Input.GetMouseButton(0))
+        if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
         {
-            if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
+            if (Input.GetMouseButton(0))
             {
                 MirDirection direction = MouseDirection();
-                
                 Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
                 if (CanWalk(newlocation))
-                    User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });              
+                    User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });
+
             }
-        }
-        else if(Input.GetMouseButton(1))
-        {
-            if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
+            else if (Input.GetMouseButton(1))
             {
                 MirDirection direction = MouseDirection();
-
                 Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
-                Vector2 farlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 2);
-                if (CanWalk(newlocation) && CanWalk(farlocation))
-                    User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation });
+
+                if (User.WalkStep < 1)
+                {
+                    if (CanWalk(newlocation))
+                        User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });
+                    User.WalkStep++;
+                }
+                else
+                {
+                    Vector2 farlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 2);
+                    if (CanWalk(newlocation) && CanWalk(farlocation))
+                        User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation });
+                }
             }
         }
     }

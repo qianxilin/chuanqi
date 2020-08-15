@@ -5,6 +5,7 @@ using UnityEngine;
 public class UserObject : MonoBehaviour
 {
     public PlayerObject Player;
+    public int WalkStep;
 
     void Awake()
     {
