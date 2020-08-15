@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
 
     public void UserInformation(S.UserInformation p)
     {
-        User.transform.position = new Vector3(p.x, p.y, p.z);
         User.gameObject.SetActive(true);
 
         UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
@@ -63,7 +62,7 @@ public class GameManager : MonoBehaviour
         User.Player.Gender = p.Gender;
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         User.Player.Direction = p.Direction;
-        User.Player.Model.transform.rotation = Functions.GetRotation(User.Player.Direction);
+        User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
     }
 
     public void UserLocation(S.UserLocation p)
@@ -79,7 +78,7 @@ public class GameManager : MonoBehaviour
             player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
             player.Direction = p.Direction;
             player.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
-            player.Model.transform.rotation = Functions.GetRotation(p.Direction);
+            player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
             player.gameObject.SetActive(true);
             return;
         }
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
         player = Instantiate(WarriorModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<PlayerObject>();
         player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         player.Direction = p.Direction;
-        player.Model.transform.rotation = Functions.GetRotation(p.Direction);
+        player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
         Players.Add(p.ObjectID, player);        
     }
 
@@ -118,14 +117,17 @@ public class GameManager : MonoBehaviour
         if (User.Player == null) return;
 
         if (!User.Player.Camera.activeSelf)
+        {
+            UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
             User.Player.Camera.SetActive(true);
+        }
 
         if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
         {
             if (Input.GetMouseButton(0))
             {
                 MirDirection direction = MouseDirection();
-                Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);
+                Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);
                 if (CanWalk(newlocation))
                     User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });
 
@@ -133,7 +135,7 @@ public class GameManager : MonoBehaviour
             else if (Input.GetMouseButton(1))
             {
                 MirDirection direction = MouseDirection();
-                Vector2 newlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 1);                
+                Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);                
                 if (User.WalkStep < 1)
                 {
                     if (CanWalk(newlocation))
@@ -142,7 +144,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Vector2 farlocation = Functions.VectorMove(User.Player.CurrentLocation, direction, 2);
+                    Vector2 farlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 2);
                     if (CanWalk(newlocation) && CanWalk(farlocation))
                         User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation });
                 }

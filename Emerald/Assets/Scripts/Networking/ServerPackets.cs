@@ -490,9 +490,6 @@ namespace ServerPackets
         public MirClass Class;
         public MirGender Gender;
         public ushort Level;
-        public float x;
-        public float y;
-        public float z;
         public Point Location;
         public MirDirection Direction;
         public byte Hair;
@@ -526,9 +523,6 @@ namespace ServerPackets
             Class = (MirClass)reader.ReadByte();
             Gender = (MirGender)reader.ReadByte();
             Level = reader.ReadUInt16();
-            x = reader.ReadSingle();
-            y = reader.ReadSingle();
-            z = reader.ReadSingle();
             Location = new Point(reader.ReadInt32(), reader.ReadInt32());
             Direction = (MirDirection)reader.ReadByte();
             Hair = reader.ReadByte();
@@ -600,9 +594,6 @@ namespace ServerPackets
             writer.Write((byte)Class);
             writer.Write((byte)Gender);
             writer.Write(Level);            
-            writer.Write(x);
-            writer.Write(y);
-            writer.Write(z);
             writer.Write(Location.X);
             writer.Write(Location.Y);
             writer.Write((byte)Direction);

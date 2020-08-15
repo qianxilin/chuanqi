@@ -83,7 +83,7 @@ public class PlayerObject : MonoBehaviour
                 case MirAction.Walking:
                 case MirAction.Running:
                     Vector3 targetpos = GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].position;
-                    Model.transform.rotation = Functions.GetRotation(Direction);
+                    Model.transform.rotation = ClientFunctions.GetRotation(Direction);
                     TargetPosition = targetpos;
                     StartPosition = gameObject.transform.position;
                     TargetDistance = Vector3.Distance(transform.position, targetpos);
