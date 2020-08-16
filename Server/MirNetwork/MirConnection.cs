@@ -259,6 +259,9 @@ namespace Server.MirNetwork
                 case (short)ClientPacketIds.StartGame:
                     StartGame((C.StartGame) p);
                     break;
+                case (short)ClientPacketIds.MapLoaded:
+                    MapLoaded((C.MapLoaded)p);
+                    break;
                 case (short)ClientPacketIds.LogOut:
                     LogOut();
                     break;
@@ -864,6 +867,12 @@ namespace Server.MirNetwork
 
             Player = new PlayerObject(info, this);
             Player.StartGame();
+        }
+
+        private void MapLoaded(C.MapLoaded p)
+        {
+            if (Stage == GameStage.Select)
+                Player.StartGameSuccess();
         }
 
         public void LogOut()

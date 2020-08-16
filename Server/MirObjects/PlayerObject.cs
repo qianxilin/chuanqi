@@ -2021,7 +2021,10 @@ namespace Server.MirObjects
             CurrentMap = temp;
             Envir.Players.Add(this);
 
-            StartGameSuccess();
+            Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
+            GetMapInfo();
+
+            /*StartGameSuccess();
 
             //Call Login NPC
             CallDefaultNPC(DefaultNPCType.Login);
@@ -2030,7 +2033,10 @@ namespace Server.MirObjects
             if (Info.NewDay)
             {
                 CallDefaultNPC(DefaultNPCType.Daily);
-            }
+            }*/
+        }
+        public void MapLoaded()
+        {
         }
         private void StartGameSuccess()
         {
@@ -2047,7 +2053,7 @@ namespace Server.MirObjects
                 }
                 Info.Magics[i].CastTime = Envir.Time > TimeSpend ? Envir.Time - TimeSpend : 0;
             }
-            Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
+            //Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
             ReceiveChat(string.Format(GameLanguage.Welcome, GameLanguage.GameName), ChatType.Hint);
 
             if (Settings.TestServer)
@@ -2081,7 +2087,7 @@ namespace Server.MirObjects
             SetLevelEffects();
 
             GetItemInfo();
-            GetMapInfo();
+            //GetMapInfo();
             GetUserInfo();
             GetQuestInfo();
             GetRecipeInfo();
@@ -2206,6 +2212,14 @@ namespace Server.MirObjects
                 Envir.CheckRankUpdate(Info);
             }
 
+            //Call Login NPC
+            CallDefaultNPC(DefaultNPCType.Login);
+
+            //Call Daily NPC
+            if (Info.NewDay)
+            {
+                CallDefaultNPC(DefaultNPCType.Daily);
+            }
         }
         private void StartGameFailed()
         {

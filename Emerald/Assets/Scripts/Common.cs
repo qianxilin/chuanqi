@@ -1519,6 +1519,7 @@ public enum ClientPacketIds : short
     NewCharacter,
     DeleteCharacter,
     StartGame,
+    MapLoaded,
     LogOut,
     Turn,
     Walk,
@@ -4534,6 +4535,8 @@ public abstract class Packet
                 return new C.DeleteCharacter();
             case (short)ClientPacketIds.StartGame:
                 return new C.StartGame();
+            case (short)ClientPacketIds.MapLoaded:
+                return new C.MapLoaded();
             case (short)ClientPacketIds.LogOut:
                 return new C.LogOut();
             case (short)ClientPacketIds.Turn:

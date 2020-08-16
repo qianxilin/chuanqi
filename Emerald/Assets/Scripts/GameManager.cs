@@ -51,6 +51,12 @@ public class GameManager : MonoBehaviour
         Network.Connect();
     }
 
+    public void MapInformation(S.MapInformation p)
+    {
+        FindObjectOfType<LoadScreenManager>().LoadScene(p.FileName);
+        //SceneManager.LoadSceneAsync(p.FileName, LoadSceneMode.Additive);
+    }
+
     public void UserInformation(S.UserInformation p)
     {
         User.gameObject.SetActive(true);

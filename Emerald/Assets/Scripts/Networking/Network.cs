@@ -516,7 +516,7 @@ namespace EmeraldNetwork
         }
         public static void MapInformation(S.MapInformation p)
         {
-            SceneManager.LoadSceneAsync(p.FileName, LoadSceneMode.Additive);
+            gameManager.MapInformation(p);            
         }
         public static void UserInformation(S.UserInformation p)
         {
