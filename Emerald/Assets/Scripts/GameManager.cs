@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
         User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction); 
         
         User.Player.Camera.SetActive(true);
+        Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
     }
 
     public void UserLocation(S.UserLocation p)
