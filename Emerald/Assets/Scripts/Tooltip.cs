@@ -21,8 +21,9 @@ public class Tooltip : MonoBehaviour
     }
     Vector3 min, max;
     RectTransform rect;
-    float offset = 10f;    
-    
+    [Range(0f, 100f)]
+    public float Offset;
+
     // Update is called once per frame
     void Update()
     {
@@ -35,7 +36,7 @@ public class Tooltip : MonoBehaviour
         if (gameObject.activeSelf)
         {
             //get the tooltip position with offset
-            Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - (rect.rect.height + offset), 0f);
+            Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y - (rect.rect.height + Offset), 0f);
             //clamp it to the screen size so it doesn't go outside
             transform.position = new Vector3(Mathf.Clamp(position.x, min.x + rect.rect.width / 2, max.x - rect.rect.width / 4), Mathf.Clamp(position.y, min.y + rect.rect.height / 2, max.y - rect.rect.height / 2), transform.position.z);
         }
@@ -44,7 +45,7 @@ public class Tooltip : MonoBehaviour
     void UpdateCamera()
     {
         rect = GetComponent<RectTransform>();
-        min = new Vector3(0, 0, 0);
+        min = new Vector3(0, 25, 0);
         max = new Vector3(cam.pixelWidth, cam.pixelHeight, 0);
     }
 
