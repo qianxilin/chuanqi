@@ -55,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hashCode: 1771029689
   material: {fileID: 6693065328617318361}
-  materialHashCode: -765454574
+  materialHashCode: 1160914169
   m_Version: 1.1.0
   m_SourceFontFileGUID: 3bf94ad85e15be84e95486b25a901086
   m_SourceFontFile_EditorRef: {fileID: 0}
@@ -1850,6 +1850,7 @@ MonoBehaviour:
   m_AtlasTextures:
   - {fileID: -5000463897765031745}
   m_AtlasTextureIndex: 0
+  m_IsMultiAtlasTexturesEnabled: 0
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0
@@ -2599,7 +2600,7 @@ MonoBehaviour:
   fontWeights: []
   normalStyle: 0
   normalSpacingOffset: 0
-  boldStyle: 0.75
+  boldStyle: 1
   boldSpacing: 7
   italicStyle: 35
   tabSize: 10
@@ -2691,7 +2692,7 @@ Material:
     - _UnderlaySoftness: 0
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
-    - _WeightBold: 0.75
+    - _WeightBold: 1
     - _WeightNormal: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
