@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static NetworkInfo networkInfo;
     [HideInInspector]
-    public static GameStage gameStage;    
+    public static GameStage gameStage;
+    [HideInInspector]
+    public static GameSceneManager GameScene;
     [HideInInspector]
     public static UserObject User;    
     [HideInInspector]
@@ -70,8 +72,9 @@ public class GameManager : MonoBehaviour
         UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
 
         User.Player.Direction = p.Direction;
-        User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction); 
-        
+        User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
+
+        Players.Add(p.ObjectID, User.Player);
         User.Player.Camera.SetActive(true);
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
     }
@@ -106,7 +109,6 @@ public class GameManager : MonoBehaviour
         if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
         {
             player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
-            return;
         }
     }
 
@@ -115,7 +117,20 @@ public class GameManager : MonoBehaviour
         if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
         {
             player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
-            return;
+        }
+    }
+
+    public void Chat(S.Chat p)
+    {
+        GameScene.RecieveChat(p.Message);
+    }
+
+    public void ObjectChat(S.ObjectChat p)
+    {
+        if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
+        {
+            //player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+            GameScene.RecieveChat(p.Text);
         }
     }
 
@@ -126,7 +141,7 @@ public class GameManager : MonoBehaviour
         ProcessScene();
     }
 
-    MirDirection MouseDirection()
+    static MirDirection MouseDirection()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -140,10 +155,10 @@ public class GameManager : MonoBehaviour
         return Functions.MirDrectionFromAngle(angle);
     }
 
-    void ProcessScene()
+    public static void CheckMouseInput()
     {
-        if (CurrentScene == null) return;        
-        if (User.Player == null) return;        
+        if (CurrentScene == null) return;
+        if (User.Player == null) return;
 
         if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
         {
@@ -158,7 +173,7 @@ public class GameManager : MonoBehaviour
             else if (Input.GetMouseButton(1))
             {
                 MirDirection direction = MouseDirection();
-                Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);                
+                Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);
                 if (User.WalkStep < 1)
                 {
                     if (CanWalk(newlocation))
@@ -175,7 +190,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool CanWalk(Vector2 location)
+    void ProcessScene()
+    {                
+    }
+
+    static bool CanWalk(Vector2 location)
     {
         return CurrentScene.Cells[(int)location.x, (int)location.y].walkable;
     }

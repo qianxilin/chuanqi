@@ -321,6 +321,12 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectRun:
                     ObjectRun((S.ObjectRun)p);
                     break;
+                case (short)ServerPacketIds.Chat:
+                    Chat((S.Chat)p);
+                    break;
+                case (short)ServerPacketIds.ObjectChat:
+                    ObjectChat((S.ObjectChat)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -543,6 +549,14 @@ namespace EmeraldNetwork
         public static void ObjectRun(S.ObjectRun p)
         {
             gameManager.ObjectRun(p);
+        }
+        public static void Chat(S.Chat p)
+        {
+            gameManager.Chat(p);
+        }
+        public static void ObjectChat(S.ObjectChat p)
+        {
+            gameManager.ObjectChat(p);
         }
 
         public static void Enqueue(Packet p)
