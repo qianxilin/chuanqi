@@ -34,6 +34,11 @@ public static class ClientFunctions
         }
         return newp;
     }
+    public static Vector2 Back(Vector2 p, MirDirection direction, int i)
+    {
+        MirDirection backdirection = (MirDirection)(((int)direction + 4) % 8);
+        return VectorMove(p, backdirection, i);
+    }
     public static Quaternion GetRotation(MirDirection direction)
     {
         switch (direction)
