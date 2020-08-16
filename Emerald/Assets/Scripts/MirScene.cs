@@ -18,7 +18,7 @@ public class MirScene : MonoBehaviour
     public Cell[,] Cells;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GameManager.CurrentScene = this;
 

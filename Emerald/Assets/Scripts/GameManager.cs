@@ -60,15 +60,19 @@ public class GameManager : MonoBehaviour
     public void UserInformation(S.UserInformation p)
     {
         User.gameObject.SetActive(true);
-
-        UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
-        DontDestroyOnLoad(UserGameObject);
+        UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity); 
+        
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
+
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
+
         User.Player.Direction = p.Direction;
-        User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
+        User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction); 
+        
+        User.Player.Camera.SetActive(true);
     }
 
     public void UserLocation(S.UserLocation p)
@@ -96,6 +100,24 @@ public class GameManager : MonoBehaviour
         Players.Add(p.ObjectID, player);        
     }
 
+    public void ObjectWalk(S.ObjectWalk p)
+    {
+        if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
+        {
+            player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+            return;
+        }
+    }
+
+    public void ObjectRun(S.ObjectRun p)
+    {
+        if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
+        {
+            player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+            return;
+        }
+    }
+
     void Update()
     {
         Network.Process();
@@ -120,13 +142,7 @@ public class GameManager : MonoBehaviour
     void ProcessScene()
     {
         if (CurrentScene == null) return;        
-        if (User.Player == null) return;
-
-        if (!User.Player.Camera.activeSelf)
-        {
-            UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
-            User.Player.Camera.SetActive(true);
-        }
+        if (User.Player == null) return;        
 
         if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
         {

@@ -315,6 +315,12 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectPlayer:
                     ObjectPlayer((S.ObjectPlayer)p);
                     break;
+                case (short)ServerPacketIds.ObjectWalk:
+                    ObjectWalk((S.ObjectWalk)p);
+                    break;
+                case (short)ServerPacketIds.ObjectRun:
+                    ObjectRun((S.ObjectRun)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -529,6 +535,14 @@ namespace EmeraldNetwork
         public static void ObjectPlayer(S.ObjectPlayer p)
         {
             gameManager.ObjectPlayer(p);
+        }
+        public static void ObjectWalk(S.ObjectWalk p)
+        {
+            gameManager.ObjectWalk(p);
+        }
+        public static void ObjectRun(S.ObjectRun p)
+        {
+            gameManager.ObjectRun(p);
         }
 
         public static void Enqueue(Packet p)
