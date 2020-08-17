@@ -53,25 +53,21 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    public void RecieveChat(string text)
+    public void RecieveChat(string text, ChatType type)
     {
-        ChatMessage cm = new ChatMessage();
+        ChatMessageBody cm = new ChatMessageBody();
         cm.text = text;
-        GameObject newText = Instantiate(TextObject, ChatPanel.transform);
-        cm.textObject = newText.GetComponent<TMP_Text>();
-        cm.textObject.text = text;
-        chatMessages.Add(cm);
+        cm.type = type;
+
+        ChatMessage newText = Instantiate(TextObject, ChatPanel.transform).GetComponent<ChatMessage>();
+        newText.Info = cm;
+        
+        chatMessages.Add(newText);
 
         if (chatMessages.Count > MaxChatMessages)
         {
-            Destroy(chatMessages[0].textObject.gameObject);
+            Destroy(chatMessages[0].gameObject);
             chatMessages.RemoveAt(0);
         }
     }
-}
-
-public class ChatMessage
-{
-    public string text;
-    public TMP_Text textObject;
 }

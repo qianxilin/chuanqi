@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     public void Chat(S.Chat p)
     {
-        GameScene.RecieveChat(p.Message);
+        GameScene.RecieveChat(p.Message, p.Type);
     }
 
     public void ObjectChat(S.ObjectChat p)
@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
         if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
         {
             //player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
-            GameScene.RecieveChat(p.Text);
+            GameScene.RecieveChat(p.Text, p.Type);
         }
     }
 

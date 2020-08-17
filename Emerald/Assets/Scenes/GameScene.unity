@@ -5382,9 +5382,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChatBar: {fileID: 635084011}
   ChatPanel: {fileID: 1181610542}
-  TextObject: {fileID: 5120033721671708123, guid: 4a726c85dd5a9ec46ba0d7bb55a3b3c0,
+  TextObject: {fileID: 3777351459069033553, guid: 4a726c85dd5a9ec46ba0d7bb55a3b3c0,
     type: 3}
   ScrollBar: {fileID: 1854083844}
+  chatMessages: []
   eventSystem: {fileID: 1529085024}
 --- !u!1 &559825994
 GameObject:
