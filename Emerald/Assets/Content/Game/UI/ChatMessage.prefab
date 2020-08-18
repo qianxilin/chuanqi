@@ -149,15 +149,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChannelImages:
-  - {fileID: 21300000, guid: 27f320f2d439a824489b85333e6a017c, type: 3}
-  - {fileID: 21300000, guid: 27f320f2d439a824489b85333e6a017c, type: 3}
-  - {fileID: 21300000, guid: 634bf4c777e1cd140abeaf77203deb5a, type: 3}
-  - {fileID: 21300000, guid: 634bf4c777e1cd140abeaf77203deb5a, type: 3}
-  - {fileID: 21300000, guid: 634bf4c777e1cd140abeaf77203deb5a, type: 3}
-  - {fileID: 21300000, guid: 55932ebed9e07e14dbde31799610af47, type: 3}
-  - {fileID: 21300000, guid: 4abd24dd2eb84644981a329355d10c7b, type: 3}
-  - {fileID: 21300000, guid: 4abd24dd2eb84644981a329355d10c7b, type: 3}
-  - {fileID: 21300000, guid: ef5ec5823d9e95243ba03d51866e9a65, type: 3}
+  - {fileID: 21300000, guid: 222d7518ef6db214bb43cd269f6bf584, type: 3}
+  - {fileID: 21300000, guid: 50ba8ed4611f34a45adcbd01ef14ac26, type: 3}
+  - {fileID: 21300000, guid: 4c208ca7876d3ed459344559bfcf77ad, type: 3}
+  - {fileID: 21300000, guid: 4c208ca7876d3ed459344559bfcf77ad, type: 3}
+  - {fileID: 21300000, guid: 1577ce0b6fd489b43b3be03b14d0ad4f, type: 3}
+  - {fileID: 21300000, guid: 9bfa51b44028329409fa5ed57b4cde71, type: 3}
+  - {fileID: 21300000, guid: 1c6a983562cd3434fb932788b5fdd750, type: 3}
+  - {fileID: 21300000, guid: 1c6a983562cd3434fb932788b5fdd750, type: 3}
+  - {fileID: 21300000, guid: 37e2b1c6593150e4dafbe949987546c0, type: 3}
   TextBox: {fileID: 8769053549254273709}
   ChannelImage: {fileID: 5071174526034202958}
 --- !u!1 &7994482362341551275
