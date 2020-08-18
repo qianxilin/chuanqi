@@ -47,7 +47,7 @@ public class GameSceneManager : MonoBehaviour
             }
         }
 
-        if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && eventSystem.currentSelectedGameObject == null)
+        if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !eventSystem.IsPointerOverGameObject())
         {
             GameManager.CheckMouseInput();
         }

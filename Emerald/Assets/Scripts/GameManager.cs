@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public static float NextAction;
     [HideInInspector]
     public static float InputDelay;
+    [HideInInspector]
+    public static bool UIDragging;
 
     void Awake()
     {
@@ -171,6 +173,7 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentScene == null) return;
         if (User.Player == null) return;
+        if (UIDragging) return;
 
         if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
         {
