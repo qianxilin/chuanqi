@@ -327,6 +327,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectChat:
                     ObjectChat((S.ObjectChat)p);
                     break;
+                case (short)ServerPacketIds.NewItemInfo:
+                    NewItemInfo((S.NewItemInfo)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -557,6 +560,10 @@ namespace EmeraldNetwork
         public static void ObjectChat(S.ObjectChat p)
         {
             gameManager.ObjectChat(p);
+        }
+        public static void NewItemInfo(S.NewItemInfo p)
+        {
+            gameManager.NewItemInfo(p);
         }
 
         public static void Enqueue(Packet p)

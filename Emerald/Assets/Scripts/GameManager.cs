@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     private GameObject UserGameObject;
     private Dictionary<uint, PlayerObject> Players = new Dictionary<uint, PlayerObject>();
+    [HideInInspector]
+    public static List<ItemInfo> ItemInfoList = new List<ItemInfo>();
 
     [HideInInspector]
     public static NetworkInfo networkInfo;
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void UserInformation(S.UserInformation p)
     {
         User.gameObject.SetActive(true);
-        UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity); 
+        UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
         
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.Class = p.Class;
@@ -74,8 +76,13 @@ public class GameManager : MonoBehaviour
         User.Player.Direction = p.Direction;
         User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
 
+        User.Inventory = p.Inventory;
+
+        User.BindAllItems();
+
         Players.Add(p.ObjectID, User.Player);
         User.Player.Camera.SetActive(true);
+
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
     }
 
@@ -134,6 +141,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void NewItemInfo(S.NewItemInfo info)
+    {
+        ItemInfoList.Add(info.Info);
+    }
+
     void Update()
     {
         Network.Process();
@@ -187,6 +199,27 @@ public class GameManager : MonoBehaviour
                         User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation });
                 }
             }
+        }
+    }
+
+    public static void Bind(UserItem item)
+    {
+        for (int i = 0; i < ItemInfoList.Count; i++)
+        {
+            if (ItemInfoList[i].Index != item.ItemIndex) continue;
+
+            item.Info = ItemInfoList[i];
+
+            item.SetSlotSize();
+
+            for (int s = 0; s < item.Slots.Length; s++)
+            {
+                if (item.Slots[s] == null) continue;
+
+                Bind(item.Slots[s]);
+            }
+
+            return;
         }
     }
 

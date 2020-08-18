@@ -3074,6 +3074,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325054579}
   m_CullTransparentMesh: 0
+--- !u!1 &326123526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326123527}
+  m_Layer: 5
+  m_Name: Cells
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &326123527
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326123526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2121219933}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -170, y: 142}
+  m_SizeDelta: {x: 44, y: 44}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &326791556
 GameObject:
   m_ObjectHideFlags: 0
@@ -19126,6 +19161,7 @@ GameObject:
   - component: {fileID: 2121219933}
   - component: {fileID: 2121219935}
   - component: {fileID: 2121219934}
+  - component: {fileID: 2121219936}
   m_Layer: 5
   m_Name: Bag Window
   m_TagString: Untagged
@@ -19150,6 +19186,7 @@ RectTransform:
   - {fileID: 633109357}
   - {fileID: 475990722}
   - {fileID: 369192298}
+  - {fileID: 326123527}
   m_Father: {fileID: 829155078}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19195,6 +19232,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121219932}
   m_CullTransparentMesh: 0
+--- !u!114 &2121219936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121219932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a2ecd4a439058478f15ef30abe23ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CellObject: {fileID: 8217915514658752811, guid: 9a181a73ec07aec409264cb8a15c6534,
+    type: 3}
+  CellsLocation: {fileID: 326123526}
 --- !u!1 &2132468943
 GameObject:
   m_ObjectHideFlags: 0
