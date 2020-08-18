@@ -1,14 +1,31 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragWindow : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DragWindow : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler
 {
     private RectTransform rectTransform;
-    [SerializeField] private Canvas canvas;
+    private Canvas canvas;
 
-    void Start()
+    void Awake()
     {
         rectTransform = gameObject.GetComponent<RectTransform>();
+
+        if (canvas == null)
+        {
+            Transform testCanvas = transform.parent;
+            while (testCanvas != null)
+            {
+                canvas = testCanvas.GetComponent<Canvas>();
+                if (canvas != null)
+                    break;
+                testCanvas = testCanvas.parent;
+            }
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        rectTransform.SetAsLastSibling();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
