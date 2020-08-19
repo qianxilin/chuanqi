@@ -1857,7 +1857,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 91421573}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1026178501}
+        m_MethodName: ToggleFilter
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &91421573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7037,7 +7048,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 611194170}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1026178501}
+        m_MethodName: ToggleFilter
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &611194170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8761,7 +8783,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 727343218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1026178501}
+        m_MethodName: ToggleFilter
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &727343218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11642,13 +11675,12 @@ MonoBehaviour:
   TextObject: {fileID: 3777351459069033553, guid: 4a726c85dd5a9ec46ba0d7bb55a3b3c0,
     type: 3}
   FilterObjects:
-  - {fileID: 1049769305}
-  - {fileID: 611194167}
-  - {fileID: 91421570}
-  - {fileID: 1372888122}
-  - {fileID: 727343215}
-  - {fileID: 1229977970}
-  - {fileID: 1580335596}
+  - {fileID: 338671841}
+  - {fileID: 2082012764}
+  - {fileID: 211847974}
+  - {fileID: 714957837}
+  - {fileID: 1665177414}
+  - {fileID: 1096933175}
 --- !u!1 &1041974573
 GameObject:
   m_ObjectHideFlags: 0
@@ -13136,7 +13168,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1229977973}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1026178501}
+        m_MethodName: ToggleFilter
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1229977973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14173,7 +14216,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1372888125}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1026178501}
+        m_MethodName: ToggleFilter
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1372888125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15961,7 +16015,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1580335599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1026178501}
+        m_MethodName: ToggleFilter
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1580335599
 MonoBehaviour:
   m_ObjectHideFlags: 0

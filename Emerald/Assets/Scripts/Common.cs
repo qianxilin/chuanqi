@@ -771,6 +771,16 @@ public enum ChatType : byte
     Shout3 = 15
 }
 
+public enum ChatFilterType : byte
+{
+    Global = 0,
+    Local = 1,
+    Group = 2,
+    Guild = 3,
+    Private = 4,
+    System = 5,
+}
+
 public enum ItemType : byte
 {
     Nothing = 0,
