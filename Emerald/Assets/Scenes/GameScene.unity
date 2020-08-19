@@ -988,7 +988,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Mentor\t(?)"
+            m_StringArgument: Mentor       (?)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -1070,7 +1070,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Mount\t(R)"
+            m_StringArgument: Mount       (R)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -3508,7 +3508,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Gameshop\t(Y)"
+            m_StringArgument: Gameshop       (Y)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -4577,7 +4577,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Mail\t(M)"
+            m_StringArgument: Mail       (M)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -6800,7 +6800,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Settings\t(F12)"
+            m_StringArgument: Settings       (F12)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -14051,7 +14051,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Quest Log\t(Q)"
+            m_StringArgument: Quest Log       (Q)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -15643,7 +15643,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Guild\t(G)"
+            m_StringArgument: Guild       (G)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -16786,8 +16786,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17382,7 +17382,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Spells\t(F11)"
+            m_StringArgument: Spells       (F11)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -17819,7 +17819,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Group\t(P)"
+            m_StringArgument: Group       (P)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -18394,7 +18394,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Inventory\t(F9)"
+            m_StringArgument: Inventory       (F9)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -20042,7 +20042,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Character\t(F10)"
+            m_StringArgument: Character       (F10)
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
@@ -20721,7 +20721,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "Ranking\t(K)"
+            m_StringArgument: Ranking       (K)
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
