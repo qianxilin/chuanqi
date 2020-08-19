@@ -9,14 +9,10 @@ using C = ClientPackets;
 
 public class GameSceneManager : MonoBehaviour
 {
-    public TMP_InputField ChatBar;
-    public GameObject ChatPanel;
-    public GameObject TextObject;
+    public TMP_InputField ChatBar;      
     public Scrollbar ScrollBar;
-    public List<ChatMessage> chatMessages = new List<ChatMessage>();
-    public EventSystem eventSystem;
-
-    const int MaxChatMessages = 200;
+    public ChatController ChatController;
+    public EventSystem eventSystem;    
 
     void Awake()
     {
@@ -50,24 +46,7 @@ public class GameSceneManager : MonoBehaviour
         if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !eventSystem.IsPointerOverGameObject())
         {
             GameManager.CheckMouseInput();
-        }
-    }
+        }   }
 
-    public void RecieveChat(string text, ChatType type)
-    {
-        ChatMessageBody cm = new ChatMessageBody();
-        cm.text = text;
-        cm.type = type;
 
-        ChatMessage newText = Instantiate(TextObject, ChatPanel.transform).GetComponent<ChatMessage>();
-        newText.Info = cm;
-        
-        chatMessages.Add(newText);
-
-        if (chatMessages.Count > MaxChatMessages)
-        {
-            Destroy(chatMessages[0].gameObject);
-            chatMessages.RemoveAt(0);
-        }
-    }
 }

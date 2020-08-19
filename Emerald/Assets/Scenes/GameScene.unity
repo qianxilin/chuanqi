@@ -6363,11 +6363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChatBar: {fileID: 635084011}
-  ChatPanel: {fileID: 1181610542}
-  TextObject: {fileID: 3777351459069033553, guid: 4a726c85dd5a9ec46ba0d7bb55a3b3c0,
-    type: 3}
   ScrollBar: {fileID: 1854083844}
-  chatMessages: []
+  ChatController: {fileID: 1026178501}
   eventSystem: {fileID: 1529085024}
 --- !u!1 &559825994
 GameObject:
@@ -11602,6 +11599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1026178500}
+  - component: {fileID: 1026178501}
   m_Layer: 0
   m_Name: Chat
   m_TagString: Untagged
@@ -11627,6 +11625,30 @@ Transform:
   m_Father: {fileID: 829155078}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1026178501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026178499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c826181e01af144bf92aad7e916475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatPanel: {fileID: 1181610542}
+  chatMessages: []
+  TextObject: {fileID: 3777351459069033553, guid: 4a726c85dd5a9ec46ba0d7bb55a3b3c0,
+    type: 3}
+  FilterObjects:
+  - {fileID: 1049769305}
+  - {fileID: 611194167}
+  - {fileID: 91421570}
+  - {fileID: 1372888122}
+  - {fileID: 727343215}
+  - {fileID: 1229977970}
+  - {fileID: 1580335596}
 --- !u!1 &1041974573
 GameObject:
   m_ObjectHideFlags: 0
