@@ -46,13 +46,40 @@ TextureImporter:
     second: chat_widget_btns_13
   - first:
       213: 3267468221109787562
-    second: chat_widget_btns_14
+    second: chat_widget_winesize2
   - first:
       213: -2188175069470965664
-    second: chat_widget_btns_15
+    second: chat_widget_winesize3
   - first:
       213: -7517317247043066888
-    second: chat_widget_btns_16
+    second: chat_widget_winsize1
+  - first:
+      213: -8270818064650643350
+    second: chat_widget_unlock2
+  - first:
+      213: -8762382794914437769
+    second: chat_widget_lock2
+  - first:
+      213: -6140829074143836758
+    second: chat_widget_unlock1
+  - first:
+      213: 6893615956391491250
+    second: chat_widget_lock1
+  - first:
+      213: -5691347138559737289
+    second: chat_widget_unlock3
+  - first:
+      213: -367881242185407110
+    second: chat_widget_lock3
+  - first:
+      213: 2999518899080082290
+    second: chat_widget_btns_23
+  - first:
+      213: 3301842785808055878
+    second: chat_widget_btns_24
+  - first:
+      213: -4169100077532778869
+    second: chat_widget_btns_25
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -162,13 +189,13 @@ TextureImporter:
       name: chat_widget_btns_1
       rect:
         serializedVersion: 2
-        x: 80
+        x: 81
         y: 118
-        width: 10
+        width: 8
         height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 5, z: 4, w: 4}
+      border: {x: 2, y: 5, z: 3, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -183,13 +210,13 @@ TextureImporter:
       name: chat_widget_btns_2
       rect:
         serializedVersion: 2
-        x: 90
+        x: 91
         y: 118
-        width: 10
+        width: 8
         height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 6, z: 4, w: 4}
+      border: {x: 2, y: 5, z: 3, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -204,13 +231,13 @@ TextureImporter:
       name: chat_widget_btns_3
       rect:
         serializedVersion: 2
-        x: 102
+        x: 101
         y: 118
         width: 8
         height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 5, z: 4, w: 4}
+      border: {x: 2, y: 5, z: 3, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -432,7 +459,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chat_widget_btns_14
+      name: chat_widget_winesize2
       rect:
         serializedVersion: 2
         x: 134
@@ -453,7 +480,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chat_widget_btns_15
+      name: chat_widget_winesize3
       rect:
         serializedVersion: 2
         x: 156
@@ -474,7 +501,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: chat_widget_btns_16
+      name: chat_widget_winsize1
       rect:
         serializedVersion: 2
         x: 178
@@ -490,6 +517,195 @@ TextureImporter:
       bones: []
       spriteID: 8f3a412dacf1da790800000000000000
       internalID: -7517317247043066888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_unlock2
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 58
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a685d967ac6283d80800000000000000
+      internalID: -8270818064650643350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_lock2
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 58
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 775612be543c56680800000000000000
+      internalID: -8762382794914437769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_unlock1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 11
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa504491e7467caa0800000000000000
+      internalID: -6140829074143836758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_lock1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 11
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b6fdaa303b0baf50800000000000000
+      internalID: 6893615956391491250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_unlock3
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 11
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73206b87ee54401b0800000000000000
+      internalID: -5691347138559737289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_lock3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 11
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a75620895f505eaf0800000000000000
+      internalID: -367881242185407110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_btns_23
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 82
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2733dbceb8e60a920800000000000000
+      internalID: 2999518899080082290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_btns_24
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 127
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64e7640158082dd20800000000000000
+      internalID: 3301842785808055878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chat_widget_btns_25
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 82
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8eea9d71916426c0800000000000000
+      internalID: -4169100077532778869
       vertices: []
       indices: 
       edges: []
