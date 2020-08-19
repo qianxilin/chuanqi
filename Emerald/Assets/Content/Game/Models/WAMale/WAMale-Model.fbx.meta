@@ -15,7 +15,12 @@ ModelImporter:
   - first:
       74: -7614707094677883042
     second: wa_m_body_01.ao|Walk
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WA_M_Body_01_Mat
+    second: {fileID: 2100000, guid: cfd712a03660f3349af7bd7bf3d4c102, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -74,8 +79,8 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 3
+    normalImportMode: 1
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1

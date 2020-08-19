@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: 538a888d579c62946b595e2b08cf943d
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4154487544783917178
+    second: CheckBox_I2_0
+  - first:
+      213: 6435019088037753081
+    second: CheckBox_I2_1
+  - first:
+      213: 3828608428332169636
+    second: CheckBox_I2_2
+  - first:
+      213: -7765399987469991619
+    second: CheckBox_I2_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -85,11 +97,95 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CheckBox_I2_0
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 19
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7051aa1964b7a930800000000000000
+      internalID: 4154487544783917178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckBox_I2_1
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 19
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f0395134c7cd4950800000000000000
+      internalID: 6435019088037753081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckBox_I2_2
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 19
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a93ecaa413f12530800000000000000
+      internalID: 3828608428332169636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckBox_I2_3
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 19
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d314700bad1cb3490800000000000000
+      internalID: -7765399987469991619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 57fcf9efc647e9c4d83e227ffcfb80eb
     internalID: 0
     vertices: []
     indices: 
