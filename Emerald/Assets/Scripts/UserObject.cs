@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UserObject : MonoBehaviour
 {
+    public uint Level;
     public PlayerObject Player;
     public int WalkStep;
     public UserItem[] Inventory = new UserItem[46];

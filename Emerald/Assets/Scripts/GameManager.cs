@@ -69,8 +69,12 @@ public class GameManager : MonoBehaviour
         UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
         
         User.Player = UserGameObject.GetComponent<PlayerObject>();
+        User.Player.name = p.Name;
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
+        User.Level = p.Level;
+        
+        GameScene.UpdateCharacterIcon();
 
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
