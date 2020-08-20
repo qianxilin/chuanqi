@@ -11,6 +11,90 @@ TextureImporter:
   - first:
       213: 6635671551493691409
     second: HudInfo_LvlBG
+  - first:
+      213: -3527497859555801888
+    second: HudInfoWidget_I3_3
+  - first:
+      213: -8903800916750468227
+    second: HudInfoWidget_I3_4
+  - first:
+      213: -5541109018203895237
+    second: HudInfoWidget_I3_5
+  - first:
+      213: -1645287407197631923
+    second: HudInfoWidget_I3_6
+  - first:
+      213: -154971200007277017
+    second: HudInfoWidget_I3_7
+  - first:
+      213: 1946498842207649094
+    second: AtkModePeaceful1
+  - first:
+      213: -5613953025508090425
+    second: AtkModeAll2
+  - first:
+      213: -7073052201535797473
+    second: AtkModePeaceful2
+  - first:
+      213: 3996457496095997127
+    second: AtkModePeaceful3
+  - first:
+      213: -1371386445166113507
+    second: HudInfoWidget_I3_12
+  - first:
+      213: 6838864243442321904
+    second: AtkModeGuild1
+  - first:
+      213: 1316084058107745792
+    second: AtkModeGuild3
+  - first:
+      213: 1918728205373963724
+    second: AtkModeGuild2
+  - first:
+      213: 8371531255240842325
+    second: AtkModeAll1
+  - first:
+      213: 3085669501428261188
+    second: AtkModeAll2
+  - first:
+      213: 3085669501428261188
+    second: AtkModeAll3
+  - first:
+      213: 1371687408249958051
+    second: AtkModeEvil1
+  - first:
+      213: -7049612042877770371
+    second: AtkModeEvil2
+  - first:
+      213: -8460076306479638644
+    second: AtkModeEvil3
+  - first:
+      213: 3085669501428261188
+    second: AtkModeAll3
+  - first:
+      213: -7669040891394232173
+    second: AtkModeAll2
+  - first:
+      213: -8957604507631904181
+    second: AtkModeGrp2
+  - first:
+      213: 3109642085348464500
+    second: AtkModeGrp1
+  - first:
+      213: 3085669501428261188
+    second: HudInfoWidget_I3_9
+  - first:
+      213: 1170824291958994939
+    second: AtkModeWar4
+  - first:
+      213: -9051978712765215153
+    second: AtkModeWar3
+  - first:
+      213: -1228710421639453298
+    second: AtkModeWar2
+  - first:
+      213: 4792711226550767922
+    second: AtkModeWar1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -146,7 +230,7 @@ TextureImporter:
         width: 22
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,6 +238,510 @@ TextureImporter:
       bones: []
       spriteID: 11852f86e14a61c50800000000000000
       internalID: 6635671551493691409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_3
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 64
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e4c93fd26fcb0fc0800000000000000
+      internalID: -3527497859555801888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_4
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 64
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7b7a469d385f6480800000000000000
+      internalID: -8903800916750468227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_5
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 64
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a4e3cb4b60a13b0800000000000000
+      internalID: -5541109018203895237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_6
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 64
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4acf8cf1d3ca29e0800000000000000
+      internalID: -1645287407197631923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7267621c38e69ddf0800000000000000
+      internalID: -154971200007277017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModePeaceful1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64dfe7d426a530b10800000000000000
+      internalID: 1946498842207649094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModePeaceful2
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f170aa15f7877dd90800000000000000
+      internalID: -7073052201535797473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModePeaceful3
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ccbfb62be4467730800000000000000
+      internalID: 3996457496095997127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 117
+        width: 219
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1d86164b4bd7fce0800000000000000
+      internalID: -1371386445166113507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeGuild1
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f90089abc688ee50800000000000000
+      internalID: 6838864243442321904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeGuild3
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 006111a5a7ba34210800000000000000
+      internalID: 1316084058107745792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeGuild2
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd76dd0321b0aa10800000000000000
+      internalID: 1918728205373963724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeAll1
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55cd5b68257ad2470800000000000000
+      internalID: 8371531255240842325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_9
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 145
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44163ee101082da20800000000000000
+      internalID: 3085669501428261188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeEvil1
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae6d972e66390310800000000000000
+      internalID: 1371687408249958051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeEvil2
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7564fb823fba2e90800000000000000
+      internalID: -7049612042877770371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeEvil3
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8715933c65c79a80800000000000000
+      internalID: -8460076306479638644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeAll2
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 148
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 390708c01f7129590800000000000000
+      internalID: -7669040891394232173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeGrp2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 147
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4a9924e82230b380800000000000000
+      internalID: -8957604507631904181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeGrp1
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 147
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 477dcc3400ba72b20800000000000000
+      internalID: 3109642085348464500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeWar4
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 116
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf73d908d7a9f3010800000000000000
+      internalID: 1170824291958994939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeWar3
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 116
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e4b37f159e06280800000000000000
+      internalID: -9051978712765215153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeWar2
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 116
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e852c5aa16eb2fee0800000000000000
+      internalID: -1228710421639453298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AtkModeWar1
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 116
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 231d599b771238240800000000000000
+      internalID: 4792711226550767922
       vertices: []
       indices: 
       edges: []
