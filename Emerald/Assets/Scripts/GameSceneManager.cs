@@ -17,7 +17,12 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text CharacterName;
     public TMP_Text CharacterLevel;
     public Image CharacterIcon;
-    public Sprite[] CharacterIcons = new Sprite[Enum.GetNames(typeof(MirClass)).Length * Enum.GetNames(typeof(MirGender)).Length];    
+    public Sprite[] CharacterIcons = new Sprite[Enum.GetNames(typeof(MirClass)).Length * Enum.GetNames(typeof(MirGender)).Length];
+    public Button AttackModeButton;
+    public TMP_Text AttackModeText;
+    public Sprite[] AttackModeIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
+    public Sprite[] AttackModeHoverIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
+    public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
 
     void Awake()
     {
@@ -59,6 +64,26 @@ public class GameSceneManager : MonoBehaviour
         CharacterIcon.sprite = CharacterIcons[(int)GameManager.User.Player.Class * 2 + (int)GameManager.User.Player.Gender];
         CharacterName.text = GameManager.User.Player.name;
         CharacterLevel.text = GameManager.User.Level.ToString();
+    }
+
+    public void ChangeAttackMode(int amode)
+    {
+        if (amode >= Enum.GetNames(typeof(AttackMode)).Length) return;
+        Network.Enqueue(new C.ChangeAMode() { Mode = (AttackMode)amode });
+    }
+
+    public void SetAttackMode(AttackMode amode)
+    {
+        AttackModeButton.GetComponent<Image>().sprite = AttackModeIcons[(int)amode];
+
+        SpriteState state = new SpriteState();
+        state = AttackModeButton.spriteState;
+        state.highlightedSprite = AttackModeHoverIcons[(int)amode];
+        state.pressedSprite = AttackModeDownIcons[(int)amode];
+
+        AttackModeButton.spriteState = state;
+
+        AttackModeText.text = amode.ToString();
     }
 
 

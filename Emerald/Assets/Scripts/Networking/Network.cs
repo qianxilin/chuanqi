@@ -312,6 +312,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.UserLocation:
                     UserLocation((S.UserLocation)p);
                     break;
+                case (short)ServerPacketIds.ChangeAMode:
+                    AttackMode((S.ChangeAMode)p);
+                    break;
                 case (short)ServerPacketIds.ObjectPlayer:
                     ObjectPlayer((S.ObjectPlayer)p);
                     break;
@@ -540,6 +543,10 @@ namespace EmeraldNetwork
         public static void UserLocation(S.UserLocation p)
         {
             gameManager.UserLocation(p);
+        }
+        public static void AttackMode(S.ChangeAMode p)
+        {
+            gameManager.AttackMode(p);
         }
         public static void ObjectPlayer(S.ObjectPlayer p)
         {

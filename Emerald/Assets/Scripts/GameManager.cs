@@ -97,6 +97,11 @@ public class GameManager : MonoBehaviour
         NextAction = 0;
     }
 
+    public void AttackMode(S.ChangeAMode p)
+    {
+        GameScene.SetAttackMode(p.Mode);
+    }
+
     public void ObjectPlayer(S.ObjectPlayer p)
     {
         PlayerObject player;

@@ -6,6 +6,8 @@ public class UserObject : MonoBehaviour
 {
     public uint Level;
     public PlayerObject Player;
+    public AttackMode AMode;
+
     public int WalkStep;
     public UserItem[] Inventory = new UserItem[46];
     public int BeltIdx = 6;

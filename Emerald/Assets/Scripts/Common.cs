@@ -885,7 +885,7 @@ public enum FishingSlot : byte
 [Obfuscation(Feature = "renaming", Exclude = true)]
 public enum AttackMode : byte
 {
-    Peace = 0,
+    Peaceful = 0,
     Group = 1,
     Guild = 2,
     EnemyGuild = 3,
