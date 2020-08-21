@@ -25259,8 +25259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ed10dd1e6251b4db0648f3fc2d8aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Level: 0
   Player: {fileID: 0}
+  AMode: 0
   WalkStep: 0
+  BeltIdx: 6
 --- !u!1 &1235383926
 GameObject:
   m_ObjectHideFlags: 0

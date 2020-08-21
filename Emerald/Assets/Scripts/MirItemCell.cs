@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class MirItemCell : MonoBehaviour
 {
-    public Image ItemImage;
+    private Image ItemImage;
+    private static Color VisibleColor = new Color(255, 255, 255, 255);
+    private static Color HideColor = new Color(255, 255, 255, 0);
 
     [HideInInspector]
     public UserItem Item
@@ -25,6 +27,7 @@ public class MirItemCell : MonoBehaviour
     }
 
     #region ItemSlot
+    [SerializeField]
     private int _itemSlot;
     [HideInInspector]
     public event EventHandler ItemSlotChanged;
@@ -48,6 +51,7 @@ public class MirItemCell : MonoBehaviour
     #endregion
 
     #region GridType
+    [SerializeField]
     private MirGridType _gridType;
     [HideInInspector]
     public event EventHandler GridTypeChanged;
@@ -60,7 +64,6 @@ public class MirItemCell : MonoBehaviour
             if (_gridType == value) return;
             _gridType = value;            
             OnGridTypeChanged();
-            Redraw();
         }
     }
 
@@ -86,9 +89,30 @@ public class MirItemCell : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        ItemImage = gameObject.GetComponent<Image>();
+        Redraw();
+    }
+
+    void Update()
+    {
+        if (GridType == MirGridType.None || Item == null || Item.Info == null) return;
+        if (Item.NeedRefresh)
+        {
+            Redraw();
+            Item.NeedRefresh = true;
+        }
+    }
+
     void Redraw()
     {
-        if (Item == null || Item.Info == null) return;
+        if (GridType == MirGridType.None || Item == null || Item.Info == null)
+        {
+            ItemImage.color = HideColor;
+            return;
+        }
+        ItemImage.color = VisibleColor;
         ItemImage.sprite = Resources.Load<Sprite>($"UI/Items/{Item.Info.Image}");
     }
 }

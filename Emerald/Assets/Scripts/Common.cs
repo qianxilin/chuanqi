@@ -3067,6 +3067,9 @@ public class UserItem
     public RentalInformation RentalInformation;
 
 	public Awake Awake = new Awake();
+
+    public bool NeedRefresh;
+
     public bool IsAdded
     {
         get
@@ -3175,6 +3178,8 @@ public class UserItem
 
         if (reader.ReadBoolean())
             RentalInformation = new RentalInformation(reader, version, Customversion);
+
+        NeedRefresh = true;
     }
 
     public void Save(BinaryWriter writer)

@@ -16,10 +16,11 @@ public class InventoryController : MonoBehaviour
         {
             for (int x = 0; x < cellsWidth; x++)
             {
-                Cells[x, y] = Instantiate(CellObject, CellsLocation.transform).GetComponent<MirItemCell>();
+                GameObject cell = Instantiate(CellObject, CellsLocation.transform);
+                Cells[x, y] = cell.GetComponentInChildren<MirItemCell>();
                 Cells[x, y].ItemSlot = 6 + (y * cellsHeight + x);
                 Cells[x, y].GridType = MirGridType.Inventory;
-                RectTransform rt = Cells[x, y].GetComponent<RectTransform>();
+                RectTransform rt = cell.GetComponent<RectTransform>();
                 rt.localPosition = new Vector3(x * 44, -(y * 44), 0);
             }
         }
