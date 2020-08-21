@@ -333,6 +333,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.NewItemInfo:
                     NewItemInfo((S.NewItemInfo)p);
                     break;
+                case (short)ServerPacketIds.MoveItem:
+                    MoveItem((S.MoveItem)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -571,6 +574,10 @@ namespace EmeraldNetwork
         public static void NewItemInfo(S.NewItemInfo p)
         {
             gameManager.NewItemInfo(p);
+        }
+        public static void MoveItem(S.MoveItem p)
+        {
+            GameManager.GameScene.MoveItem(p);
         }
 
         public static void Enqueue(Packet p)

@@ -6,12 +6,14 @@ public class InventoryController : MonoBehaviour
 {
     const int cellsWidth = 8;
     const int cellsHeight = 8;
-    private MirItemCell[,] Cells = new MirItemCell[cellsWidth, cellsHeight];
+    public MirItemCell[,] Cells = new MirItemCell[cellsWidth, cellsHeight];
     public GameObject CellObject;
     public GameObject CellsLocation;
 
     void Awake()
     {
+        GameManager.GameScene.Inventory = this;
+
         for (int y = 0; y < cellsHeight; y++)
         {
             for (int x = 0; x < cellsWidth; x++)
