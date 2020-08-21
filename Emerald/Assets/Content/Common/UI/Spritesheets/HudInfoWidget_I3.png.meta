@@ -101,6 +101,9 @@ TextureImporter:
   - first:
       213: -828090892842993285
     second: HudInfoWidget_I3_28
+  - first:
+      213: 9005021316361149537
+    second: HudInfoWidget_I3_29
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -378,7 +381,7 @@ TextureImporter:
       name: AtkModePeaceful2
       rect:
         serializedVersion: 2
-        x: 172
+        x: 173
         y: 149
         width: 28
         height: 28
@@ -756,12 +759,12 @@ TextureImporter:
       name: HudInfoWidget_I3_27
       rect:
         serializedVersion: 2
-        x: 548
-        y: 145
-        width: 25
-        height: 32
+        x: 547
+        y: 147
+        width: 28
+        height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -777,12 +780,12 @@ TextureImporter:
       name: HudInfoWidget_I3_28
       rect:
         serializedVersion: 2
-        x: 375
-        y: 146
-        width: 29
-        height: 31
+        x: 377
+        y: 147
+        width: 28
+        height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -790,6 +793,27 @@ TextureImporter:
       bones: []
       spriteID: b797b5a68b70284f0800000000000000
       internalID: -828090892842993285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_29
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 145
+        width: 35
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16cd6843d2348fc70800000000000000
+      internalID: 9005021316361149537
       vertices: []
       indices: 
       edges: []
