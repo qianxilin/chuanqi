@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
         User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
 
         User.Inventory = p.Inventory;
+        User.Equipment = p.Equipment;
 
         User.BindAllItems();
 

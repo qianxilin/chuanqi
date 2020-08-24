@@ -336,6 +336,12 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.MoveItem:
                     MoveItem((S.MoveItem)p);
                     break;
+                case (short)ServerPacketIds.EquipItem:
+                    EquipItem((S.EquipItem)p);
+                    break;
+                case (short)ServerPacketIds.RemoveItem:
+                    RemoveItem((S.RemoveItem)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -578,6 +584,14 @@ namespace EmeraldNetwork
         public static void MoveItem(S.MoveItem p)
         {
             GameManager.GameScene.MoveItem(p);
+        }
+        public static void EquipItem(S.EquipItem p)
+        {
+            GameManager.GameScene.EquipItem(p);
+        }
+        public static void RemoveItem(S.RemoveItem p)
+        {
+            GameManager.GameScene.RemoveItem(p);
         }
 
         public static void Enqueue(Packet p)

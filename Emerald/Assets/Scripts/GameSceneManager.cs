@@ -28,11 +28,12 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text AttackModeText;
     public Sprite[] AttackModeIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
     public Sprite[] AttackModeHoverIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
-    public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
+    public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];    
 
     [HideInInspector]
     public InventoryController Inventory;
     public Image SelectedItemImage;
+    public MirItemCell[] EquipmentCells = new MirItemCell[14];
     public MirItemCell[] BeltCells = new MirItemCell[6];
 
     [HideInInspector]
@@ -99,7 +100,10 @@ public class GameSceneManager : MonoBehaviour
         }
 
         if (SelectedItemImage.gameObject.activeSelf)
+        {
             SelectedItemImage.transform.position = Input.mousePosition;
+            SelectedItemImage.transform.SetAsLastSibling();
+        }
     }
 
     public void MoveItem(S.MoveItem p)
@@ -109,7 +113,7 @@ public class GameSceneManager : MonoBehaviour
         switch (p.Grid)
         {
             case MirGridType.Inventory:
-                fromCell = p.From < User.BeltIdx ? BeltCells[p.From] : Inventory.Cells[(p.From - User.BeltIdx) % 8, (p.From - User.BeltIdx) / 8];
+                fromCell = p.From < User.BeltIdx ? BeltCells[p.From] : Inventory.Cells[p.From];
                 break;
             default:
                 return;
@@ -118,7 +122,7 @@ public class GameSceneManager : MonoBehaviour
         switch (p.Grid)
         {
             case MirGridType.Inventory:
-                toCell = p.To < User.BeltIdx ? BeltCells[p.To] : Inventory.Cells[(p.To - User.BeltIdx) % 8, (p.To - User.BeltIdx) / 8];
+                toCell = p.To < User.BeltIdx ? BeltCells[p.To] : Inventory.Cells[p.To];
                 break;
             default:
                 return;
@@ -134,6 +138,85 @@ public class GameSceneManager : MonoBehaviour
         UserItem i = fromCell.Item;
         fromCell.Item = toCell.Item;
         toCell.Item = i;
+    }
+
+    public MirItemCell GetCell(MirItemCell[] cells, ulong id)
+    {
+        for (int i = 0; i < cells.Length; i++)
+        {
+            if (cells[i].Item == null || cells[i].Item.UniqueID != id) continue;
+            return cells[i];
+        }
+        return null;
+    }
+
+    public void EquipItem(S.EquipItem p)
+    {
+        MirItemCell fromCell;
+        MirItemCell toCell = EquipmentCells[p.To];
+
+        switch (p.Grid)
+        {
+            case MirGridType.Inventory:
+                fromCell = GetCell(Inventory.Cells, p.UniqueID) ?? GetCell(BeltCells, p.UniqueID);
+                break;
+            /*case MirGridType.Storage:
+                fromCell = StorageDialog.GetCell(p.UniqueID) ?? BeltDialog.GetCell(p.UniqueID);
+                break;*/
+            default:
+                return;
+        }
+
+        if (toCell == null || fromCell == null) return;
+
+        toCell.Locked = false;
+        fromCell.Locked = false;
+
+        if (!p.Success) return;
+
+        UserItem i = fromCell.Item;
+        fromCell.Item = toCell.Item;
+        toCell.Item = i;
+        //User.RefreshStats();
+    }
+
+    public void RemoveItem(S.RemoveItem p)
+    {
+        MirItemCell toCell;
+
+        int index = -1;
+
+        for (int i = 0; i < User.Equipment.Length; i++)
+        {
+            if (User.Equipment[i] == null || User.Equipment[i].UniqueID != p.UniqueID) continue;
+            index = i;
+            break;
+        }
+
+        MirItemCell fromCell = EquipmentCells[index];
+
+
+        switch (p.Grid)
+        {
+            case MirGridType.Inventory:
+                toCell = p.To < User.BeltIdx ? BeltCells[p.To] : Inventory.Cells[p.To - User.BeltIdx];
+                break;
+            /*case MirGridType.Storage:
+                toCell = StorageDialog.Grid[p.To];
+                break;*/
+            default:
+                return;
+        }
+
+        if (toCell == null || fromCell == null) return;
+
+        toCell.Locked = false;
+        fromCell.Locked = false;
+
+        if (!p.Success) return;
+        toCell.Item = fromCell.Item;
+        fromCell.Item = null;
+        //User.RefreshStats();
     }
 
     public void UpdateCharacterIcon()

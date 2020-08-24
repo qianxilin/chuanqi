@@ -10,6 +10,7 @@ public class UserObject : MonoBehaviour
 
     public int WalkStep;
     public UserItem[] Inventory = new UserItem[46];
+    public UserItem[] Equipment = new UserItem[14];
     public int BeltIdx = 6;
     
 
@@ -24,6 +25,12 @@ public class UserObject : MonoBehaviour
         {
             if (Inventory[i] == null) continue;            
             GameManager.Bind(Inventory[i]);
+        }
+
+        for (int i = 0; i < Equipment.Length; i++)
+        {
+            if (Equipment[i] == null) continue;
+            GameManager.Bind(Equipment[i]);
         }
     }
 
