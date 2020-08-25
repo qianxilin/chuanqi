@@ -150,8 +150,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
             default:
                 ItemImage.sprite = Resources.Load<Sprite>($"UI/Items/{Item.Info.Image}");
                 break;
-        }
-        
+        }        
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -636,5 +635,17 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         }*/
 
         return true;
+    }
+
+    public void ShowTooltip()
+    {
+        if (Item == null) return;
+        GameScene.ItemToolTip.Item = Item;
+        GameScene.ItemToolTip.Show();
+    }
+
+    public void HideTooltip()
+    {
+        GameScene.ItemToolTip.Hide();
     }
 }

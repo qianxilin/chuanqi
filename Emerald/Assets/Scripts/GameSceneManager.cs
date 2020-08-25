@@ -32,6 +32,7 @@ public class GameSceneManager : MonoBehaviour
 
     [HideInInspector]
     public InventoryController Inventory;
+    public ItemTooltip ItemToolTip;
     public Image SelectedItemImage;
     public MirItemCell[] EquipmentCells = new MirItemCell[14];
     public MirItemCell[] BeltCells = new MirItemCell[6];
