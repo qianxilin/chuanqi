@@ -141,7 +141,17 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
             return;
         }
         ItemImage.color = VisibleColor;
-        ItemImage.sprite = Resources.Load<Sprite>($"UI/Items/{Item.Info.Image}");
+
+        switch (GridType)
+        {
+            case MirGridType.Equipment:
+                ItemImage.sprite = Resources.Load<Sprite>($"UI/StateItems/{Item.Info.Image}");
+                break;
+            default:
+                ItemImage.sprite = Resources.Load<Sprite>($"UI/Items/{Item.Info.Image}");
+                break;
+        }
+        
     }
 
     public void OnPointerDown(PointerEventData eventData)

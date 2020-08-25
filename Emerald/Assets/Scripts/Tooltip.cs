@@ -24,6 +24,11 @@ public class Tooltip : MonoBehaviour
     [Range(0f, 100f)]
     public float Offset;
 
+    void Awake()
+    {
+        rect = GetComponent<RectTransform>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,8 +48,7 @@ public class Tooltip : MonoBehaviour
     }
 
     void UpdateCamera()
-    {
-        rect = GetComponent<RectTransform>();
+    {        
         min = new Vector3(0, 25, 0);
         max = new Vector3(cam.pixelWidth, cam.pixelHeight, 0);
     }
@@ -53,5 +57,6 @@ public class Tooltip : MonoBehaviour
     {
         TextBox.SetText(text);
         gameObject.SetActive(true);
+        gameObject.transform.SetAsLastSibling();
     }
 }
