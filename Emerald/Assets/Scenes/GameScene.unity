@@ -4461,9 +4461,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 2730466052481906949, guid: 1ac0675b48685f14da94074cc31b19af,
+    m_HighlightedSprite: {fileID: -3814248792425554237, guid: 1ac0675b48685f14da94074cc31b19af,
       type: 3}
-    m_PressedSprite: {fileID: 8736757445958895675, guid: 1ac0675b48685f14da94074cc31b19af,
+    m_PressedSprite: {fileID: 8380107107440788378, guid: 1ac0675b48685f14da94074cc31b19af,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -11496,7 +11496,7 @@ PrefabInstance:
     - target: {fileID: 7740017860566972558, guid: b389e0b7fc9168b4ab1a3f8f941236cd,
         type: 3}
       propertyPath: m_text
-      value: Additional
+      value: More
       objectReference: {fileID: 0}
     - target: {fileID: 7740017860566972558, guid: b389e0b7fc9168b4ab1a3f8f941236cd,
         type: 3}
@@ -19747,7 +19747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1336975545
@@ -27021,9 +27021,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 2730466052481906949, guid: 1ac0675b48685f14da94074cc31b19af,
+    m_HighlightedSprite: {fileID: -3814248792425554237, guid: 1ac0675b48685f14da94074cc31b19af,
       type: 3}
-    m_PressedSprite: {fileID: 8736757445958895675, guid: 1ac0675b48685f14da94074cc31b19af,
+    m_PressedSprite: {fileID: 8380107107440788378, guid: 1ac0675b48685f14da94074cc31b19af,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
