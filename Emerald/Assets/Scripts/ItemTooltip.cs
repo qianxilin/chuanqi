@@ -80,8 +80,19 @@ public class ItemTooltip : MonoBehaviour
         TopTextBox.text = $"BP<br>0<br>Required Level: {item.Info.RequiredAmount}";
 
         string mainstring = string.Empty;
+
+        if (item.Info.MinAC + item.Info.MaxAC + item.AC > 0)
+            mainstring += $"AC {item.Info.MinAC} - {item.Info.MaxAC + item.AC}<br>";
+        if (item.Info.MinMAC + item.Info.MaxMAC + item.MAC > 0)
+            mainstring += $"MAC {item.Info.MinMAC} - {item.Info.MaxMAC + item.MAC}<br>";
+
         if (item.Info.MinDC + item.Info.MaxDC + item.DC > 0)
-            mainstring += $"Attack {item.Info.MinDC} - {item.Info.MaxDC + item.DC}<br>";
+            mainstring += $"DC {item.Info.MinDC} - {item.Info.MaxDC + item.DC}<br>";
+        if (item.Info.MinMC + item.Info.MaxMC + item.MC > 0)
+            mainstring += $"MC {item.Info.MinMC} - {item.Info.MaxMC + item.MC}<br>";
+        if (item.Info.MinSC + item.Info.MaxSC + item.SC > 0)
+            mainstring += $"SC {item.Info.MinSC} - {item.Info.MaxSC + item.SC}<br>";
+
         MainTextBox.text = mainstring;
 
         DescriptionTextBox.text = item.Info.ToolTip;
