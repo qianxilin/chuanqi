@@ -13,7 +13,9 @@ public class CharSelManager : MonoBehaviour
 {
     private List<SelectInfo> characters = new List<SelectInfo>();
     private GameObject loginCamera;
-    private GameObject charselCamera;
+    private Transform LoginPosition;
+    [HideInInspector]
+    public Transform CharSelPosition;
 
     public LoginManager LoginManager;
     public MirButton[] CreateButtons = new MirButton[Globals.MaxCharacterCount];
@@ -24,6 +26,7 @@ public class CharSelManager : MonoBehaviour
     public MirButton DeleteButton;
     public MirButton LogOutButton;
     public TMP_InputField NameInput;
+    
     //Windows
     public GameObject SelectCharacterBox;
     public GameObject NewCharacterBox;
@@ -43,12 +46,18 @@ public class CharSelManager : MonoBehaviour
         activeLocation = GameObject.Find("ActiveLocation");
         inactiveLocation = GameObject.Find("InactiveLocation");
         loginCamera = GameObject.Find("LoginCamera");
-        charselCamera = GameObject.Find("CharSelCamera");
+        LoginPosition = GameObject.Find("LoginCameraPosition").transform;
+        CharSelPosition = GameObject.Find("CharSelCameraPosition").transform;
         Network.CharSelManager = this;
     }
 
     public void OnLoaded()
     {
+        loginCamera.gameObject.SetActive(false);
+        loginCamera.transform.SetPositionAndRotation(CharSelPosition.position, CharSelPosition.rotation);
+        loginCamera.gameObject.SetActive(true);
+        loginCamera.GetComponent<CameraFade>().Reset();
+        loginCamera.GetComponent<CameraFade>().CurrentCurve = loginCamera.GetComponent<CameraFade>().FadeInCurve;
         audioSource.Play();
         SelectCharacterBox.SetActive(true);
         LogOutButton.gameObject.SetActive(true);
@@ -227,17 +236,14 @@ public class CharSelManager : MonoBehaviour
 
     void ChangeScene(GameStage stage)
     {
-        charselCamera.GetComponent<CameraFade>().Reset();
+        loginCamera.GetComponent<CameraFade>().Reset();
         switch (stage)
         {
             case GameStage.Login:
-                charselCamera.GetComponent<Camera>().enabled = false;
-                charselCamera.GetComponent<CameraFade>().enabled = false;
-                charselCamera.GetComponent<AudioListener>().enabled = false;
-                loginCamera.GetComponent<Camera>().enabled = true;
+                loginCamera.SetActive(false);
+                loginCamera.transform.SetPositionAndRotation(LoginPosition.position, LoginPosition.rotation);
+                loginCamera.SetActive(true);
                 loginCamera.GetComponent<CameraFade>().Reset();
-                loginCamera.GetComponent<CameraFade>().enabled = false;
-                loginCamera.GetComponent<AudioListener>().enabled = true;
                 audioSource.Stop();
                 LoginManager.OnLoaded();
                 break;
