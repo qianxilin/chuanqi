@@ -12,6 +12,11 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         get { return GameManager.GameScene; }
     }
 
+    protected static UserObject User
+    {
+        get { return GameManager.User; }
+    }
+
     private Image ItemImage;
     public Sprite IconImage;
 
@@ -91,9 +96,9 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
             switch (GridType)
             {
                 case MirGridType.Inventory:
-                    return GameManager.User.Inventory;
+                    return User.Inventory;
                 case MirGridType.Equipment:
-                    return GameManager.User.Equipment;
+                    return User.Equipment;
                 default:
                     throw new NotImplementedException();
             }
@@ -126,7 +131,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         if (Item.NeedRefresh)
         {
             Redraw();
-            Item.NeedRefresh = true;
+            Item.NeedRefresh = false;
         }
     }
 
@@ -164,7 +169,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         switch (eventData.button)
         {
             case PointerEventData.InputButton.Right:
-                //UseItem();
+                UseItem();
                 break;
             case PointerEventData.InputButton.Left:
                 if (Item != null && GameScene.SelectedCell == null)
@@ -220,6 +225,76 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
                 else*/ MoveItem();
                 break;
         }
+    }
+
+    public void RemoveItem()
+    {
+        int count = 0;
+
+        for (int i = 0; i < User.Inventory.Length; i++)
+        {
+            MirItemCell itemCell = i < User.BeltIdx ? GameScene.BeltCells[i] : GameScene.Inventory.Cells[i - User.BeltIdx];
+            if (itemCell.Item == null) count++;
+        }
+
+        if (Item == null || count < 1 /*|| (User.RidingMount && Item.Info.Type != ItemType.Torch)*/) return;
+
+        if (Item.Info.StackSize > 1)
+        {
+            UserItem item = null;
+
+            for (int i = 0; i < User.Inventory.Length; i++)
+            {
+                MirItemCell itemCell = i < User.BeltIdx ? GameScene.BeltCells[i] : GameScene.Inventory.Cells[i - User.BeltIdx];
+
+                if (itemCell.Item == null || itemCell.Item.Info != Item.Info) continue;
+
+                item = itemCell.Item;
+            }
+
+            if (item != null && ((item.Count + Item.Count) <= item.Info.StackSize))
+            {
+                //Merge.
+                Network.Enqueue(new C.MergeItem { GridFrom = GridType, GridTo = MirGridType.Inventory, IDFrom = Item.UniqueID, IDTo = item.UniqueID });
+
+                Locked = true;
+
+                PlayItemSound();
+                return;
+            }
+        }
+
+
+        for (int i = 0; i < User.Inventory.Length; i++)
+        {
+            MirItemCell itemCell = null;
+
+            if (Item.Info.Type == ItemType.Amulet)
+            {
+                itemCell = i < User.BeltIdx ? GameScene.BeltCells[i] : GameScene.Inventory.Cells[i - User.BeltIdx];
+            }
+            else
+            {
+                itemCell = i < (User.Inventory.Length - User.BeltIdx) ? GameScene.Inventory.Cells[i] : GameScene.BeltCells[i - User.Inventory.Length];
+            }
+
+            if (itemCell.Item != null) continue;
+
+            if (GridType != MirGridType.Equipment)
+            {
+                Network.Enqueue(new C.RemoveSlotItem { Grid = GridType, UniqueID = Item.UniqueID, To = itemCell.ItemSlot, GridTo = MirGridType.Inventory });
+            }
+            else
+            {
+                Network.Enqueue(new C.RemoveItem { Grid = MirGridType.Inventory, UniqueID = Item.UniqueID, To = itemCell.ItemSlot });
+            }
+
+            Locked = true;
+
+            PlayItemSound();
+            break;
+        }
+
     }
 
     private void MoveItem()
@@ -370,6 +445,196 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    public void UseItem()
+    {
+        if (Locked || GridType == MirGridType.Inspect || GridType == MirGridType.TrustMerchant || GridType == MirGridType.GuildStorage || GridType == MirGridType.Craft) return;
+
+
+        //if (MapObject.User.RidingMount && Item.Info.Type != ItemType.Scroll && Item.Info.Type != ItemType.Potion && Item.Info.Type != ItemType.Torch) return;
+
+        if (GridType == MirGridType.BuyBack)
+        {
+            //BuyItem();
+            return;
+        }
+
+        if (GridType == MirGridType.Equipment || GridType == MirGridType.Mount || GridType == MirGridType.Fishing)
+        {
+            RemoveItem();
+            return;
+        }
+
+        if ((GridType != MirGridType.Inventory && GridType != MirGridType.Storage) || Item == null || !CanUseItem() || GameScene.SelectedCell == this) return;
+
+        if ((Item.SoulBoundId != -1) && (User.Player.ObjectID != Item.SoulBoundId))
+            return;
+        switch (Item.Info.Type)
+        {
+            case ItemType.Weapon:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Weapon].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Weapon });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Weapon].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Armour:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Armour].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Armour });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Armour].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Helmet:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Helmet].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Helmet });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Helmet].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Necklace:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Necklace].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Necklace });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Necklace].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Bracelet:
+                if ((GameScene.EquipmentCells[(int)EquipmentSlot.BraceletR].Item == null || GameScene.EquipmentCells[(int)EquipmentSlot.BraceletR].Item.Info.Type == ItemType.Amulet) && GameScene.EquipmentCells[(int)EquipmentSlot.BraceletR].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.BraceletR });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.BraceletR].Locked = true;
+                    Locked = true;
+                }
+                else if (GameScene.EquipmentCells[(int)EquipmentSlot.BraceletL].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.BraceletL });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.BraceletL].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Ring:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.RingR].Item == null && GameScene.EquipmentCells[(int)EquipmentSlot.RingR].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.RingR });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.RingR].Locked = true;
+                    Locked = true;
+                }
+                else if (GameScene.EquipmentCells[(int)EquipmentSlot.RingL].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.RingL });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.RingL].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Amulet:
+                //if (Item.Info.Shape == 0) return;
+
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].Item != null && Item.Info.Type == ItemType.Amulet)
+                {
+                    if (GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].Item.Info == Item.Info && GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].Item.Count < GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].Item.Info.StackSize)
+                    {
+                        Network.Enqueue(new C.MergeItem { GridFrom = GridType, GridTo = MirGridType.Equipment, IDFrom = Item.UniqueID, IDTo = GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].Item.UniqueID });
+
+                        Locked = true;
+                        return;
+                    }
+                }
+
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Amulet });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Amulet].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Belt:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Belt].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Belt });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Belt].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Boots:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Boots].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Boots });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Boots].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Stone:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Stone].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Stone });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Stone].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Torch:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Torch].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Torch });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Torch].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Potion:
+            case ItemType.Scroll:
+            case ItemType.Book:
+            case ItemType.Food:
+            case ItemType.Script:
+            case ItemType.Pets:
+            case ItemType.Transform:
+                if (CanUseItem() && GridType == MirGridType.Inventory)
+                {
+                    if (Time.time < GameScene.UseItemTime) return;
+                    Network.Enqueue(new C.UseItem { UniqueID = Item.UniqueID });
+
+                    if (Item.Count == 1 && ItemSlot < 6)
+                    {
+                        for (int i = User.BeltIdx; i < User.Inventory.Length; i++)
+                            if (ItemArray[i] != null && ItemArray[i].Info == Item.Info)
+                            {
+                                Network.Enqueue(new C.MoveItem { Grid = MirGridType.Inventory, From = i, To = ItemSlot });
+                                GameScene.Inventory.Cells[i - User.BeltIdx].Locked = true;
+                                break;
+                            }
+                    }
+
+                    Locked = true;
+                }
+                break;
+            case ItemType.Mount:
+                if (GameScene.EquipmentCells[(int)EquipmentSlot.Mount].CanWearItem(Item))
+                {
+                    Network.Enqueue(new C.EquipItem { Grid = GridType, UniqueID = Item.UniqueID, To = (int)EquipmentSlot.Mount });
+                    GameScene.EquipmentCells[(int)EquipmentSlot.Mount].Locked = true;
+                    Locked = true;
+                }
+                break;
+            case ItemType.Reins:
+            case ItemType.Bells:
+            case ItemType.Ribbon:
+            case ItemType.Saddle:
+            case ItemType.Mask:
+            case ItemType.Hook:
+            case ItemType.Float:
+            case ItemType.Bait:
+            case ItemType.Finder:
+            case ItemType.Reel:
+                //UseSlotItem();
+                break;
+        }
+
+        GameScene.UseItemTime = Time.time + 300;
+        PlayItemSound();
+    }
+
     private void PlayItemSound()
     {
         if (Item == null) return;
@@ -466,6 +731,183 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         }
     }
 
+    private bool CanUseItem()
+    {
+        if (Item == null) return false;
+
+        switch (User.Player.Gender)
+        {
+            case MirGender.Male:
+                if (!Item.Info.RequiredGender.HasFlag(RequiredGender.Male))
+                {
+                    GameScene.ChatController.ReceiveChat(GameLanguage.NotFemale, ChatType.System);
+                    return false;
+                }
+                break;
+            case MirGender.Female:
+                if (!Item.Info.RequiredGender.HasFlag(RequiredGender.Female))
+                {
+                    GameScene.ChatController.ReceiveChat(GameLanguage.NotMale, ChatType.System);
+                    return false;
+                }
+                break;
+        }
+
+        switch (User.Player.Class)
+        {
+            case MirClass.Warrior:
+                if (!Item.Info.RequiredClass.HasFlag(RequiredClass.Warrior))
+                {
+                    GameScene.ChatController.ReceiveChat("Warriors cannot use this item.", ChatType.System);
+                    return false;
+                }
+                break;
+            case MirClass.Wizard:
+                if (!Item.Info.RequiredClass.HasFlag(RequiredClass.Wizard))
+                {
+                    GameScene.ChatController.ReceiveChat("Wizards cannot use this item.", ChatType.System);
+                    return false;
+                }
+                break;
+            case MirClass.Taoist:
+                if (!Item.Info.RequiredClass.HasFlag(RequiredClass.Taoist))
+                {
+                    GameScene.ChatController.ReceiveChat("Taoists cannot use this item.", ChatType.System);
+                    return false;
+                }
+                break;
+            case MirClass.Assassin:
+                if (!Item.Info.RequiredClass.HasFlag(RequiredClass.Assassin))
+                {
+                    GameScene.ChatController.ReceiveChat("Assassins cannot use this item.", ChatType.System);
+                    return false;
+                }
+                break;
+            case MirClass.Archer:
+                if (!Item.Info.RequiredClass.HasFlag(RequiredClass.Archer))
+                {
+                    GameScene.ChatController.ReceiveChat("Archers cannot use this item.", ChatType.System);
+                    return false;
+                }
+                break;
+        }
+
+        switch (Item.Info.RequiredType)
+        {
+            case RequiredType.Level:
+                if (User.Level < Item.Info.RequiredAmount)
+                {
+                    GameScene.ChatController.ReceiveChat(GameLanguage.LowLevel, ChatType.System);
+                    return false;
+                }
+                break;
+            /*case RequiredType.MaxAC:
+                if (MapObject.User.MaxAC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough AC.", ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MaxMAC:
+                if (MapObject.User.MaxMAC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough MAC.", ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MaxDC:
+                if (MapObject.User.MaxDC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat(GameLanguage.LowDC, ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MaxMC:
+                if (MapObject.User.MaxMC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat(GameLanguage.LowMC, ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MaxSC:
+                if (MapObject.User.MaxSC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat(GameLanguage.LowSC, ChatType.System);
+                    return false;
+                }
+                break;*/
+            case RequiredType.MaxLevel:
+                if (User.Level > Item.Info.RequiredAmount)
+                {
+                    GameScene.ChatController.ReceiveChat("You have exceeded the maximum level.", ChatType.System);
+                    return false;
+                }
+                break;
+            /*case RequiredType.MinAC:
+                if (MapObject.User.MinAC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough Base AC.", ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MinMAC:
+                if (MapObject.User.MinMAC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough Base MAC.", ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MinDC:
+                if (MapObject.User.MinDC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough Base DC.", ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MinMC:
+                if (MapObject.User.MinMC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough Base MC.", ChatType.System);
+                    return false;
+                }
+                break;
+            case RequiredType.MinSC:
+                if (MapObject.User.MinSC < Item.Info.RequiredAmount)
+                {
+                    GameScene.Scene.ChatDialog.ReceiveChat("You do not have enough Base SC.", ChatType.System);
+                    return false;
+                }
+                break;*/
+        }
+
+        switch (Item.Info.Type)
+        {
+            case ItemType.Saddle:
+            case ItemType.Ribbon:
+            case ItemType.Bells:
+            case ItemType.Mask:
+            case ItemType.Reins:
+                if (User.Equipment[(int)EquipmentSlot.Mount] == null)
+                {
+                    GameScene.ChatController.ReceiveChat("You do not have a mount equipped.", ChatType.System);
+                    return false;
+                }
+                break;
+            case ItemType.Hook:
+            case ItemType.Float:
+            case ItemType.Bait:
+            case ItemType.Finder:
+            case ItemType.Reel:
+                /*if (User.Equipment[(int)EquipmentSlot.Weapon] == null || !User.Equipment[(int)EquipmentSlot.Weapon].Info.IsFishingRod)
+                {
+                    GameScene.ChatController.ReceiveChat("You do not have a fishing rod equipped.", ChatType.System);
+                    return false;
+                }*/
+                break;
+        }
+        return true;
+    }
+
     private bool CanWearItem(UserItem i)
     {
         if (i == null) return false;
@@ -477,14 +919,14 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
             case MirGender.Male:
                 if (!i.Info.RequiredGender.HasFlag(RequiredGender.Male))
                 {
-                    GameScene.ChatController.RecieveChat(GameLanguage.NotFemale, ChatType.System);
+                    GameScene.ChatController.ReceiveChat(GameLanguage.NotFemale, ChatType.System);
                     return false;
                 }
                 break;
             case MirGender.Female:
                 if (!i.Info.RequiredGender.HasFlag(RequiredGender.Female))
                 {
-                    GameScene.ChatController.RecieveChat(GameLanguage.NotMale, ChatType.System);
+                    GameScene.ChatController.ReceiveChat(GameLanguage.NotMale, ChatType.System);
                     return false;
                 }
                 break;
@@ -495,35 +937,35 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
             case MirClass.Warrior:
                 if (!i.Info.RequiredClass.HasFlag(RequiredClass.Warrior))
                 {
-                    GameScene.ChatController.RecieveChat("Warriors cannot use this item.", ChatType.System);
+                    GameScene.ChatController.ReceiveChat("Warriors cannot use this item.", ChatType.System);
                     return false;
                 }
                 break;
             case MirClass.Wizard:
                 if (!i.Info.RequiredClass.HasFlag(RequiredClass.Wizard))
                 {
-                    GameScene.ChatController.RecieveChat("Wizards cannot use this item.", ChatType.System);
+                    GameScene.ChatController.ReceiveChat("Wizards cannot use this item.", ChatType.System);
                     return false;
                 }
                 break;
             case MirClass.Taoist:
                 if (!i.Info.RequiredClass.HasFlag(RequiredClass.Taoist))
                 {
-                    GameScene.ChatController.RecieveChat("Taoists cannot use this item.", ChatType.System);
+                    GameScene.ChatController.ReceiveChat("Taoists cannot use this item.", ChatType.System);
                     return false;
                 }
                 break;
             case MirClass.Assassin:
                 if (!i.Info.RequiredClass.HasFlag(RequiredClass.Assassin))
                 {
-                    GameScene.ChatController.RecieveChat("Assassins cannot use this item.", ChatType.System);
+                    GameScene.ChatController.ReceiveChat("Assassins cannot use this item.", ChatType.System);
                     return false;
                 }
                 break;
             case MirClass.Archer:
                 if (!i.Info.RequiredClass.HasFlag(RequiredClass.Archer))
                 {
-                    GameScene.ChatController.RecieveChat("Archers cannot use this item.", ChatType.System);
+                    GameScene.ChatController.ReceiveChat("Archers cannot use this item.", ChatType.System);
                     return false;
                 }
                 break;
@@ -534,7 +976,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
             case RequiredType.Level:
                 if (GameManager.User.Level < i.Info.RequiredAmount)
                 {
-                    GameScene.ChatController.RecieveChat(GameLanguage.LowLevel, ChatType.System);
+                    GameScene.ChatController.ReceiveChat(GameLanguage.LowLevel, ChatType.System);
                     return false;
                 }
                 break;

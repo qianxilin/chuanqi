@@ -39,6 +39,8 @@ public class GameSceneManager : MonoBehaviour
 
     [HideInInspector]
     public bool PickedUpGold;
+    [HideInInspector]
+    public float UseItemTime;
 
     private MirItemCell _selectedCell;
     [HideInInspector]
@@ -114,7 +116,7 @@ public class GameSceneManager : MonoBehaviour
         switch (p.Grid)
         {
             case MirGridType.Inventory:
-                fromCell = p.From < User.BeltIdx ? BeltCells[p.From] : Inventory.Cells[p.From];
+                fromCell = p.From < User.BeltIdx ? BeltCells[p.From] : Inventory.Cells[p.From - User.BeltIdx];
                 break;
             default:
                 return;
@@ -123,7 +125,7 @@ public class GameSceneManager : MonoBehaviour
         switch (p.Grid)
         {
             case MirGridType.Inventory:
-                toCell = p.To < User.BeltIdx ? BeltCells[p.To] : Inventory.Cells[p.To];
+                toCell = p.To < User.BeltIdx ? BeltCells[p.To] : Inventory.Cells[p.To - User.BeltIdx];
                 break;
             default:
                 return;

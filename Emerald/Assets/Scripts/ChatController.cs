@@ -20,7 +20,7 @@ public class ChatController : MonoBehaviour
             Filter[i] = true;
     }
 
-    public void RecieveChat(string text, ChatType type)
+    public void ReceiveChat(string text, ChatType type)
     {
         if (Filtered(type)) return;
 

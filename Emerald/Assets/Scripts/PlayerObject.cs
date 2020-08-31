@@ -19,7 +19,8 @@ public class PlayerObject : MonoBehaviour
     [HideInInspector]
     public float TargetDistance;
 
-
+    [HideInInspector]
+    public uint ObjectID;
     [HideInInspector]
     public MirClass Class;
     [HideInInspector]

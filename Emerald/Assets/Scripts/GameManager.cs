@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
         UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
         
         User.Player = UserGameObject.GetComponent<PlayerObject>();
+        User.Player.ObjectID = p.ObjectID;
         User.Player.name = p.Name;
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
         }
 
         player = Instantiate(WarriorModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<PlayerObject>();
+        player.ObjectID = p.ObjectID;
         player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         player.Direction = p.Direction;
         player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
@@ -141,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     public void Chat(S.Chat p)
     {
-        GameScene.ChatController.RecieveChat(p.Message, p.Type);
+        GameScene.ChatController.ReceiveChat(p.Message, p.Type);
     }
 
     public void ObjectChat(S.ObjectChat p)
@@ -149,7 +151,7 @@ public class GameManager : MonoBehaviour
         if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
         {
             //player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
-            GameScene.ChatController.RecieveChat(p.Text, p.Type);
+            GameScene.ChatController.ReceiveChat(p.Text, p.Type);
         }
     }
 
