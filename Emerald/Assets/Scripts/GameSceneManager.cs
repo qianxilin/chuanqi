@@ -109,6 +109,15 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    public void GainedItem(S.GainedItem p)
+    {
+        GameManager.Bind(p.Item);
+        GameManager.AddItem(p.Item);
+        //User.RefreshStats();
+
+        ChatController.ReceiveChat(string.Format(GameLanguage.YouGained, p.Item.FriendlyName), ChatType.System);
+    }
+
     public void MoveItem(S.MoveItem p)
     {
         MirItemCell toCell, fromCell;

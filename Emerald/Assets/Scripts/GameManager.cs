@@ -217,6 +217,61 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void AddItem(UserItem item)
+    {
+        if (item.Info.StackSize > 1) //Stackable
+        {
+            for (int i = 0; i < User.Inventory.Length; i++)
+            {
+                UserItem temp = User.Inventory[i];
+                if (temp == null || item.Info != temp.Info || temp.Count >= temp.Info.StackSize) continue;
+
+                if (item.Count + temp.Count <= temp.Info.StackSize)
+                {
+                    temp.Count += item.Count;
+                    return;
+                }
+                item.Count -= temp.Info.StackSize - temp.Count;
+                temp.Count = temp.Info.StackSize;
+            }
+        }
+
+        if (item.Info.Type == ItemType.Potion || item.Info.Type == ItemType.Scroll || (item.Info.Type == ItemType.Script && item.Info.Effect == 1))
+        {
+            for (int i = 0; i < User.BeltIdx - 2; i++)
+            {
+                if (User.Inventory[i] != null) continue;
+                User.Inventory[i] = item;
+                return;
+            }
+        }
+        else if (item.Info.Type == ItemType.Amulet)
+        {
+            for (int i = 4; i < User.BeltIdx; i++)
+            {
+                if (User.Inventory[i] != null) continue;
+                User.Inventory[i] = item;
+                return;
+            }
+        }
+        else
+        {
+            for (int i = User.BeltIdx; i < User.Inventory.Length; i++)
+            {
+                if (User.Inventory[i] != null) continue;
+                User.Inventory[i] = item;
+                return;
+            }
+        }
+
+        for (int i = 0; i < User.Inventory.Length; i++)
+        {
+            if (User.Inventory[i] != null) continue;
+            User.Inventory[i] = item;
+            return;
+        }
+    }
+
     public static void Bind(UserItem item)
     {
         for (int i = 0; i < ItemInfoList.Count; i++)
