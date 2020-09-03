@@ -12,7 +12,6 @@ public class ChatMessage : MonoBehaviour
 {
     public ChatMessageBody Info;
 
-    public Sprite[] ChannelImages = new Sprite[9];
     public TMP_Text TextBox;
     public Image ChannelImage;
 
@@ -22,6 +21,6 @@ public class ChatMessage : MonoBehaviour
     void Start()
     {
         TextBox.text = EmptySpace + Info.text;
-        ChannelImage.sprite = ChannelImages[(int)Info.type];
+        ChannelImage.sprite = Resources.Load<Sprite>($"UI/ChatIcons/{(int)Info.type}");
     }
 }
