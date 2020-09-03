@@ -231,6 +231,30 @@ public class GameSceneManager : MonoBehaviour
         //User.RefreshStats();
     }
 
+    public void UseItem(S.UseItem p)
+    {
+        MirItemCell cell = GetCell(Inventory.Cells, p.UniqueID) ?? GetCell(BeltCells, p.UniqueID);
+
+        if (cell == null) return;
+
+        cell.Locked = false;
+
+        if (!p.Success) return;
+        if (cell.Item.Count > 1) cell.Item.Count--;
+        else cell.Item = null;
+        //User.RefreshStats();
+    }
+
+    public void NewMagic(S.NewMagic p)
+    {
+        ClientMagic magic = p.Magic;
+
+        User.Magics.Add(magic);
+        //User.RefreshStats();
+        //foreach (SkillBarDialog Bar in SkillBarDialogs)
+        //    Bar.Update();
+    }
+
     public void UpdateCharacterIcon()
     {
         CharacterIcon.sprite = CharacterIcons[(int)GameManager.User.Player.Class * 2 + (int)GameManager.User.Player.Gender];

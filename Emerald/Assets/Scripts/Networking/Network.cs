@@ -345,6 +345,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.RemoveItem:
                     RemoveItem((S.RemoveItem)p);
                     break;
+                case (short)ServerPacketIds.UseItem:
+                    UseItem((S.UseItem)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -599,6 +602,14 @@ namespace EmeraldNetwork
         public static void RemoveItem(S.RemoveItem p)
         {
             GameManager.GameScene.RemoveItem(p);
+        }
+        public static void UseItem(S.UseItem p)
+        {
+            GameManager.GameScene.UseItem(p);
+        }
+        public static void NewMagic(S.NewMagic p)
+        {
+            GameManager.GameScene.NewMagic(p);
         }
 
         public static void Enqueue(Packet p)

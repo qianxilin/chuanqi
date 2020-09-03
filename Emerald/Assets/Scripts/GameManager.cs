@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
 
         User.Inventory = p.Inventory;
         User.Equipment = p.Equipment;
+        User.Magics = p.Magics;
 
         User.BindAllItems();
 
