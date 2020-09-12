@@ -11,7 +11,7 @@ public class LoginManager : MonoBehaviour
     //Manager
     public GameObject GameManagement;
     //Animations
-    public Animator LeftDoor, RightDoor, Camera, DoorGlow;
+    public Animator LeftDoor, RightDoor, Camera;
     public AudioSource DoorOpenSound;
     public ParticleSystem DoorFX;
     //Connection
@@ -55,7 +55,6 @@ public class LoginManager : MonoBehaviour
         LeftDoor.SetBool("openGate", false);
         RightDoor.SetBool("openGate", false);
         Camera.SetBool("openGate", false);
-        DoorGlow.SetBool("openGate", false);
         DoorFX.Stop();
         LoginBox.SetActive(false);
         RegisterBox.SetActive(false);
@@ -218,7 +217,6 @@ public class LoginManager : MonoBehaviour
         LeftDoor.SetBool("openGate", true);
         RightDoor.SetBool("openGate", true);
         Camera.SetBool("openGate", true);
-        DoorGlow.SetBool("openGate", true);
     }
 
     public void ExitButton_Click()

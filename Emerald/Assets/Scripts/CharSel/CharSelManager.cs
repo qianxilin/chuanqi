@@ -59,6 +59,7 @@ public class CharSelManager : MonoBehaviour
         loginCamera.GetComponent<CameraFade>().Reset();
         loginCamera.GetComponent<CameraFade>().CurrentCurve = loginCamera.GetComponent<CameraFade>().FadeInCurve;
         audioSource.Play();
+        Camera.main.fieldOfView = 50;
         SelectCharacterBox.SetActive(true);
         LogOutButton.gameObject.SetActive(true);
         GameManager.gameStage = GameStage.Select;
