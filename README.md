@@ -1,5 +1,5 @@
 # Emerald
-#IMPORTANT Do not start Unity until the below steps are complete
+#IMPORTANT Do not start Unity until Steps 1 & 2 are complete
 
 1. Pull latest repo updates
 2. Run AssetsPatcher.exe in Assets/_Unreal_Assets/ - wait for all files to download
