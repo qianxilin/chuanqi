@@ -144,7 +144,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SplitWaveSpeed: -0.5
-    - _SpliwaveYOffset: 0.05
+    - _SpliwaveYOffset: -0.06
     - _SrcBlend: 1
     - _TransAmbient: 0.2
     - _TransDirect: 1

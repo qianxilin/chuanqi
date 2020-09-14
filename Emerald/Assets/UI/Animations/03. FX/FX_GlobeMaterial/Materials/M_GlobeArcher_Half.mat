@@ -131,7 +131,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SplitWaveSpeed: 0.3
-    - _SpliwaveYOffset: 0
+    - _SpliwaveYOffset: -0.06
     - _SrcBlend: 1
     - _UVSec: 0
     - _UseD3Algorithm: 0
