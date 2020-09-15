@@ -111,10 +111,10 @@ public class CharSelManager : MonoBehaviour
                 SelectInfo info = characters[i];
                 CreateButtons[i].gameObject.SetActive(false);
                 CharacterButtons[i].gameObject.SetActive(true);
-                CharacterButtons[i].NeutralImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
-                CharacterButtons[i].HoverImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_2");
-                CharacterButtons[i].DownImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
-                CharacterButtons[i].SelectImage = Resources.Load<Sprite>($"UI/CharSel/{(byte)info.Class}_{(byte)info.Gender}_3");
+                CharacterButtons[i].NeutralImage = Resources.Load<Sprite>($"CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
+                CharacterButtons[i].HoverImage = Resources.Load<Sprite>($"CharSel/{(byte)info.Class}_{(byte)info.Gender}_2");
+                CharacterButtons[i].DownImage = Resources.Load<Sprite>($"CharSel/{(byte)info.Class}_{(byte)info.Gender}_1");
+                CharacterButtons[i].SelectImage = Resources.Load<Sprite>($"CharSel/{(byte)info.Class}_{(byte)info.Gender}_3");
                 CharacterButtons[i].gameObject.transform.Find("Username").GetComponent<TextMeshProUGUI>().text = info.Name;
                 CharacterButtons[i].gameObject.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = $"Level {info.Level}";
                 CharacterButtons[i].gameObject.transform.Find("Class").GetComponent<TextMeshProUGUI>().text = info.Class.ToString();

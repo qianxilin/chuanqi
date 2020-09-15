@@ -150,10 +150,10 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         switch (GridType)
         {
             case MirGridType.Equipment:
-                ItemImage.sprite = Resources.Load<Sprite>($"UI/StateItems/{Item.Info.Image}");
+                ItemImage.sprite = Resources.Load<Sprite>($"StateItems/{Item.Info.Image}");
                 break;
             default:
-                ItemImage.sprite = Resources.Load<Sprite>($"UI/Items/{Item.Info.Image}");
+                ItemImage.sprite = Resources.Load<Sprite>($"Items/{Item.Info.Image}");
                 break;
         }        
     }

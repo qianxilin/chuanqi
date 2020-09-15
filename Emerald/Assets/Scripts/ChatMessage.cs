@@ -21,6 +21,6 @@ public class ChatMessage : MonoBehaviour
     void Start()
     {
         TextBox.text = EmptySpace + Info.text;
-        ChannelImage.sprite = Resources.Load<Sprite>($"UI/ChatIcons/{(int)Info.type}");
+        ChannelImage.sprite = Resources.Load<Sprite>($"ChatIcons/{(int)Info.type}");
     }
 }

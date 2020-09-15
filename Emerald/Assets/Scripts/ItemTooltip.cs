@@ -97,7 +97,7 @@ public class ItemTooltip : MonoBehaviour
 
         DescriptionTextBox.text = item.Info.ToolTip;
         BottomTextBox.text = $"Durability: {item.CurrentDura}/{item.MaxDura}";
-        IconImage.sprite = Resources.Load<Sprite>($"UI/Items/{item.Info.Image}");
+        IconImage.sprite = Resources.Load<Sprite>($"Items/{item.Info.Image}");
 }
 
     public void Show()

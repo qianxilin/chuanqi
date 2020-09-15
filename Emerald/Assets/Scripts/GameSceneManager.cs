@@ -64,7 +64,7 @@ public class GameSceneManager : MonoBehaviour
         {
             SelectedItemImage.gameObject.SetActive(true);
             SelectedItemImage.transform.position = Input.mousePosition;
-            SelectedItemImage.sprite = Resources.Load<Sprite>($"UI/Items/{SelectedCell.Item.Info.Image}");
+            SelectedItemImage.sprite = Resources.Load<Sprite>($"Items/{SelectedCell.Item.Info.Image}");
         }
     }
 
