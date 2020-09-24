@@ -89,6 +89,7 @@ Emerald/Assets/_Unreal_Assets/08. UI/
 Emerald/Assets/_Unreal_Assets/09. Avatar/
 Emerald/Assets/_Unreal_Assets/10. Maps/
 Emerald/Assets/_Unreal_Assets/11. External/
+Emerald/Assets/_Unreal_Assets/12. Scripts/
 Emerald/Assets/_Unreal_Assets/_Tests/
 
 Emerald/Assets/_Unreal_Assets/01. Scene.meta
@@ -101,6 +102,7 @@ Emerald/Assets/_Unreal_Assets/08. UI.meta
 Emerald/Assets/_Unreal_Assets/09. Avatar.meta
 Emerald/Assets/_Unreal_Assets/10. Maps.meta
 Emerald/Assets/_Unreal_Assets/11. External.meta
+Emerald/Assets/_Unreal_Assets/12. Scripts.meta
 Emerald/Assets/_Unreal_Assets/_Tests.meta
 
 
@@ -1478,3 +1480,4 @@ Emerald/Assets/_Unreal_Assets/Error.txt
 Emerald/Assets/_Unreal_Assets/AssetsPatcher.exe.config.meta
 Emerald/Assets/_Unreal_Assets/AssetsPatcher.exe.meta
 Emerald/Assets/_Unreal_Assets/Mir2Test.ini.meta
+Emerald/Assets/_Unreal_Assets/Error.txt.meta
