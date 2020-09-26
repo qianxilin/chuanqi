@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Login.unity
-    guid: d85b3e8ca8c86fb469b7d62648d883f1
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 2594823f08c246743950dae427d103a0
   - enabled: 1
     path: Assets/Scenes/Shop.unity
     guid: 8d4f577bc9c8b87459717ed0e1c0d0ad
+  - enabled: 1
+    path: Assets/_Unreal_Assets/10. Maps/MirPb03/MirPb03.unity
+    guid: 6295f1d206c7c7f43a359bde4ac0c968
   m_configObjects: {}
