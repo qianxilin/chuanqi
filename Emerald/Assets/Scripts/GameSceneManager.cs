@@ -76,6 +76,7 @@ public class GameSceneManager : MonoBehaviour
     void Start()
     {
         ScrollBar.size = 0.4f;
+        Network.Enqueue(new C.RequestMapInformation { });
     }
 
     void Update()

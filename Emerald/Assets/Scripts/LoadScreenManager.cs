@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class LoadScreenManager : MonoBehaviour
 {
-    [SerializeField]
-    private Slider slider;
+    //[SerializeField]
+    public Slider slider;
 
     private Canvas canvas;
 

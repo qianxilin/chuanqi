@@ -212,6 +212,20 @@ namespace ClientPackets
             writer.Write(CharacterIndex);
         }
     }
+    public sealed class RequestMapInformation : Packet
+    {
+        public override short Index
+        {
+            get { return (short)ClientPacketIds.RequestMapInformation; }
+        }
+
+        protected override void ReadPacket(BinaryReader reader)
+        {
+        }
+        protected override void WritePacket(BinaryWriter writer)
+        {
+        }
+    }
     public sealed class MapLoaded : Packet
     {
         public override short Index

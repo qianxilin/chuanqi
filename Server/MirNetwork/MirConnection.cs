@@ -259,6 +259,9 @@ namespace Server.MirNetwork
                 case (short)ClientPacketIds.StartGame:
                     StartGame((C.StartGame) p);
                     break;
+                case (short)ClientPacketIds.RequestMapInformation:
+                    RequestMapInformation((C.RequestMapInformation)p);
+                    break;
                 case (short)ClientPacketIds.MapLoaded:
                     MapLoaded((C.MapLoaded)p);
                     break;
@@ -867,6 +870,12 @@ namespace Server.MirNetwork
 
             Player = new PlayerObject(info, this);
             Player.StartGame();
+        }
+
+        private void RequestMapInformation(C.RequestMapInformation p)
+        {
+            if (Stage == GameStage.Game)
+                Player.GetMapInfo();
         }
 
         private void MapLoaded(C.MapLoaded p)

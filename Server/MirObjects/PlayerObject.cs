@@ -2027,7 +2027,7 @@ namespace Server.MirObjects
 
             Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
             Connection.Stage = GameStage.Game;
-            GetMapInfo();
+            
 
 
             /*StartGameSuccess();
@@ -2437,7 +2437,7 @@ namespace Server.MirObjects
 
             Enqueue(packet);
         }
-        private void GetMapInfo()
+        public void GetMapInfo()
         {
             Enqueue(new S.MapInformation
             {
