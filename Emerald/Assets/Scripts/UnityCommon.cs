@@ -44,21 +44,21 @@ public static class ClientFunctions
         switch (direction)
         {
             case MirDirection.UpRight:
-                return Quaternion.AngleAxis(45, Vector3.up);
+                return Quaternion.AngleAxis(0, Vector3.up);
             case MirDirection.Right:
-                return Quaternion.AngleAxis(90, Vector3.up);
+                return Quaternion.AngleAxis(45, Vector3.up);
             case MirDirection.DownRight:
-                return Quaternion.AngleAxis(135, Vector3.up);
+                return Quaternion.AngleAxis(90, Vector3.up);
             case MirDirection.Down:
-                return Quaternion.AngleAxis(180, Vector3.up);
+                return Quaternion.AngleAxis(135, Vector3.up);
             case MirDirection.DownLeft:
-                return Quaternion.AngleAxis(225, Vector3.up);
+                return Quaternion.AngleAxis(180, Vector3.up);
             case MirDirection.Left:
-                return Quaternion.AngleAxis(270, Vector3.up);
+                return Quaternion.AngleAxis(225, Vector3.up);
             case MirDirection.UpLeft:
-                return Quaternion.AngleAxis(315, Vector3.up);
+                return Quaternion.AngleAxis(270, Vector3.up);
             default:
-                return new Quaternion(0, 0, 0, 0);
+                return Quaternion.AngleAxis(315, Vector3.up);
         }
     }    
 }
