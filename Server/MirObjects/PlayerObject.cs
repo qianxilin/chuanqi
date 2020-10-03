@@ -390,7 +390,11 @@ namespace Server.MirObjects
         }
         public void StopGame(byte reason)
         {
-            if (Node == null) return;
+            if (Node == null)
+            {
+                CleanUp();
+                return;
+            }
 
             for (int i = 0; i < Pets.Count; i++)
             {
@@ -2017,12 +2021,14 @@ namespace Server.MirObjects
                 CurrentMapIndex = BindMapIndex;
                 CurrentLocation = BindLocation;
             }
-            temp.AddObject(this);
+            
             CurrentMap = temp;
-            Envir.Players.Add(this);
+            
 
             Enqueue(new S.StartGame { Result = 4, Resolution = Settings.AllowedResolution });
+            Connection.Stage = GameStage.Game;
             GetMapInfo();
+
 
             /*StartGameSuccess();
 
@@ -2038,9 +2044,11 @@ namespace Server.MirObjects
         public void MapLoaded()
         {
         }
-        private void StartGameSuccess()
+        public void StartGameSuccess()
         {
-            Connection.Stage = GameStage.Game;
+            CurrentMap.AddObject(this);
+            Envir.Players.Add(this);            
+
             for (int i = 0; i < Info.Magics.Count; i++)
             {
                 if (Info.Magics[i].CastTime == 0) continue;
@@ -9999,7 +10007,7 @@ namespace Server.MirObjects
                     return MyGuild == null || MyGuild != attacker.MyGuild;
                 case AttackMode.EnemyGuild:
                     return MyGuild != null && MyGuild.IsEnemy(attacker.MyGuild);
-                case AttackMode.Peace:
+                case AttackMode.Peaceful:
                     return false;
                 case AttackMode.RedBrown:
                     return PKPoints >= 200 || Envir.Time < BrownTime;
@@ -10041,7 +10049,7 @@ namespace Server.MirObjects
                     return true;
                 case AttackMode.EnemyGuild:
                     return false;
-                case AttackMode.Peace:
+                case AttackMode.Peaceful:
                     return false;
                 case AttackMode.RedBrown:
                     return PKPoints >= 200 || Envir.Time < BrownTime;

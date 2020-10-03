@@ -871,7 +871,7 @@ namespace Server.MirNetwork
 
         private void MapLoaded(C.MapLoaded p)
         {
-            if (Stage == GameStage.Select)
+            if (Stage == GameStage.Game)
                 Player.StartGameSuccess();
         }
 

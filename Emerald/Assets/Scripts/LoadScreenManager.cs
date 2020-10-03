@@ -10,7 +10,6 @@ public class LoadScreenManager : MonoBehaviour
     [SerializeField]
     private Slider slider;
 
-    private AsyncOperation operation;
     private Canvas canvas;
 
     void Awake()
@@ -21,30 +20,27 @@ public class LoadScreenManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        UpdateProgressUI(0);
+        slider.value = 0;
         canvas.gameObject.SetActive(true);
 
         StartCoroutine(BeginLoad(sceneName));
     }
 
     private IEnumerator BeginLoad(string sceneName)
-    {
-        operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    {       
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
         while (!operation.isDone)
         {
-            UpdateProgressUI(operation.progress);
+            Network.Process();
+            float progress = Mathf.Clamp01(operation.progress / .9f);            
+            slider.value = progress;
             yield return null;
         }
 
-        UpdateProgressUI(operation.progress);
+        slider.value = operation.progress;
         operation = null;
         canvas.gameObject.SetActive(false);
         Network.Enqueue(new C.MapLoaded { });
     }    
-
-    private void UpdateProgressUI(float progress)
-    {
-        slider.value = progress;
-    }
 }

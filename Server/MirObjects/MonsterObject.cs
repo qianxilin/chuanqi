@@ -1817,7 +1817,7 @@ namespace Server.MirObjects
             if (attacker == null || attacker.Node == null) return false;
             if (Dead) return false;
             if (Master == null) return true;
-            if (attacker.AMode == AttackMode.Peace) return false;
+            if (attacker.AMode == AttackMode.Peaceful) return false;
             if (Master == attacker) return attacker.AMode == AttackMode.All;
             if (Master.Race == ObjectType.Player && (attacker.InSafeZone || InSafeZone)) return false;
 
@@ -1885,7 +1885,7 @@ namespace Server.MirObjects
                     case AttackMode.RedBrown:
                         if (attacker.Master.PKPoints < 200 || Envir.Time > attacker.Master.BrownTime) return false;
                         break;
-                    case AttackMode.Peace:
+                    case AttackMode.Peaceful:
                         return false;
                 }
 
