@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
     static MirDirection MouseDirection()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
+        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 50);
 
         Vector2 v2 = (mousePosition - middle);
         float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
