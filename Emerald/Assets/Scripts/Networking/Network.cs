@@ -321,6 +321,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectMonster:
                     ObjectMonster((S.ObjectMonster)p);
                     break;
+                case (short)ServerPacketIds.ObjectRemove:
+                    ObjectRemove((S.ObjectRemove)p);
+                    break;
                 case (short)ServerPacketIds.ObjectWalk:
                     ObjectWalk((S.ObjectWalk)p);
                     break;
@@ -573,6 +576,10 @@ namespace EmeraldNetwork
         public static void ObjectMonster(S.ObjectMonster p)
         {
             gameManager.ObjectMonster(p);
+        }
+        public static void ObjectRemove(S.ObjectRemove p)
+        {
+            gameManager.ObjectRemove(p);
         }
         public static void ObjectWalk(S.ObjectWalk p)
         {

@@ -159,6 +159,14 @@ public class GameManager : MonoBehaviour
         ObjectList.Add(p.ObjectID, monster);
     }
 
+    public void ObjectRemove(S.ObjectRemove p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            ob.gameObject.SetActive(false);
+        }
+    }
+
     public void ObjectWalk(S.ObjectWalk p)
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
