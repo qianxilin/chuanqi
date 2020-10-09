@@ -5,12 +5,21 @@ using System.IO;
 using Network = EmeraldNetwork.Network;
 using S = ServerPackets;
 
+public class QueuedAction
+{
+    public MirAction Action;
+    public Vector2 Location;
+    public MirDirection Direction;
+    public List<object> Params;
+}
+
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> WarriorModels;
+    public List<GameObject> MonsterModels;
 
     private GameObject UserGameObject;
-    private Dictionary<uint, PlayerObject> Players = new Dictionary<uint, PlayerObject>();
+    private Dictionary<uint, MapObject> ObjectList = new Dictionary<uint, MapObject>();
     [HideInInspector]
     public static List<ItemInfo> ItemInfoList = new List<ItemInfo>();
 
@@ -78,7 +87,6 @@ public class GameManager : MonoBehaviour
 
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
-
         User.Player.Direction = p.Direction;
         User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
 
@@ -88,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         User.BindAllItems();
 
-        Players.Add(p.ObjectID, User.Player);
+        ObjectList.Add(p.ObjectID, User.Player);
         User.Player.Camera.SetActive(true);
 
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
@@ -106,9 +114,11 @@ public class GameManager : MonoBehaviour
 
     public void ObjectPlayer(S.ObjectPlayer p)
     {
+        MapObject ob;
         PlayerObject player;
-        if (Players.TryGetValue(p.ObjectID, out player))
+        if (ObjectList.TryGetValue(p.ObjectID, out ob))
         {
+            player = (PlayerObject)ob;
             player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
             player.Direction = p.Direction;
             player.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
@@ -122,22 +132,46 @@ public class GameManager : MonoBehaviour
         player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         player.Direction = p.Direction;
         player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
-        Players.Add(p.ObjectID, player);        
+        ObjectList.Add(p.ObjectID, player);        
+    }
+
+    public void ObjectMonster(S.ObjectMonster p)
+    {
+        MapObject ob;
+        MonsterObject monster;
+
+        if (ObjectList.TryGetValue(p.ObjectID, out ob))
+        {
+            monster = (MonsterObject)ob;
+            monster.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+            monster.Direction = p.Direction;
+            monster.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
+            monster.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+            monster.gameObject.SetActive(true);
+            return;
+        }
+
+        monster = Instantiate(MonsterModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<MonsterObject>();
+        monster.ObjectID = p.ObjectID;
+        monster.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        monster.Direction = p.Direction;
+        monster.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+        ObjectList.Add(p.ObjectID, monster);
     }
 
     public void ObjectWalk(S.ObjectWalk p)
     {
-        if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
-        {
-            player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {            
+            ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
         }
     }
 
     public void ObjectRun(S.ObjectRun p)
     {
-        if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
-            player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+            ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
         }
     }
 
@@ -148,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     public void ObjectChat(S.ObjectChat p)
     {
-        if (Players.TryGetValue(p.ObjectID, out PlayerObject player))
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
             //player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
             GameScene.ChatController.ReceiveChat(p.Text, p.Type);
@@ -306,5 +340,5 @@ public class GameManager : MonoBehaviour
     {
         public string IPAddress = "127.0.0.1";
         public int Port = 7000;
-    }
+    }    
 }
