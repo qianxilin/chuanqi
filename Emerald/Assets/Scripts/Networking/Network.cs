@@ -333,6 +333,12 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectAttack:
                     ObjectAttack((S.ObjectAttack)p);
                     break;
+                case (short)ServerPacketIds.ObjectStruck:
+                    ObjectStruck((S.ObjectStruck)p);
+                    break;
+                case (short)ServerPacketIds.ObjectDied:
+                    ObjectDied((S.ObjectDied)p);
+                    break;
                 case (short)ServerPacketIds.Chat:
                     Chat((S.Chat)p);
                     break;
@@ -595,6 +601,14 @@ namespace EmeraldNetwork
         public static void ObjectAttack(S.ObjectAttack p)
         {
             gameManager.ObjectAttack(p);
+        }
+        public static void ObjectStruck(S.ObjectStruck p)
+        {
+            gameManager.ObjectStruck(p);
+        }
+        public static void ObjectDied(S.ObjectDied p)
+        {
+            gameManager.ObjectDied(p);
         }
         public static void Chat(S.Chat p)
         {

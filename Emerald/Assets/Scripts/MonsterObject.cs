@@ -6,11 +6,16 @@ using C = ClientPackets;
 
 public class MonsterObject : MapObject
 {
+    public bool Dead;
+
     public override void SetAction()
     {
         if (ActionFeed.Count == 0)
         {
-            CurrentAction = MirAction.Standing;
+            if (Dead)
+                CurrentAction = MirAction.Dead;
+            else
+                CurrentAction = MirAction.Standing;
         }
         else
         {
@@ -37,6 +42,9 @@ public class MonsterObject : MapObject
                     StartPosition = gameObject.transform.position;
                     TargetDistance = Vector3.Distance(transform.position, targetpos);
                     IsMoving = true;                    
+                    break;
+                case MirAction.Die:
+                    Dead = true;
                     break;
             }
 

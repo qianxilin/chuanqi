@@ -156,6 +156,13 @@ public class GameManager : MonoBehaviour
         monster.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         monster.Direction = p.Direction;
         monster.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+
+        if (p.Dead)
+        {
+            monster.Dead = true;
+            monster.CurrentAction = MirAction.Dead;
+        }
+
         ObjectList.Add(p.ObjectID, monster);
     }
 
@@ -188,6 +195,22 @@ public class GameManager : MonoBehaviour
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
             ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Attack, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+        }
+    }
+
+    public void ObjectStruck(S.ObjectStruck p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Struck, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+        }
+    }
+
+    public void ObjectDied(S.ObjectDied p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Die, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
         }
     }
 
