@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '          New Text'
+  m_text: '         New Text'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e697a763cfb3a0a4b99b07afade02f09, type: 2}
   m_sharedMaterial: {fileID: 6693065328617318361, guid: e697a763cfb3a0a4b99b07afade02f09,
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283464377
-  m_fontColor: {r: 0.7264151, g: 0.47951135, b: 0.31181026, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.4233779, y: 0, z: -12.234163, w: 0}
+  m_margin: {x: 5.0097427, y: 0, z: -12.234163, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -148,16 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42879639916893419a504e6e4b8479d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChannelImages:
-  - {fileID: 21300000, guid: 222d7518ef6db214bb43cd269f6bf584, type: 3}
-  - {fileID: 21300000, guid: 50ba8ed4611f34a45adcbd01ef14ac26, type: 3}
-  - {fileID: 21300000, guid: 4c208ca7876d3ed459344559bfcf77ad, type: 3}
-  - {fileID: 21300000, guid: 4c208ca7876d3ed459344559bfcf77ad, type: 3}
-  - {fileID: 21300000, guid: 1577ce0b6fd489b43b3be03b14d0ad4f, type: 3}
-  - {fileID: 21300000, guid: 9bfa51b44028329409fa5ed57b4cde71, type: 3}
-  - {fileID: 21300000, guid: 1c6a983562cd3434fb932788b5fdd750, type: 3}
-  - {fileID: 21300000, guid: 1c6a983562cd3434fb932788b5fdd750, type: 3}
-  - {fileID: 21300000, guid: 37e2b1c6593150e4dafbe949987546c0, type: 3}
   TextBox: {fileID: 8769053549254273709}
   ChannelImage: {fileID: 5071174526034202958}
 --- !u!1 &7994482362341551275
