@@ -183,6 +183,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ObjectAttack(S.ObjectAttack p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Attack, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+        }
+    }
+
     public void Chat(S.Chat p)
     {
         GameScene.ChatController.ReceiveChat(p.Message, p.Type);

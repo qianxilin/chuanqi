@@ -26,7 +26,7 @@ public class MapObject : MonoBehaviour
     public MirDirection Direction;
     [HideInInspector]
     public List<QueuedAction> ActionFeed = new List<QueuedAction>();
-    [HideInInspector]
+   // [HideInInspector]
     public MirAction CurrentAction;
     [HideInInspector]
     public int ActionType;

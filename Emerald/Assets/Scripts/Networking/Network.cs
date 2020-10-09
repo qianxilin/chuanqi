@@ -330,6 +330,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectRun:
                     ObjectRun((S.ObjectRun)p);
                     break;
+                case (short)ServerPacketIds.ObjectAttack:
+                    ObjectAttack((S.ObjectAttack)p);
+                    break;
                 case (short)ServerPacketIds.Chat:
                     Chat((S.Chat)p);
                     break;
@@ -588,6 +591,10 @@ namespace EmeraldNetwork
         public static void ObjectRun(S.ObjectRun p)
         {
             gameManager.ObjectRun(p);
+        }
+        public static void ObjectAttack(S.ObjectAttack p)
+        {
+            gameManager.ObjectAttack(p);
         }
         public static void Chat(S.Chat p)
         {
