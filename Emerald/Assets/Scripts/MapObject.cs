@@ -1,14 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
 
 public class MapObject : MonoBehaviour
 {
+    public TMP_Text NameLabel;
     public GameObject Model;
     [Range(0f, 10f)]
     public float MoveSpeed;
+
+    private string _name;
+    public string Name
+    {
+        get { return _name; }
+        set
+        {
+            _name = value;
+            SetNameLabel();
+        }
+    }
+
     [HideInInspector]
     public bool IsMoving;
     //[HideInInspector]
@@ -61,5 +75,10 @@ public class MapObject : MonoBehaviour
 
     public virtual void SetAction()
     {
+    }
+
+    public void SetNameLabel()
+    {
+        NameLabel.text = Name;
     }
 }

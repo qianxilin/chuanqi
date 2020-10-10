@@ -5,8 +5,13 @@ using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
 
 public class MonsterObject : MapObject
-{
-    public bool Dead;
+{  
+    [HideInInspector]
+    public bool Dead;    
+
+    public AudioClip AttackSound;
+    public AudioClip StruckSound;
+    public AudioClip DeathSound;
 
     public override void SetAction()
     {
@@ -43,7 +48,14 @@ public class MonsterObject : MapObject
                     TargetDistance = Vector3.Distance(transform.position, targetpos);
                     IsMoving = true;                    
                     break;
+                case MirAction.Attack:
+                    AudioSource.PlayClipAtPoint(AttackSound, gameObject.transform.position);
+                    break;
+                case MirAction.Struck:
+                    AudioSource.PlayClipAtPoint(StruckSound, gameObject.transform.position);
+                    break;
                 case MirAction.Die:
+                    AudioSource.PlayClipAtPoint(DeathSound, gameObject.transform.position);
                     Dead = true;
                     break;
             }

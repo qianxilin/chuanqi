@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
     {
         User.gameObject.SetActive(true);
         UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
+        UserGameObject.GetComponentInChildren<AudioListener>().enabled = true;
         
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.ObjectID = p.ObjectID;
@@ -143,6 +144,7 @@ public class GameManager : MonoBehaviour
         if (ObjectList.TryGetValue(p.ObjectID, out ob))
         {
             monster = (MonsterObject)ob;
+            monster.Name = p.Name;
             monster.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
             monster.Direction = p.Direction;
             monster.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
@@ -152,6 +154,7 @@ public class GameManager : MonoBehaviour
         }
 
         monster = Instantiate(MonsterModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<MonsterObject>();
+        monster.Name = p.Name;
         monster.ObjectID = p.ObjectID;
         monster.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         monster.Direction = p.Direction;
