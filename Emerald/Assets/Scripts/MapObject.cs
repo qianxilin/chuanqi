@@ -7,6 +7,10 @@ using C = ClientPackets;
 
 public class MapObject : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject NameLabelObject;
+    public Transform NameLocation;
+    [HideInInspector]
     public TMP_Text NameLabel;
     public GameObject Model;
     [Range(0f, 10f)]
@@ -49,6 +53,7 @@ public class MapObject : MonoBehaviour
     {
         CurrentAction = MirAction.Standing;
         GetComponentInChildren<Animator>().SetInteger("StateAction", 0);
+        NameLabel = Instantiate(NameLabelObject, NameLocation.position, Quaternion.identity, gameObject.transform).GetComponent<TMP_Text>();
     }
 
     void Update()

@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70cac30a22db544f90877e19f566a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameLabel: {fileID: 0}
   Model: {fileID: 8447126569704725765}
   MoveSpeed: 1.2
   IsMoving: 0
