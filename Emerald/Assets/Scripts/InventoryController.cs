@@ -19,7 +19,7 @@ public class InventoryController : MonoBehaviour
             Cells[x].ItemSlot = 6 + x;
             Cells[x].GridType = MirGridType.Inventory;
             RectTransform rt = cell.GetComponent<RectTransform>();
-            rt.localPosition = new Vector3(x % 8 * 44, -(x / 8 * 44), 0);
+            rt.localPosition = new Vector3(x % 8 * 43, -(x / 8 * 43), 0);
         }
     }    
 }
