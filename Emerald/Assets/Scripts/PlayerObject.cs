@@ -7,11 +7,38 @@ using C = ClientPackets;
 
 public class PlayerObject : MapObject
 {
+    [HideInInspector]
+    public GameManager gameManager;
+
     public GameObject Camera;
     [HideInInspector]
     public MirClass Class;
     [HideInInspector]
     public MirGender Gender;
+
+    private GameObject ArmourModel;
+
+    private int armour = -1;
+    public int Armour
+    {
+        get { return armour; }
+        set
+        {
+            if (value == armour) return;
+
+            armour = value;
+
+            if (ArmourModel != null)
+                Destroy(ArmourModel);
+
+            if (value < gameManager.WarriorModels.Count)
+                ArmourModel = Instantiate(gameManager.WarriorModels[value], Model.transform);
+            else
+                ArmourModel = Instantiate(gameManager.WarriorModels[0], Model.transform);
+
+            Instantiate(gameManager.WarriorFaces[0], ArmourModel.transform.Find("Rig/Root/Bip01/Bip01-Pelvis/Bip01-Spine/Bip01-Spine1/Bip01-Neck/Bip01-Head"));
+        }
+    }
 
     public override void Start()
     {
@@ -22,7 +49,7 @@ public class PlayerObject : MapObject
 
     public override void SetAction()
     {
-        if (GameScene.QueuedAction != null)
+        if (this == GameManager.User.Player && GameScene.QueuedAction != null)
         {
             ActionFeed.Clear();
             ActionFeed.Add(GameScene.QueuedAction);
@@ -36,8 +63,7 @@ public class PlayerObject : MapObject
                 GameManager.User.WalkStep = 0;
         }
         else
-        {            
-
+        {           
             QueuedAction action = ActionFeed[0];
             ActionFeed.RemoveAt(0);
 

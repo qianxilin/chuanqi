@@ -36,4 +36,10 @@ public class UserObject : MonoBehaviour
         }
     }
 
+    public void RefreshStats()
+    {
+        if (Equipment[(int)EquipmentSlot.Armour] != null)
+            Player.Armour = Equipment[(int)EquipmentSlot.Armour].Info.Shape;
+    }
+
 }

@@ -219,7 +219,7 @@ public class GameSceneManager : MonoBehaviour
         UserItem i = fromCell.Item;
         fromCell.Item = toCell.Item;
         toCell.Item = i;
-        //User.RefreshStats();
+        User.RefreshStats();
     }
 
     public void RemoveItem(S.RemoveItem p)

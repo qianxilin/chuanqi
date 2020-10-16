@@ -15,7 +15,11 @@ public class QueuedAction
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject PlayerModel;
     public List<GameObject> WarriorModels;
+    public List<GameObject> WarriorFaces;
+    public List<GameObject> WarriorHairs;
+
     public List<GameObject> MonsterModels;
 
     private GameObject UserGameObject;
@@ -74,9 +78,9 @@ public class GameManager : MonoBehaviour
     public void UserInformation(S.UserInformation p)
     {
         User.gameObject.SetActive(true);
-        UserGameObject = Instantiate(WarriorModels[0], User.transform.position, Quaternion.identity);
-        UserGameObject.GetComponentInChildren<AudioListener>().enabled = true;
-        
+        UserGameObject = Instantiate(PlayerModel, User.transform.position, Quaternion.identity);
+        UserGameObject.GetComponentInChildren<AudioListener>().enabled = true;        
+
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.ObjectID = p.ObjectID;
         User.Player.Name = p.Name;
@@ -87,6 +91,7 @@ public class GameManager : MonoBehaviour
         GameScene.UpdateCharacterIcon();
 
         User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        User.Player.gameManager = this;
         UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
         User.Player.Direction = p.Direction;
         User.Player.Model.transform.rotation = ClientFunctions.GetRotation(User.Player.Direction);
@@ -96,6 +101,11 @@ public class GameManager : MonoBehaviour
         User.Magics = p.Magics;
 
         User.BindAllItems();
+
+        if (p.Equipment[(int)EquipmentSlot.Armour] != null && p.Equipment[(int)EquipmentSlot.Armour].Info.Shape < WarriorModels.Count)
+            User.Player.Armour = p.Equipment[(int)EquipmentSlot.Armour].Info.Shape;
+        else
+            User.Player.Armour = 0;
 
         ObjectList.Add(p.ObjectID, User.Player);
         User.Player.Camera.SetActive(true);
@@ -117,6 +127,8 @@ public class GameManager : MonoBehaviour
     {
         MapObject ob;
         PlayerObject player;
+        GameObject Armour = null;
+
         if (ObjectList.TryGetValue(p.ObjectID, out ob))
         {
             player = (PlayerObject)ob;
@@ -124,16 +136,19 @@ public class GameManager : MonoBehaviour
             player.Direction = p.Direction;
             player.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
             player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+            player.Armour = p.Armour;
             player.gameObject.SetActive(true);
             return;
         }
 
-        player = Instantiate(WarriorModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<PlayerObject>();
+        player = Instantiate(PlayerModel, CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<PlayerObject>();
+        player.gameManager = this;
         player.Name = p.Name;
         player.ObjectID = p.ObjectID;
         player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         player.Direction = p.Direction;
         player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+        player.Armour = p.Armour;
         ObjectList.Add(p.ObjectID, player);        
     }
 
