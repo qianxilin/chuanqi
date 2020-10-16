@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ using TMPro;
 using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
 using S = ServerPackets;
+using Image = UnityEngine.UI.Image;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -41,6 +43,12 @@ public class GameSceneManager : MonoBehaviour
     public bool PickedUpGold;
     [HideInInspector]
     public float UseItemTime;
+    [HideInInspector]
+    public MonsterObject TargetObject;
+    [HideInInspector]
+    public float NextHitTime;
+    [HideInInspector]
+    public QueuedAction QueuedAction;
 
     private MirItemCell _selectedCell;
     [HideInInspector]
@@ -102,12 +110,33 @@ public class GameSceneManager : MonoBehaviour
         {
             GameManager.CheckMouseInput();
         }
+        else
+        {
+            if (TargetObject != null && !TargetObject.Dead && TargetObject.gameObject.activeSelf && CanAttack())
+            {
+                Point self = new Point((int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y);
+                Point targ = new Point((int)TargetObject.CurrentLocation.x, (int)TargetObject.CurrentLocation.y);
+                if (Functions.InRange(self, targ, 1))
+                {
+                    NextHitTime = Time.time + 1.6f;
+                    MirDirection direction = Functions.DirectionFromPoint(self, targ);
+                    QueuedAction = new QueuedAction { Action = MirAction.Attack, Direction = direction, Location = User.Player.CurrentLocation };
+                }
+            }
+        }
 
         if (SelectedItemImage.gameObject.activeSelf)
         {
             SelectedItemImage.transform.position = Input.mousePosition;
             SelectedItemImage.transform.SetAsLastSibling();
         }
+    }
+
+    public bool CanAttack()
+    {
+        if (Time.time < NextHitTime) return false;
+
+        return true;
     }
 
     public void GainedItem(S.GainedItem p)

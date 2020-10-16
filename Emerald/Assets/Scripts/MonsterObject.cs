@@ -13,6 +13,11 @@ public class MonsterObject : MapObject
     public AudioClip StruckSound;
     public AudioClip DeathSound;
 
+    void OnMouseDown()
+    {
+        GameScene.TargetObject = this;
+    }
+
     public override void SetAction()
     {
         if (ActionFeed.Count == 0)
@@ -43,6 +48,9 @@ public class MonsterObject : MapObject
 
                     Vector2 back = ClientFunctions.Back(action.Location, Direction, steps);
                     gameObject.transform.position = GameManager.CurrentScene.Cells[(int)back.x, (int)back.y].position;
+
+                    GameManager.CurrentScene.Cells[(int)CurrentLocation.x, (int)CurrentLocation.y].RemoveObject(this);
+                    GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].AddObject(this);
 
                     StartPosition = gameObject.transform.position;
                     TargetDistance = Vector3.Distance(transform.position, targetpos);

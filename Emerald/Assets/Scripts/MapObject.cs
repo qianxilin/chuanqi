@@ -7,8 +7,12 @@ using C = ClientPackets;
 
 public class MapObject : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject NameLabelObject;
+    public GameSceneManager GameScene
+    {
+        get { return GameManager.GameScene; }
+    }
+
+    public GameObject NameLabelObject;
     public Transform NameLocation;
     [HideInInspector]
     public TMP_Text NameLabel;
@@ -16,16 +20,7 @@ public class MapObject : MonoBehaviour
     [Range(0f, 10f)]
     public float MoveSpeed;
 
-    private string _name;
-    public string Name
-    {
-        get { return _name; }
-        set
-        {
-            _name = value;
-            SetNameLabel();
-        }
-    }
+    public string Name;
 
     [HideInInspector]
     public bool IsMoving;
@@ -49,11 +44,12 @@ public class MapObject : MonoBehaviour
     [HideInInspector]
     public int ActionType;
 
-    void Start()
+    public virtual void Start()
     {
         CurrentAction = MirAction.Standing;
-        GetComponentInChildren<Animator>().SetInteger("StateAction", 0);
         NameLabel = Instantiate(NameLabelObject, NameLocation.position, Quaternion.identity, gameObject.transform).GetComponent<TMP_Text>();
+        GetComponentInChildren<Animator>().SetInteger("StateAction", 0);
+        SetNameLabel();
     }
 
     void Update()

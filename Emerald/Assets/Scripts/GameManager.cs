@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.ObjectID = p.ObjectID;
-        User.Player.name = p.Name;
+        User.Player.Name = p.Name;
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
         User.Level = p.Level;
@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
         }
 
         player = Instantiate(WarriorModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<PlayerObject>();
+        player.Name = p.Name;
         player.ObjectID = p.ObjectID;
         player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
         player.Direction = p.Direction;
@@ -150,6 +151,7 @@ public class GameManager : MonoBehaviour
             monster.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
             monster.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
             monster.gameObject.SetActive(true);
+            CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
             return;
         }
 
@@ -167,6 +169,7 @@ public class GameManager : MonoBehaviour
         }
 
         ObjectList.Add(p.ObjectID, monster);
+        CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
     }
 
     public void ObjectRemove(S.ObjectRemove p)
@@ -174,6 +177,7 @@ public class GameManager : MonoBehaviour
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
             ob.gameObject.SetActive(false);
+            CurrentScene.Cells[(int)ob.CurrentLocation.x, (int)ob.CurrentLocation.y].RemoveObject(ob);
         }
     }
 
@@ -270,7 +274,7 @@ public class GameManager : MonoBehaviour
                 MirDirection direction = MouseDirection();
                 Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);
                 if (CanWalk(newlocation))
-                    User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });
+                    GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation };
 
             }
             else if (Input.GetMouseButton(1))
@@ -280,14 +284,14 @@ public class GameManager : MonoBehaviour
                 if (User.WalkStep < 1)
                 {
                     if (CanWalk(newlocation))
-                        User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation });
+                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation };
                     User.WalkStep++;
                 }
                 else
                 {
                     Vector2 farlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 2);
                     if (CanWalk(newlocation) && CanWalk(farlocation))
-                        User.Player.ActionFeed.Add(new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation });
+                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation };
                 }
             }
         }
@@ -375,7 +379,7 @@ public class GameManager : MonoBehaviour
 
     static bool CanWalk(Vector2 location)
     {
-        return CurrentScene.Cells[(int)location.x, (int)location.y].walkable;
+        return CurrentScene.Cells[(int)location.x, (int)location.y].walkable && CurrentScene.Cells[(int)location.x, (int)location.y].CellObjects == null;
     }
 
     public class NetworkInfo

@@ -9,6 +9,23 @@ public class Cell
 {
     public bool walkable;
     public Vector3 position;
+    public List<MapObject> CellObjects;
+
+    public void AddObject(MapObject ob)
+    {
+        if (CellObjects == null) CellObjects = new List<MapObject>();
+
+        CellObjects.Insert(0, ob);
+    }
+    public void RemoveObject(MapObject ob)
+    {
+        if (ob == null)
+            return;
+
+        CellObjects.Remove(ob);
+
+        if (CellObjects.Count == 0) CellObjects = null;
+    }
 }
 
 public class MirScene : MonoBehaviour

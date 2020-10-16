@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Network = EmeraldNetwork.Network;
@@ -12,23 +13,37 @@ public class PlayerObject : MapObject
     [HideInInspector]
     public MirGender Gender;
 
+    public override void Start()
+    {
+        gameObject.GetComponentInChildren<PlayerAnimationController>().ParentObject = this;
+
+        base.Start();
+    }
+
     public override void SetAction()
     {
-        if (ActionFeed.Count == 0)
+        if (GameScene.QueuedAction != null)
         {
+            ActionFeed.Clear();
+            ActionFeed.Add(GameScene.QueuedAction);
+            GameScene.QueuedAction = null;
+        }
+
+        if (ActionFeed.Count == 0)
+        {           
             CurrentAction = MirAction.Standing;
             if (this == GameManager.User.Player)
                 GameManager.User.WalkStep = 0;
         }
         else
-        {
-            if (Time.time < GameManager.NextAction) return;
+        {            
 
             QueuedAction action = ActionFeed[0];
             ActionFeed.RemoveAt(0);
 
             CurrentAction = action.Action;
             Direction = action.Direction;
+            Model.transform.rotation = ClientFunctions.GetRotation(Direction);
 
             switch (CurrentAction)
             {
@@ -37,8 +52,7 @@ public class PlayerObject : MapObject
                     int steps = 1;
                     if (CurrentAction == MirAction.Running) steps = 2;
 
-                    Vector3 targetpos = GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].position;
-                    Model.transform.rotation = ClientFunctions.GetRotation(Direction);
+                    Vector3 targetpos = GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].position;                    
                     TargetPosition = targetpos;
 
                     if (this != GameManager.User.Player)
@@ -61,13 +75,17 @@ public class PlayerObject : MapObject
                 {
                     case MirAction.Walking:
                         Network.Enqueue(new C.Walk { Direction = action.Direction });
-                        GameManager.NextAction = Time.time + 2.5f;
+                        //GameManager.NextAction = Time.time + 2.5f;
                         GameManager.InputDelay = Time.time + 0.5f;
                         break;
                     case MirAction.Running:
                         Network.Enqueue(new C.Run { Direction = action.Direction });
-                        GameManager.NextAction = Time.time + 2.5f;
+                        //GameManager.NextAction = Time.time + 2.5f;
                         GameManager.InputDelay = Time.time + 0.5f;
+                        break;
+                    case MirAction.Attack:
+                        GetComponentInChildren<Animator>().Play("Attack", -1, normalizedTime: 0f);
+                        Network.Enqueue(new C.Attack { Direction = Direction, Spell = Spell.None });
                         break;
                 }
             }

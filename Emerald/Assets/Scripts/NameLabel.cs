@@ -23,7 +23,6 @@ public class NameLabel : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.LookAt(transform.position + _camera.transform.rotation * Vector3.forward,
-            _camera.transform.rotation * Vector3.up);
+        transform.LookAt(transform.position + _camera.transform.rotation * Vector3.forward, _camera.transform.rotation * Vector3.up);
     }
 }
