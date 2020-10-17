@@ -18,6 +18,9 @@ public class PlayerObject : MapObject
 
     private GameObject ArmourModel;
     private GameObject HeadBone;
+    private GameObject WeaponRBone;
+
+    public int Weapon;
 
     private int armour = -1;
     public int Armour
@@ -39,13 +42,24 @@ public class PlayerObject : MapObject
 
             foreach (Transform child in ArmourModel.GetComponentsInChildren<Transform>())
             {
-                if (child.CompareTag("Head_Bone"))
+                if (child.name == "Bip01-Head")
                 {
                     HeadBone = child.gameObject;
                     break;
                 }
             }
             Instantiate(gameManager.WarriorFaces[0], HeadBone.transform);
+
+            foreach (Transform child in ArmourModel.GetComponentsInChildren<Transform>())
+            {
+                if (child.name == "Weapon_R")
+                {
+                    WeaponRBone = child.gameObject;
+                    break;
+                }
+            }
+            if (Weapon > 0)
+                Instantiate(gameManager.WeaponModels[Weapon - 1], WeaponRBone.transform);
         }
     }
 

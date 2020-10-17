@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> WarriorModels;
     public List<GameObject> WarriorFaces;
     public List<GameObject> WarriorHairs;
+    public List<GameObject> WeaponModels;
 
     public List<GameObject> MonsterModels;
 
@@ -101,6 +102,11 @@ public class GameManager : MonoBehaviour
         User.Magics = p.Magics;
 
         User.BindAllItems();
+
+        if (p.Equipment[(int)EquipmentSlot.Weapon] != null && p.Equipment[(int)EquipmentSlot.Weapon].Info.Shape <= WeaponModels.Count)
+            User.Player.Weapon = p.Equipment[(int)EquipmentSlot.Weapon].Info.Shape;
+        else
+            User.Player.Weapon = 0;
 
         if (p.Equipment[(int)EquipmentSlot.Armour] != null && p.Equipment[(int)EquipmentSlot.Armour].Info.Shape < WarriorModels.Count)
             User.Player.Armour = p.Equipment[(int)EquipmentSlot.Armour].Info.Shape;
