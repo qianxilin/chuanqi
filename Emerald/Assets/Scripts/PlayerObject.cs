@@ -17,6 +17,7 @@ public class PlayerObject : MapObject
     public MirGender Gender;
 
     private GameObject ArmourModel;
+    private GameObject HeadBone;
 
     private int armour = -1;
     public int Armour
@@ -36,7 +37,15 @@ public class PlayerObject : MapObject
             else
                 ArmourModel = Instantiate(gameManager.WarriorModels[0], Model.transform);
 
-            Instantiate(gameManager.WarriorFaces[0], ArmourModel.transform.Find("Rig/Root/Bip01/Bip01-Pelvis/Bip01-Spine/Bip01-Spine1/Bip01-Neck/Bip01-Head"));
+            foreach (Transform child in ArmourModel.GetComponentsInChildren<Transform>())
+            {
+                if (child.CompareTag("Head_Bone"))
+                {
+                    HeadBone = child.gameObject;
+                    break;
+                }
+            }
+            Instantiate(gameManager.WarriorFaces[0], HeadBone.transform);
         }
     }
 
@@ -110,10 +119,16 @@ public class PlayerObject : MapObject
                         GameManager.InputDelay = Time.time + 0.5f;
                         break;
                     case MirAction.Attack:
-                        GetComponentInChildren<Animator>().Play("Attack", -1, normalizedTime: 0f);
                         Network.Enqueue(new C.Attack { Direction = Direction, Spell = Spell.None });
                         break;
                 }
+            }
+
+            switch (CurrentAction)
+            {
+                case MirAction.Attack:
+                    GetComponentInChildren<Animator>().Play("Attack", -1, normalizedTime: 0f);
+                    break;
             }
         }
         GetComponentInChildren<Animator>().SetInteger("CurrentAction", (int)CurrentAction);

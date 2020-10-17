@@ -119,7 +119,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    void Awake()
+    void Start()
     {
         ItemImage = gameObject.GetComponent<Image>();
         Redraw();
@@ -136,7 +136,9 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
     }
 
     void Redraw()
-    {        
+    {
+        if (ItemImage == null) return;
+
         if (GridType == MirGridType.None || Item == null || Item.Info == null)
         {
             if (IconImage != null)

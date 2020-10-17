@@ -127,7 +127,6 @@ public class GameManager : MonoBehaviour
     {
         MapObject ob;
         PlayerObject player;
-        GameObject Armour = null;
 
         if (ObjectList.TryGetValue(p.ObjectID, out ob))
         {
@@ -138,6 +137,7 @@ public class GameManager : MonoBehaviour
             player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
             player.Armour = p.Armour;
             player.gameObject.SetActive(true);
+            CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(player);
             return;
         }
 
@@ -149,7 +149,20 @@ public class GameManager : MonoBehaviour
         player.Direction = p.Direction;
         player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
         player.Armour = p.Armour;
-        ObjectList.Add(p.ObjectID, player);        
+        ObjectList.Add(p.ObjectID, player);
+        CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(player);
+    }
+
+    public void UpdatePlayer(S.PlayerUpdate p)
+    {
+        MapObject ob;
+        PlayerObject player;
+
+        if (ObjectList.TryGetValue(p.ObjectID, out ob))
+        {
+            player = (PlayerObject)ob;
+            player.Armour = p.Armour;
+        }
     }
 
     public void ObjectMonster(S.ObjectMonster p)
@@ -216,6 +229,7 @@ public class GameManager : MonoBehaviour
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
+            Debug.Log(ob.Name);
             ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Attack, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
         }
     }

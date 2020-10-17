@@ -363,6 +363,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.UseItem:
                     UseItem((S.UseItem)p);
                     break;
+                case (short)ServerPacketIds.PlayerUpdate:
+                    UpdatePlayer((S.PlayerUpdate)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -645,6 +648,10 @@ namespace EmeraldNetwork
         public static void NewMagic(S.NewMagic p)
         {
             GameManager.GameScene.NewMagic(p);
+        }
+        public static void UpdatePlayer(S.PlayerUpdate p)
+        {
+            gameManager.UpdatePlayer(p);
         }
 
         public static void Enqueue(Packet p)
