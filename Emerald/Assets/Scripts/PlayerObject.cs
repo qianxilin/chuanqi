@@ -15,10 +15,13 @@ public class PlayerObject : MapObject
     public MirClass Class;
     [HideInInspector]
     public MirGender Gender;
+    [HideInInspector]
+    public bool InSafeZone;
 
     private GameObject ArmourModel;
     private GameObject HeadBone;
     private GameObject WeaponRBone;
+    private GameObject WeaponBackBone;
 
     public int Weapon;
 
@@ -58,8 +61,16 @@ public class PlayerObject : MapObject
                     break;
                 }
             }
+            foreach (Transform child in ArmourModel.GetComponentsInChildren<Transform>())
+            {
+                if (child.name == "Weapon_B2")
+                {
+                    WeaponBackBone = child.gameObject;
+                    break;
+                }
+            }
             if (Weapon > 0)
-                Instantiate(gameManager.WeaponModels[Weapon - 1], WeaponRBone.transform);
+                Instantiate(gameManager.WeaponModels[Weapon - 1], InSafeZone ? WeaponBackBone.transform : WeaponRBone.transform);
         }
     }
 

@@ -11,6 +11,8 @@ using C = ClientPackets;
 
 public class CharSelManager : MonoBehaviour
 {
+    public GameManager gameManager;
+
     private List<SelectInfo> characters = new List<SelectInfo>();
     private GameObject loginCamera;
     private Transform LoginPosition;
@@ -34,17 +36,45 @@ public class CharSelManager : MonoBehaviour
     public MirMessageBox MessageBox;
     public AudioSource audioSource;
 
+    private GameObject PlayerModel;
+
     private SelectInfo selectedCharacter;
+    private SelectInfo SelectedCharacter
+    {
+        get { return selectedCharacter; }
+        set
+        {
+            if (value == selectedCharacter) return;
+
+            selectedCharacter = value;
+
+            if (PlayerModel != null)
+                Destroy(PlayerModel);
+
+            PlayerModel = Instantiate(gameManager.PlayerModel, previewLocation.transform);
+            PlayerModel.GetComponentInChildren<Rigidbody>().useGravity = false;
+            PlayerModel.GetComponentInChildren<DragRotate>().enabled = true;
+
+            PlayerObject player = PlayerModel.GetComponent<PlayerObject>();
+            player.gameManager = gameManager;
+            player.InSafeZone = true;
+            player.Weapon = value.Weapon;
+            player.Armour = value.Armour;            
+        }
+    }
+
     private MirClass selectedClass;
     private MirGender selectedGender;
     private GameObject selectedModel;
     private GameObject activeLocation;
     private GameObject inactiveLocation;
+    private GameObject previewLocation;
 
     void Start()
     {
         activeLocation = GameObject.Find("ActiveLocation");
         inactiveLocation = GameObject.Find("InactiveLocation");
+        previewLocation = GameObject.Find("PreviewLocation");
         loginCamera = GameObject.Find("LoginCamera");
         LoginPosition = GameObject.Find("LoginCameraPosition").transform;
         CharSelPosition = GameObject.Find("CharSelCameraPosition").transform;
@@ -119,9 +149,9 @@ public class CharSelManager : MonoBehaviour
                 CharacterButtons[i].gameObject.transform.Find("Level").GetComponent<TextMeshProUGUI>().text = $"Level {info.Level}";
                 CharacterButtons[i].gameObject.transform.Find("Class").GetComponent<TextMeshProUGUI>().text = info.Class.ToString();
 
-                if (selectedCharacter == null)
+                if (SelectedCharacter == null)
                 {
-                    selectedCharacter = info;
+                    SelectedCharacter = info;
                     CharacterButtons[i].Select(true);
                 }
                 CharacterButtons[i].gameObject.GetComponent<Image>().sprite = CharacterButtons[i].GetNeutralButton();
@@ -172,14 +202,31 @@ public class CharSelManager : MonoBehaviour
     {
         if (characters[i] == null) return;
 
-        selectedCharacter = characters[i];
+        SelectedCharacter = characters[i];
 
         for (int j = 0; j < CharacterButtons.Length; j++)
             CharacterButtons[j].Select(i == j);
     }
 
+    public void CreateClose()
+    {
+        if (selectedModel != null)
+        {
+            selectedModel.transform.SetPositionAndRotation(inactiveLocation.transform.position, inactiveLocation.transform.rotation);
+            selectedModel.GetComponent<Animator>().SetBool("selected", false);
+            selectedModel.GetComponent<Animator>().SetBool("bored", false);
+            selectedModel.GetComponent<AudioSource>().Stop();
+        }
+
+        if (PlayerModel != null)
+            PlayerModel.transform.SetPositionAndRotation(previewLocation.transform.position, previewLocation.transform.rotation);
+    }
+
     public void SelectClass(int i)
     {
+        if (PlayerModel != null)
+            PlayerModel.transform.SetPositionAndRotation(inactiveLocation.transform.position, inactiveLocation.transform.rotation);
+
         selectedClass = (MirClass)i;
 
         RefreshModel();

@@ -517,7 +517,8 @@ namespace EmeraldNetwork
 
         public static void SelectCharacters(S.SelectCharacters p)
         {
-                CharSelManager.AddCharacters(p.Characters);
+            CharSelManager.gameManager = gameManager;
+            CharSelManager.AddCharacters(p.Characters);
         }
 
         public static void DeleteCharacter(S.DeleteCharacter p)

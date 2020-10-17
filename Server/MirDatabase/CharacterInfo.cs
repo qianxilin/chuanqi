@@ -522,14 +522,16 @@ namespace Server.MirDatabase
         public SelectInfo ToSelectInfo()
         {
             return new SelectInfo
-                {
-                    Index = Index,
-                    Name = Name,
-                    Level = Level,
-                    Class = Class,
-                    Gender = Gender,
-                    LastAccess = LastDate
-                };
+            {
+                Index = Index,
+                Name = Name,
+                Level = Level,
+                Class = Class,
+                Gender = Gender,
+                LastAccess = LastDate,
+                Armour = Equipment[(int)EquipmentSlot.Armour] != null ? Equipment[(int)EquipmentSlot.Armour].Info.Shape : (short)0,
+                Weapon = Equipment[(int)EquipmentSlot.Weapon] != null ? Equipment[(int)EquipmentSlot.Weapon].Info.Shape : (short)0,
+            };
         }
 
         public bool CheckHasIntelligentCreature(IntelligentCreatureType petType)
