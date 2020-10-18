@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
         User.Level = p.Level;
+
+        User.HP = p.HP;
+        User.MP = p.MP;
         
         GameScene.UpdateCharacterIcon();
 
@@ -103,20 +106,16 @@ public class GameManager : MonoBehaviour
 
         User.BindAllItems();
 
-        if (p.Equipment[(int)EquipmentSlot.Weapon] != null && p.Equipment[(int)EquipmentSlot.Weapon].Info.Shape <= WeaponModels.Count)
-            User.Player.Weapon = p.Equipment[(int)EquipmentSlot.Weapon].Info.Shape;
-        else
-            User.Player.Weapon = 0;
-
-        if (p.Equipment[(int)EquipmentSlot.Armour] != null && p.Equipment[(int)EquipmentSlot.Armour].Info.Shape < WarriorModels.Count)
-            User.Player.Armour = p.Equipment[(int)EquipmentSlot.Armour].Info.Shape;
-        else
-            User.Player.Armour = 0;
-
         ObjectList.Add(p.ObjectID, User.Player);
         User.Player.Camera.SetActive(true);
 
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
+    }
+
+    public void BaseStatsInfo(S.BaseStatsInfo p)
+    {
+        User.CoreStats = p.Stats;
+        User.RefreshStats();
     }
 
     public void UserLocation(S.UserLocation p)

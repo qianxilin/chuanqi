@@ -9517,6 +9517,7 @@ MonoBehaviour:
   - {fileID: -9051978712765215153, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
   - {fileID: -8460076306479638644, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
   - {fileID: -34868809682548032, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
+  StatsDisplay: {fileID: 744925779}
   Inventory: {fileID: 0}
   ItemToolTip: {fileID: 675349350}
   SelectedItemImage: {fileID: 838068041}
@@ -9544,6 +9545,8 @@ MonoBehaviour:
   - {fileID: 40540455}
   PickedUpGold: 0
   UseItemTime: 0
+  TargetObject: {fileID: 0}
+  NextHitTime: 0
 --- !u!1 &559825994
 GameObject:
   m_ObjectHideFlags: 0
@@ -11572,6 +11575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &646429462
 GameObject:
   m_ObjectHideFlags: 0
@@ -13179,19 +13184,7 @@ MonoBehaviour:
 
     MP
 
-    Luck
-
-    9
-
-    10
-
-    11
-
-    12
-
-    13
-
-    14'
+    Luck'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e697a763cfb3a0a4b99b07afade02f09, type: 2}
   m_sharedMaterial: {fileID: 6693065328617318361, guid: e697a763cfb3a0a4b99b07afade02f09,

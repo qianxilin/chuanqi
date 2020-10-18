@@ -19,11 +19,30 @@ public class PlayerObject : MapObject
     public bool InSafeZone;
 
     private GameObject ArmourModel;
+    private GameObject WeaponModel;
     private GameObject HeadBone;
     private GameObject WeaponRBone;
     private GameObject WeaponBackBone;
 
-    public int Weapon;
+    private int weapon = -1;
+    public int Weapon
+    {
+        get { return weapon; }
+        set
+        {
+            if (value == weapon) return;
+            weapon = value;
+
+            if (value <= 0) return;
+            if (WeaponRBone == null) return;
+
+            if (WeaponModel != null)
+                Destroy(WeaponModel);
+            
+            WeaponModel = Instantiate(gameManager.WeaponModels[value - 1], InSafeZone ? WeaponBackBone.transform : WeaponRBone.transform);
+        }
+    }
+
 
     private int armour = -1;
     public int Armour
@@ -42,6 +61,9 @@ public class PlayerObject : MapObject
                 ArmourModel = Instantiate(gameManager.WarriorModels[value], Model.transform);
             else
                 ArmourModel = Instantiate(gameManager.WarriorModels[0], Model.transform);
+
+            ArmourModel.GetComponentInChildren<PlayerAnimationController>().ParentObject = this;
+            ArmourModel.GetComponentInChildren<Animator>().SetInteger("CurrentAction", (int)CurrentAction);
 
             foreach (Transform child in ArmourModel.GetComponentsInChildren<Transform>())
             {
@@ -69,15 +91,18 @@ public class PlayerObject : MapObject
                     break;
                 }
             }
+
             if (Weapon > 0)
-                Instantiate(gameManager.WeaponModels[Weapon - 1], InSafeZone ? WeaponBackBone.transform : WeaponRBone.transform);
+            {
+                if (WeaponModel != null)
+                    Destroy(WeaponModel);
+                WeaponModel = Instantiate(gameManager.WeaponModels[Weapon - 1], InSafeZone ? WeaponBackBone.transform : WeaponRBone.transform);
+            }
         }
     }
 
     public override void Start()
-    {
-        gameObject.GetComponentInChildren<PlayerAnimationController>().ParentObject = this;
-
+    {        
         base.Start();
     }
 
@@ -156,6 +181,6 @@ public class PlayerObject : MapObject
                     break;
             }
         }
-        GetComponentInChildren<Animator>().SetInteger("CurrentAction", (int)CurrentAction);
+        GetComponentInChildren<Animator>()?.SetInteger("CurrentAction", (int)CurrentAction);
     }
 }

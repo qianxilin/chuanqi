@@ -30,7 +30,8 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text AttackModeText;
     public Sprite[] AttackModeIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
     public Sprite[] AttackModeHoverIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
-    public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];    
+    public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
+    public TMP_Text StatsDisplay;
 
     [HideInInspector]
     public InventoryController Inventory;
@@ -288,7 +289,7 @@ public class GameSceneManager : MonoBehaviour
     public void UpdateCharacterIcon()
     {
         CharacterIcon.sprite = CharacterIcons[(int)GameManager.User.Player.Class * 2 + (int)GameManager.User.Player.Gender];
-        CharacterName.text = GameManager.User.Player.name;
+        CharacterName.text = GameManager.User.Player.Name;
         CharacterLevel.text = GameManager.User.Level.ToString();
     }
 
@@ -310,6 +311,18 @@ public class GameSceneManager : MonoBehaviour
         AttackModeButton.spriteState = state;
 
         AttackModeText.text = amode.ToString();
+    }
+
+    public void RefreshStatsDisplay()
+    {
+        StatsDisplay.text = $"DC: {User.MinDC}-{User.MaxDC}" + Environment.NewLine +
+            $"MC: {User.MinMC}-{User.MaxMC}" + Environment.NewLine +
+            $"SC: {User.MinSC}-{User.MaxSC}" + Environment.NewLine +
+            $"AC: {User.MinAC}-{User.MaxAC}" + Environment.NewLine +
+            $"MAC: {User.MinMAC}-{User.MaxMAC}" + Environment.NewLine +
+            $"HP: {User.HP}/{User.MaxHP}" + Environment.NewLine +
+            $"MP: {User.MP}/{User.MaxMP}" + Environment.NewLine +
+            $"Luck: {User.Luck}";
     }
 
 

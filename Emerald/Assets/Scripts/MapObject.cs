@@ -22,6 +22,8 @@ public class MapObject : MonoBehaviour
 
     public string Name;
 
+    public int Light;
+
     [HideInInspector]
     public bool IsMoving;
     //[HideInInspector]
@@ -48,7 +50,6 @@ public class MapObject : MonoBehaviour
     {
         CurrentAction = MirAction.Standing;
         NameLabel = Instantiate(NameLabelObject, NameLocation.position, Quaternion.identity, gameObject.transform).GetComponent<TMP_Text>();
-        GetComponentInChildren<Animator>().SetInteger("StateAction", 0);
         SetNameLabel();
     }
 
