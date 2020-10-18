@@ -101,9 +101,6 @@ public class CharSelManager : MonoBehaviour
         ClassButtons[0].Select(true);
         GenderButtons[0].Select(true);
         NameInput.text = string.Empty;
-        if (selectedModel != null)
-            selectedModel.transform.SetPositionAndRotation(inactiveLocation.transform.position, inactiveLocation.transform.rotation);
-        selectedModel = null;
     }
 
     public void ShowMessageBox(string message)
@@ -178,7 +175,8 @@ public class CharSelManager : MonoBehaviour
     }
 
     public void NewCharacterSuccess(SelectInfo info)
-    {
+    {        
+        CreateClose();
         AddCharacter(info);
         NewCharacterBox.SetActive(false);
         LogOutButton.gameObject.SetActive(true);
@@ -210,12 +208,15 @@ public class CharSelManager : MonoBehaviour
 
     public void CreateClose()
     {
+        ClearCreateBox();
+
         if (selectedModel != null)
         {
             selectedModel.transform.SetPositionAndRotation(inactiveLocation.transform.position, inactiveLocation.transform.rotation);
             selectedModel.GetComponent<Animator>().SetBool("selected", false);
             selectedModel.GetComponent<Animator>().SetBool("bored", false);
             selectedModel.GetComponent<AudioSource>().Stop();
+            selectedModel = null;
         }
 
         if (PlayerModel != null)
