@@ -171,6 +171,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HealthChanged(S.HealthChanged p)
+    {
+        User.HP = p.HP;
+        User.MP = p.MP;
+
+        User.Player.PercentHealth = (byte)(User.HP / (float)User.MaxHP * 100);
+        GameScene.RefreshStatsDisplay();
+    }
+
     public void ObjectMonster(S.ObjectMonster p)
     {
         MapObject ob;
@@ -235,7 +244,6 @@ public class GameManager : MonoBehaviour
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
-            Debug.Log(ob.Name);
             ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Attack, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
         }
     }

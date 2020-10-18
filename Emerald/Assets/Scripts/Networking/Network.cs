@@ -369,6 +369,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.PlayerUpdate:
                     UpdatePlayer((S.PlayerUpdate)p);
                     break;
+                case (short)ServerPacketIds.HealthChanged:
+                    HealthChanged((S.HealthChanged)p);
+                    break;
                 default:
                     //base.ProcessPacket(p);
                     break;
@@ -660,6 +663,10 @@ namespace EmeraldNetwork
         public static void UpdatePlayer(S.PlayerUpdate p)
         {
             gameManager.UpdatePlayer(p);
+        }
+        public static void HealthChanged(S.HealthChanged p)
+        {
+            gameManager.HealthChanged(p);
         }
 
         public static void Enqueue(Packet p)

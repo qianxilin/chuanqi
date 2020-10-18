@@ -32,6 +32,8 @@ public class GameSceneManager : MonoBehaviour
     public Sprite[] AttackModeHoverIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
     public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
     public TMP_Text StatsDisplay;
+    public Material HPGlobe;
+    public Material MPGlobe;
 
     [HideInInspector]
     public InventoryController Inventory;

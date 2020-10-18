@@ -15,7 +15,31 @@ public class UserObject : MonoBehaviour
 
     public ushort Level;
 
-    public ushort HP, MaxHP, MP, MaxMP;
+    public ushort HP, MaxHP;
+
+    private ushort mp;
+    public ushort MP
+    {
+        get { return mp; }
+        set
+        {
+            if (value == mp) return;
+            mp = value;
+            MPUpdated();
+        }
+    }
+
+    private ushort maxmp;
+    public ushort MaxMP
+    {
+        get { return maxmp; }
+        set
+        {
+            if (value == maxmp) return;
+            maxmp = value;
+            MPUpdated();
+        }
+    }
 
     public ushort MinAC, MaxAC,
                MinMAC, MaxMAC,
@@ -48,6 +72,12 @@ public class UserObject : MonoBehaviour
     void Awake()
     {
         GameManager.User = this;
+    }
+
+    private void MPUpdated()
+    {
+        float percent = (byte)(mp / (float)maxmp * 100);
+        GameScene.MPGlobe.SetFloat("_Percent", 1 - percent / 100F);
     }
 
     public void BindAllItems()
@@ -299,6 +329,8 @@ public class UserObject : MonoBehaviour
 
         Player.Weapon = weapon;
         Player.Armour = armour;
+
+        Player.PercentHealth = (byte)(HP / (float)MaxHP * 100);
 
         /*if (HasMuscleRing)
         {

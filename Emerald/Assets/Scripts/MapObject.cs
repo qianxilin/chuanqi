@@ -24,6 +24,22 @@ public class MapObject : MonoBehaviour
 
     public int Light;
 
+    private byte percentHealth;
+    public byte PercentHealth
+    {
+        get { return percentHealth; }
+        set
+        {
+            if (percentHealth == value) return;
+            percentHealth = value;
+
+            if (this != GameManager.User.Player) return;
+
+            GameScene.HPGlobe.SetFloat("_Percent", 1 - value / 100F);
+        }
+    }
+    public long HealthTime;
+
     [HideInInspector]
     public bool IsMoving;
     //[HideInInspector]

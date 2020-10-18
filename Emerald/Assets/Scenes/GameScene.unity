@@ -8666,7 +8666,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 48546ac6a177c7c44ae04dd0d15586c5, type: 2}
+  - {fileID: 2100000, guid: 9c51891c2e0bdb64f94d60078024fa1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9518,6 +9518,8 @@ MonoBehaviour:
   - {fileID: -8460076306479638644, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
   - {fileID: -34868809682548032, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
   StatsDisplay: {fileID: 744925779}
+  HPGlobe: {fileID: 2100000, guid: 925f21912b310ab4f8c3fc3eba9f4b1b, type: 2}
+  MPGlobe: {fileID: 2100000, guid: 9c51891c2e0bdb64f94d60078024fa1d, type: 2}
   Inventory: {fileID: 0}
   ItemToolTip: {fileID: 675349350}
   SelectedItemImage: {fileID: 838068041}
