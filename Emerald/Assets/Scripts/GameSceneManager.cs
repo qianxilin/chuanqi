@@ -259,7 +259,7 @@ public class GameSceneManager : MonoBehaviour
         if (!p.Success) return;
         toCell.Item = fromCell.Item;
         fromCell.Item = null;
-        //User.RefreshStats();
+        User.RefreshStats();
     }
 
     public void UseItem(S.UseItem p)

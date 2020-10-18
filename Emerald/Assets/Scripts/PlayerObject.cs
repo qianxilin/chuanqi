@@ -32,13 +32,14 @@ public class PlayerObject : MapObject
         {
             if (value == weapon) return;
             weapon = value;
-
-            if (value <= 0) return;
+            
             if (WeaponRBone == null) return;
 
             if (WeaponModel != null)
                 Destroy(WeaponModel);
-            
+
+            if (value <= 0) return;
+
             WeaponModel = Instantiate(gameManager.WeaponModels[value - 1], InSafeZone ? WeaponBackBone.transform : WeaponRBone.transform);
         }
     }

@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
 
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.ObjectID = p.ObjectID;
+        User.Player.ObjectID = p.ObjectID;
         User.Player.Name = p.Name;
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;

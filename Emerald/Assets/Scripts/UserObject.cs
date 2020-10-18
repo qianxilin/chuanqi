@@ -164,6 +164,9 @@ public class UserObject : MonoBehaviour
         CurrentWearWeight = 0;
         CurrentHandWeight = 0;
 
+        int weapon = 0;
+        int armour = 0;
+
         /*HasTeleportRing = false;
         HasProtectionRing = false;
         HasMuscleRing = false;
@@ -186,12 +189,12 @@ public class UserObject : MonoBehaviour
 
             if (RealItem.Type == ItemType.Weapon)
             {
-                Player.Weapon = RealItem.Shape;
+                weapon = RealItem.Shape;
                 //WeaponEffect = RealItem.Effect;
             }
             if (RealItem.Type == ItemType.Armour)
             {
-                Player.Armour = RealItem.Shape;
+                armour = RealItem.Shape;
                 //WingEffect = RealItem.Effect;
             }
 
@@ -293,6 +296,9 @@ public class UserObject : MonoBehaviour
         MaxMP = (ushort)Math.Min(ushort.MaxValue, (((double)MPrate / 100) + 1) * MaxMP);
         MaxAC = (ushort)Math.Min(ushort.MaxValue, (((double)Acrate / 100) + 1) * MaxAC);
         MaxMAC = (ushort)Math.Min(ushort.MaxValue, (((double)Macrate / 100) + 1) * MaxMAC);
+
+        Player.Weapon = weapon;
+        Player.Armour = armour;
 
         /*if (HasMuscleRing)
         {
