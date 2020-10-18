@@ -427,7 +427,7 @@ public class GameManager : MonoBehaviour
 
     void ProcessScene()
     {
-        if (User.LastRunTime > Time.time + 1f)
+        if (Time.time > User.LastRunTime + 1f)
             User.CanRun = false;
     }
 
