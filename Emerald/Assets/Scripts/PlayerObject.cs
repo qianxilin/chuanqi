@@ -108,7 +108,7 @@ public class PlayerObject : MapObject
     }
 
     public override void SetAction()
-    {
+    {        
         if (this == GameManager.User.Player && GameScene.QueuedAction != null)
         {
             ActionFeed.Clear();
@@ -119,11 +119,11 @@ public class PlayerObject : MapObject
         if (ActionFeed.Count == 0)
         {           
             CurrentAction = MirAction.Standing;
-            if (this == GameManager.User.Player)
-                GameManager.User.WalkStep = 0;
         }
         else
-        {           
+        {
+            if (this == GameManager.User.Player && Time.time < GameManager.NextAction) return;
+
             QueuedAction action = ActionFeed[0];
             ActionFeed.RemoveAt(0);
 
@@ -161,16 +161,20 @@ public class PlayerObject : MapObject
                 {
                     case MirAction.Walking:
                         Network.Enqueue(new C.Walk { Direction = action.Direction });
-                        //GameManager.NextAction = Time.time + 2.5f;
+                        GameManager.NextAction = Time.time + 2.5f;
                         GameManager.InputDelay = Time.time + 0.5f;
+                        GameManager.User.LastRunTime = Time.time;
+                        GameManager.User.CanRun = true;
                         break;
                     case MirAction.Running:
                         Network.Enqueue(new C.Run { Direction = action.Direction });
-                        //GameManager.NextAction = Time.time + 2.5f;
+                        GameManager.NextAction = Time.time + 2.5f;
                         GameManager.InputDelay = Time.time + 0.5f;
+                        GameManager.User.LastRunTime = Time.time;
                         break;
                     case MirAction.Attack:
                         Network.Enqueue(new C.Attack { Direction = Direction, Spell = Spell.None });
+                        GameManager.NextAction = Time.time + 2.5f;
                         break;
                 }
             }

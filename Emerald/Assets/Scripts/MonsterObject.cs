@@ -13,11 +13,6 @@ public class MonsterObject : MapObject
     public AudioClip StruckSound;
     public AudioClip DeathSound;
 
-    void OnMouseDown()
-    {
-        GameScene.TargetObject = this;
-    }
-
     public override void SetAction()
     {
         if (ActionFeed.Count == 0)
@@ -64,6 +59,7 @@ public class MonsterObject : MapObject
                     break;
                 case MirAction.Die:
                     AudioSource.PlayClipAtPoint(DeathSound, gameObject.transform.position);
+                    GameManager.CurrentScene.Cells[(int)CurrentLocation.x, (int)CurrentLocation.y].RemoveObject(this);
                     Dead = true;
                     break;
             }

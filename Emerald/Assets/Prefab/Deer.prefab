@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 4531680368261317066}
   - component: {fileID: 4136972104376663512}
   - component: {fileID: 7992967207848017688}
-  - component: {fileID: 8351908237083908074}
+  - component: {fileID: 4134627212666096068}
   m_Layer: 9
   m_Name: Deer
   m_TagString: Untagged
@@ -668,6 +668,8 @@ MonoBehaviour:
   Model: {fileID: 3866362151738514288}
   MoveSpeed: 1.2
   Name: 
+  Light: 0
+  HealthTime: 0
   IsMoving: 0
   TargetPosition: {x: 0, y: 0, z: 0}
   StartPosition: {x: 0, y: 0, z: 0}
@@ -681,8 +683,8 @@ MonoBehaviour:
   AttackSound: {fileID: 8300000, guid: 8ab9a5e8b53287d4ebcf93b0004b989a, type: 3}
   StruckSound: {fileID: 8300000, guid: aab61971f7a89894bb3aa4faa3b9f820, type: 3}
   DeathSound: {fileID: 8300000, guid: 20876dac81c461f49ab3e92d93340b95, type: 3}
---- !u!64 &8351908237083908074
-MeshCollider:
+--- !u!136 &4134627212666096068
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -691,10 +693,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6524407844262739634, guid: 008f9e4ee981cb34aad1ba54c4576a61, type: 3}
+  m_Radius: 0.37709925
+  m_Height: 2.327932
+  m_Direction: 0
+  m_Center: {x: -0.09, y: 1.14, z: 0.043158002}
 --- !u!1 &3948909824564238677
 GameObject:
   m_ObjectHideFlags: 0

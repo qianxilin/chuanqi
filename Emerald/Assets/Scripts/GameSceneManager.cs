@@ -109,12 +109,33 @@ public class GameSceneManager : MonoBehaviour
             }
         }
 
+        if (SelectedItemImage.gameObject.activeSelf)
+        {
+            SelectedItemImage.transform.position = Input.mousePosition;
+            SelectedItemImage.transform.SetAsLastSibling();
+        }
+
         if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !eventSystem.IsPointerOverGameObject())
         {
+            MapObject mouseObject = GetMouseObject();
+            if (mouseObject != null)
+            {
+                switch (mouseObject.gameObject.layer)
+                {
+                    case 9: //Monster
+                        MonsterObject monster = (MonsterObject)mouseObject;
+                        if (monster.Dead) break;
+                        TargetObject = monster;
+                        return;
+                }
+            }
+
+            TargetObject = null;
             GameManager.CheckMouseInput();
         }
         else
         {
+            GameManager.User.CanRun = false;
             if (TargetObject != null && !TargetObject.Dead && TargetObject.gameObject.activeSelf && CanAttack())
             {
                 Point self = new Point((int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y);
@@ -124,15 +145,36 @@ public class GameSceneManager : MonoBehaviour
                     NextHitTime = Time.time + 1.6f;
                     MirDirection direction = Functions.DirectionFromPoint(self, targ);
                     QueuedAction = new QueuedAction { Action = MirAction.Attack, Direction = direction, Location = User.Player.CurrentLocation };
+                    return;
                 }
+
+                MirDirection targetdirection = Functions.DirectionFromPoint(self, targ);
+
+                if (!CanWalk(targetdirection)) return;
+
+                QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = targetdirection, Location = ClientFunctions.VectorMove(User.Player.CurrentLocation, targetdirection, 1) };
             }
         }
+    }
 
-        if (SelectedItemImage.gameObject.activeSelf)
+    private bool CanWalk(MirDirection dir)
+    {
+        Vector2 newpoint = ClientFunctions.VectorMove(User.Player.CurrentLocation, dir, 1);
+        return GameManager.CurrentScene.Cells[(int)newpoint.x, (int)newpoint.y].walkable && GameManager.CurrentScene.Cells[(int)newpoint.x, (int)newpoint.y].CellObjects == null;
+    }
+
+    private MapObject GetMouseObject()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
         {
-            SelectedItemImage.transform.position = Input.mousePosition;
-            SelectedItemImage.transform.SetAsLastSibling();
+            var selection = hit.transform;
+            if (selection.gameObject.layer == 9/*Monster*/)
+                return selection.GetComponent<MapObject>();
         }
+
+        return null;
     }
 
     public bool CanAttack()

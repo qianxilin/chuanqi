@@ -60,7 +60,8 @@ public class UserObject : MonoBehaviour
     public byte MagicResist, PoisonResist, HealthRecovery, SpellRecovery, PoisonRecovery, CriticalRate, CriticalDamage, Holy, Freezing, PoisonAttack, HpDrainRate;
 
     public AttackMode AMode;
-    public int WalkStep;
+    public float LastRunTime;
+    public bool CanRun;
 
     public UserItem[] Inventory = new UserItem[46];
     public UserItem[] Equipment = new UserItem[14];

@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour
             player.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
             player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
             player.Armour = p.Armour;
+            player.Weapon = p.Weapon;
             player.gameObject.SetActive(true);
             CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(player);
             return;
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
         player.Direction = p.Direction;
         player.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
         player.Armour = p.Armour;
+        player.Weapon = p.Weapon;
         ObjectList.Add(p.ObjectID, player);
         CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(player);
     }
@@ -168,6 +170,7 @@ public class GameManager : MonoBehaviour
         {
             player = (PlayerObject)ob;
             player.Armour = p.Armour;
+            player.Weapon = p.Weapon;
         }
     }
 
@@ -194,7 +197,13 @@ public class GameManager : MonoBehaviour
             monster.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
             monster.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
             monster.gameObject.SetActive(true);
-            CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
+            if (p.Dead)
+            {
+                monster.Dead = true;
+                monster.CurrentAction = MirAction.Dead;
+            }
+            else
+                CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
             return;
         }
 
@@ -210,9 +219,10 @@ public class GameManager : MonoBehaviour
             monster.Dead = true;
             monster.CurrentAction = MirAction.Dead;
         }
-
+        else
+            CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
         ObjectList.Add(p.ObjectID, monster);
-        CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
+        
     }
 
     public void ObjectRemove(S.ObjectRemove p)
@@ -324,11 +334,10 @@ public class GameManager : MonoBehaviour
             {
                 MirDirection direction = MouseDirection();
                 Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);
-                if (User.WalkStep < 1)
+                if (!User.CanRun)
                 {
                     if (CanWalk(newlocation))
-                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation };
-                    User.WalkStep++;
+                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation };                   
                 }
                 else
                 {
@@ -417,13 +426,15 @@ public class GameManager : MonoBehaviour
     }
 
     void ProcessScene()
-    {                
+    {
+        if (User.LastRunTime > Time.time + 1f)
+            User.CanRun = false;
     }
 
     static bool CanWalk(Vector2 location)
     {
         return CurrentScene.Cells[(int)location.x, (int)location.y].walkable && CurrentScene.Cells[(int)location.x, (int)location.y].CellObjects == null;
-    }
+    }    
 
     public class NetworkInfo
     {
