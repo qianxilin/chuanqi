@@ -147,6 +147,9 @@ public class PlayerObject : MapObject
                         gameObject.transform.position = GameManager.CurrentScene.Cells[(int)back.x, (int)back.y].position;
                     }
 
+                    GameManager.CurrentScene.Cells[(int)CurrentLocation.x, (int)CurrentLocation.y].RemoveObject(this);
+                    GameManager.CurrentScene.Cells[(int)action.Location.x, (int)action.Location.y].AddObject(this);
+
                     StartPosition = gameObject.transform.position;
                     TargetDistance = Vector3.Distance(transform.position, targetpos);
                     IsMoving = true;                    

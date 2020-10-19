@@ -68,7 +68,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -162,6 +162,8 @@ MonoBehaviour:
   Model: {fileID: 8447126569704725765}
   MoveSpeed: 1.4
   Name: 
+  Light: 0
+  HealthTime: 0
   IsMoving: 0
   TargetPosition: {x: 0, y: 0, z: 0}
   StartPosition: {x: 0, y: 0, z: 0}
@@ -176,7 +178,6 @@ MonoBehaviour:
   Class: 0
   Gender: 0
   InSafeZone: 0
-  Weapon: 0
 --- !u!1 &8447126569704725765
 GameObject:
   m_ObjectHideFlags: 0

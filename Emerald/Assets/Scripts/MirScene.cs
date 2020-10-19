@@ -19,7 +19,7 @@ public class Cell
     }
     public void RemoveObject(MapObject ob)
     {
-        if (ob == null)
+        if (ob == null || CellObjects == null)
             return;
 
         CellObjects.Remove(ob);
