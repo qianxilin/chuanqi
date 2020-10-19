@@ -5,10 +5,7 @@ using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
 
 public class MonsterObject : MapObject
-{  
-    [HideInInspector]
-    public bool Dead;    
-
+{      
     public AudioClip AttackSound;
     public AudioClip StruckSound;
     public AudioClip DeathSound;

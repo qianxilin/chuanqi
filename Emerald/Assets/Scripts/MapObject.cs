@@ -11,7 +11,7 @@ public class MapObject : MonoBehaviour
     {
         get { return GameManager.GameScene; }
     }
-
+    public Renderer ObjectRenderer;
     public GameObject NameLabelObject;
     public Transform NameLocation;
     [HideInInspector]
@@ -21,8 +21,9 @@ public class MapObject : MonoBehaviour
     public float MoveSpeed;
 
     public string Name;
-
     public int Light;
+    [HideInInspector]
+    public bool Dead;
 
     private byte percentHealth;
     public byte PercentHealth
@@ -35,7 +36,7 @@ public class MapObject : MonoBehaviour
 
             if (this != GameManager.User.Player) return;
 
-            GameScene.HPGlobe.SetFloat("_Percent", 1 - value / 100F);
+            GameScene.HPGlobe.material.SetFloat("_Percent", 1 - value / 100F);
         }
     }
     public long HealthTime;
@@ -65,6 +66,7 @@ public class MapObject : MonoBehaviour
     public virtual void Start()
     {
         CurrentAction = MirAction.Standing;
+        ObjectRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         NameLabel = Instantiate(NameLabelObject, NameLocation.position, Quaternion.identity, gameObject.transform).GetComponent<TMP_Text>();
         SetNameLabel();
     }
@@ -79,7 +81,10 @@ public class MapObject : MonoBehaviour
 
         if (IsMoving)
         {
-            if (Vector3.Distance(StartPosition, transform.position) > TargetDistance)
+            var distance = (TargetPosition - StartPosition) * MoveSpeed * Time.deltaTime;
+            var newpos = transform.position + distance;
+
+            if (Vector3.Distance(StartPosition, newpos) > TargetDistance)
             {
                 transform.position = TargetPosition;
                 IsMoving = false;
@@ -87,7 +92,7 @@ public class MapObject : MonoBehaviour
                 return;
             }
 
-            transform.position += (TargetPosition - StartPosition) * MoveSpeed * Time.deltaTime;
+            transform.position = newpos;
         }
     }
 

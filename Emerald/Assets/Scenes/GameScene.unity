@@ -9518,8 +9518,8 @@ MonoBehaviour:
   - {fileID: -8460076306479638644, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
   - {fileID: -34868809682548032, guid: bd58dd1e2d37b324b8e8861f5c430be7, type: 3}
   StatsDisplay: {fileID: 744925779}
-  HPGlobe: {fileID: 2100000, guid: 925f21912b310ab4f8c3fc3eba9f4b1b, type: 2}
-  MPGlobe: {fileID: 2100000, guid: 9c51891c2e0bdb64f94d60078024fa1d, type: 2}
+  HPGlobe: {fileID: 400287733}
+  MPGlobe: {fileID: 465018913}
   Inventory: {fileID: 0}
   ItemToolTip: {fileID: 675349350}
   SelectedItemImage: {fileID: 838068041}
@@ -9547,7 +9547,6 @@ MonoBehaviour:
   - {fileID: 40540455}
   PickedUpGold: 0
   UseItemTime: 0
-  TargetObject: {fileID: 0}
   NextHitTime: 0
 --- !u!1 &559825994
 GameObject:

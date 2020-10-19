@@ -78,7 +78,7 @@ public class UserObject : MonoBehaviour
     private void MPUpdated()
     {
         float percent = (byte)(mp / (float)maxmp * 100);
-        GameScene.MPGlobe.SetFloat("_Percent", 1 - percent / 100F);
+        GameScene.MPGlobe.material.SetFloat("_Percent", 1 - percent / 100F);
     }
 
     public void BindAllItems()

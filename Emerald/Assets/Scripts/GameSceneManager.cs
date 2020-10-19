@@ -32,8 +32,8 @@ public class GameSceneManager : MonoBehaviour
     public Sprite[] AttackModeHoverIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
     public Sprite[] AttackModeDownIcons = new Sprite[Enum.GetNames(typeof(AttackMode)).Length];
     public TMP_Text StatsDisplay;
-    public Material HPGlobe;
-    public Material MPGlobe;
+    public Renderer HPGlobe;
+    public Renderer MPGlobe;
 
     [HideInInspector]
     public InventoryController Inventory;
@@ -46,8 +46,33 @@ public class GameSceneManager : MonoBehaviour
     public bool PickedUpGold;
     [HideInInspector]
     public float UseItemTime;
-    [HideInInspector]
-    public MonsterObject TargetObject;
+
+    private MapObject targetObject;
+    public MapObject TargetObject
+    {
+        get { return targetObject; }
+        set
+        {
+            if (value == targetObject) return;
+            targetObject = value;
+        }
+    }
+
+    private MapObject mouseObject;
+    public MapObject MouseObject
+    {
+        get { return mouseObject; }
+        set
+        {
+            if (value == mouseObject) return;
+            if (mouseObject != null)
+                mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", 0);
+            mouseObject = value;
+            if (mouseObject != null)
+                mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", 0.03f);
+        }
+    }
+
     [HideInInspector]
     public float NextHitTime;
     [HideInInspector]
@@ -115,15 +140,17 @@ public class GameSceneManager : MonoBehaviour
             SelectedItemImage.transform.SetAsLastSibling();
         }
 
-        if ((Input.GetMouseButton(0) || Input.GetMouseButton(1)) && !eventSystem.IsPointerOverGameObject())
+        MouseObject = GetMouseObject();
+
+        if (Input.GetMouseButton(0) && !eventSystem.IsPointerOverGameObject())
         {
-            MapObject mouseObject = GetMouseObject();
-            if (mouseObject != null)
+            GameManager.User.CanRun = false;
+            if (MouseObject != null)
             {
-                switch (mouseObject.gameObject.layer)
+                switch (MouseObject.gameObject.layer)
                 {
                     case 9: //Monster
-                        MonsterObject monster = (MonsterObject)mouseObject;
+                        MonsterObject monster = (MonsterObject)MouseObject;
                         if (monster.Dead) break;
                         TargetObject = monster;
                         return;
@@ -133,6 +160,8 @@ public class GameSceneManager : MonoBehaviour
             TargetObject = null;
             GameManager.CheckMouseInput();
         }
+        else if (Input.GetMouseButton(1) && !eventSystem.IsPointerOverGameObject())         
+            GameManager.CheckMouseInput();
         else
         {
             GameManager.User.CanRun = false;

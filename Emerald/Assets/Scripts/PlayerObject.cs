@@ -10,7 +10,7 @@ public class PlayerObject : MapObject
     [HideInInspector]
     public GameManager gameManager;
 
-    public GameObject Camera;
+    public GameObject Camera;    
     [HideInInspector]
     public MirClass Class;
     [HideInInspector]
@@ -65,6 +65,8 @@ public class PlayerObject : MapObject
 
             ArmourModel.GetComponentInChildren<PlayerAnimationController>().ParentObject = this;
             ArmourModel.GetComponentInChildren<Animator>().SetInteger("CurrentAction", (int)CurrentAction);
+
+            ObjectRenderer = ArmourModel.GetComponentInChildren<SkinnedMeshRenderer>();
 
             foreach (Transform child in ArmourModel.GetComponentsInChildren<Transform>())
             {
