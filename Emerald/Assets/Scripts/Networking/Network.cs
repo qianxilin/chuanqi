@@ -327,6 +327,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectRemove:
                     ObjectRemove((S.ObjectRemove)p);
                     break;
+                case (short)ServerPacketIds.ObjectTurn:
+                    ObjectTurn((S.ObjectTurn)p);
+                    break;
                 case (short)ServerPacketIds.ObjectWalk:
                     ObjectWalk((S.ObjectWalk)p);
                     break;
@@ -603,6 +606,10 @@ namespace EmeraldNetwork
         public static void ObjectRemove(S.ObjectRemove p)
         {
             gameManager.ObjectRemove(p);
+        }
+        public static void ObjectTurn(S.ObjectTurn p)
+        {
+            gameManager.ObjectTurn(p);
         }
         public static void ObjectWalk(S.ObjectWalk p)
         {

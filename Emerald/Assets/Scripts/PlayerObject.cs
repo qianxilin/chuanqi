@@ -164,6 +164,12 @@ public class PlayerObject : MapObject
             {
                 switch (CurrentAction)
                 {
+                    case MirAction.Standing:
+                        Network.Enqueue(new C.Turn { Direction = action.Direction });
+                        GameManager.NextAction = Time.time + 2.5f;
+                        GameManager.InputDelay = Time.time + 0.5f;
+                        GameManager.User.CanRun = false;
+                        break;
                     case MirAction.Walking:
                         Network.Enqueue(new C.Walk { Direction = action.Direction });
                         GameManager.NextAction = Time.time + 2.5f;

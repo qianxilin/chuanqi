@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> MonsterModels;
 
+    private static MirDirection MouseDirection;
+    private static float MouseDistance;
+
     private GameObject UserGameObject;
     private Dictionary<uint, MapObject> ObjectList = new Dictionary<uint, MapObject>();
     [HideInInspector]
@@ -234,6 +237,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ObjectTurn(S.ObjectTurn p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            ob.ActionFeed.Add(new QueuedAction { Action = MirAction.Standing, Direction = p.Direction, Location = new Vector2(p.Location.X, p.Location.Y) });
+        }
+    }
+
     public void ObjectWalk(S.ObjectWalk p)
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
@@ -300,10 +311,12 @@ public class GameManager : MonoBehaviour
         ProcessScene();
     }
 
-    static MirDirection MouseDirection()
+    static void MouseUpdate()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 50);
+        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 30);
+
+        MouseDistance = Vector2.Distance(mousePosition, middle);
 
         Vector2 v2 = (mousePosition - middle);
         float angle = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
@@ -311,9 +324,10 @@ public class GameManager : MonoBehaviour
             angle = 360 + angle;
         angle = 360 - angle;
 
-        return Functions.MirDrectionFromAngle(angle);
+        MouseDirection = Functions.MirDrectionFromAngle(angle);
     }
 
+    private const float turnRange = 60f;
     public static void CheckMouseInput()
     {
         if (CurrentScene == null) return;
@@ -322,28 +336,44 @@ public class GameManager : MonoBehaviour
 
         if (User.Player.ActionFeed.Count == 0 && Time.time > InputDelay)
         {
+            MouseUpdate();
+
             if (Input.GetMouseButton(0))
             {
-                MirDirection direction = MouseDirection();
-                Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);
-                if (CanWalk(newlocation))
-                    GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation };
+                if (MouseDistance < turnRange)
+                {
+                    if (MouseDirection != User.Player.Direction)
+                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Standing, Direction = MouseDirection, Location = User.Player.CurrentLocation };
+                }
+                else
+                {
+                    Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 1);
+                    if (CanWalk(newlocation))
+                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = MouseDirection, Location = newlocation };
+                }
 
             }
             else if (Input.GetMouseButton(1))
             {
-                MirDirection direction = MouseDirection();
-                Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 1);
-                if (!User.CanRun)
+                if (MouseDistance < turnRange)
                 {
-                    if (CanWalk(newlocation))
-                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = direction, Location = newlocation };                   
+                    if (MouseDirection != User.Player.Direction)
+                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Standing, Direction = MouseDirection, Location = User.Player.CurrentLocation };
                 }
                 else
                 {
-                    Vector2 farlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, direction, 2);
-                    if (CanWalk(newlocation) && CanWalk(farlocation))
-                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Running, Direction = direction, Location = farlocation };
+                    Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 1);
+                    if (!User.CanRun)
+                    {
+                        if (CanWalk(newlocation))
+                            GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = MouseDirection, Location = newlocation };
+                    }
+                    else
+                    {
+                        Vector2 farlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 2);
+                        if (CanWalk(newlocation) && CanWalk(farlocation))
+                            GameScene.QueuedAction = new QueuedAction { Action = MirAction.Running, Direction = MouseDirection, Location = farlocation };
+                    }
                 }
             }
         }
