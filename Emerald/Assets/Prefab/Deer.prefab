@@ -63,7 +63,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.08, y: 0.31}
+  m_AnchoredPosition: {x: 0, y: 0.31}
   m_SizeDelta: {x: 40, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &245017351185194754
@@ -660,6 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd08bdc941ae8564eb3c7223cc21f27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ObjectRenderer: {fileID: 0}
   NameLabelObject: {fileID: 8972585348359723467, guid: fb59f2525fca14345afceae9453fb40a,
     type: 3}
   NameLocation: {fileID: 2465188362939274373}
@@ -669,6 +670,7 @@ MonoBehaviour:
   MoveSpeed: 1.2
   Name: 
   Light: 0
+  Dead: 0
   HealthTime: 0
   IsMoving: 0
   TargetPosition: {x: 0, y: 0, z: 0}
@@ -679,7 +681,6 @@ MonoBehaviour:
   Direction: 0
   CurrentAction: 0
   ActionType: 0
-  Dead: 0
   AttackSound: {fileID: 8300000, guid: 8ab9a5e8b53287d4ebcf93b0004b989a, type: 3}
   StruckSound: {fileID: 8300000, guid: aab61971f7a89894bb3aa4faa3b9f820, type: 3}
   DeathSound: {fileID: 8300000, guid: 20876dac81c461f49ab3e92d93340b95, type: 3}
@@ -1153,7 +1154,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d188dc62d8833d440bc468c41123dd8c, type: 2}
-  - {fileID: 2100000, guid: 9df71da1882afd347bbeabb06d042f1b, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

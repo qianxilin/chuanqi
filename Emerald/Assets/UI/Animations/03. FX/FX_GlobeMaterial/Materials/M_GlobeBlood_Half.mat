@@ -116,8 +116,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HeartbeatAmplify: 0.5
-    - _HeartbeatFreq: 1
+    - _HeartbeatAmplify: 0
+    - _HeartbeatFreq: 0
     - _HighlightPower: 16
     - _LowPercentWarn: 0.3
     - _Metallic: 0
