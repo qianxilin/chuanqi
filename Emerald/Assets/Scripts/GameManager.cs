@@ -116,6 +116,17 @@ public class GameManager : MonoBehaviour
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
     }
 
+    public void MapChanged(S.MapChanged p)
+    {
+        if (p.FileName != CurrentScene.gameObject.scene.name)
+        {
+            //Load new scene
+        }
+
+        User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
+    }
+
     public void BaseStatsInfo(S.BaseStatsInfo p)
     {
         User.CoreStats = p.Stats;
