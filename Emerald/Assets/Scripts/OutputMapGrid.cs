@@ -15,6 +15,10 @@ public class OutputMapGrid : MonoBehaviour
             AstarPath path = GameObject.Find("A*").GetComponent<AstarPath>();
             if (path != null)
             {
+                Transform startPoint = GameObject.Find("StartPoint").transform;
+                var node = path.GetNearest(startPoint.position).node;
+                List<Pathfinding.GraphNode> reachableNodes = Pathfinding.PathUtilities.GetReachableNodes(node);
+
                 Scene scene = SceneManager.GetActiveScene();
 
                 using (BinaryWriter writer = new BinaryWriter(File.Open(@".\Maps\" + scene.name + ".umap", FileMode.Create)))
@@ -24,13 +28,15 @@ public class OutputMapGrid : MonoBehaviour
                     for (int y = path.data.gridGraph.depth - 1; y >= 0; y--)
                         for (int x = 0; x < path.data.gridGraph.width; x++)
                         {
-                            writer.Write(path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].Walkable);
-                            if (path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].Walkable)
+                            bool walkable = path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].Walkable && reachableNodes.Contains(path.data.gridGraph.nodes[path.data.gridGraph.width * y + x]);
+
+                            writer.Write(walkable);
+                            if (walkable)
                             {
                                 writer.Write(path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.x / 1000f);
                                 writer.Write(path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.y / 1000f);
                                 writer.Write(path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.z / 1000f);
-                                Debug.Log("saving x: " + path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.x / 1000f + ", y: " + path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.y / 1000f + ", z: " + path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.z / 1000f);
+                                //Debug.Log("saving x: " + path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.x / 1000f + ", y: " + path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.y / 1000f + ", z: " + path.data.gridGraph.nodes[path.data.gridGraph.width * y + x].position.z / 1000f);
                             }
                         }
                 }
