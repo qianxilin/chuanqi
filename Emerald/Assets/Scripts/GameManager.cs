@@ -116,6 +116,17 @@ public class GameManager : MonoBehaviour
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
     }
 
+    public void MapChanged(S.MapChanged p)
+    {
+        if (p.FileName != CurrentScene.gameObject.scene.name)
+        {
+            //Load new scene
+        }
+
+        User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
+    }
+
     public void BaseStatsInfo(S.BaseStatsInfo p)
     {
         User.CoreStats = p.Stats;
@@ -347,9 +358,15 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 1);
-                    if (CanWalk(newlocation))
-                        GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = MouseDirection, Location = newlocation };
+                    if (!TryWalk(MouseDirection))
+                    {
+                        MirDirection newdirection = Functions.PreviousDir(MouseDirection);
+                        if (!TryWalk(newdirection))
+                        {
+                            newdirection = Functions.NextDir(MouseDirection);
+                            TryWalk(newdirection);
+                        }
+                    }
                 }
 
             }
@@ -362,21 +379,44 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Vector2 newlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 1);
-                    if (!User.CanRun)
+                    if (!User.CanRun || !TryRun(MouseDirection))
                     {
-                        if (CanWalk(newlocation))
-                            GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = MouseDirection, Location = newlocation };
-                    }
-                    else
-                    {
-                        Vector2 farlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 2);
-                        if (CanWalk(newlocation) && CanWalk(farlocation))
-                            GameScene.QueuedAction = new QueuedAction { Action = MirAction.Running, Direction = MouseDirection, Location = farlocation };
+                        if (!TryWalk(MouseDirection))
+                        {
+                            MirDirection newdirection = Functions.PreviousDir(MouseDirection);
+                            if (!TryWalk(newdirection))
+                            {
+                                newdirection = Functions.NextDir(MouseDirection);
+                                TryWalk(newdirection);
+                            }
+                        }
                     }
                 }
             }
         }
+    }
+
+    public static bool TryWalk(MirDirection dir)
+    {
+        Vector2 location = ClientFunctions.VectorMove(User.Player.CurrentLocation, dir, 1);
+        if (CanWalk(location))
+        {
+            GameScene.QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = dir, Location = location };
+            return true;
+        }
+        return false;
+    }
+
+    public static bool TryRun(MirDirection dir)
+    {
+        Vector2 location = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 1);
+        Vector2 farlocation = ClientFunctions.VectorMove(User.Player.CurrentLocation, MouseDirection, 2);
+        if (CanWalk(location) && CanWalk(farlocation))
+        {
+            GameScene.QueuedAction = new QueuedAction { Action = MirAction.Running, Direction = dir, Location = farlocation };
+            return true;
+        }
+        return false;
     }
 
     public static void AddItem(UserItem item)

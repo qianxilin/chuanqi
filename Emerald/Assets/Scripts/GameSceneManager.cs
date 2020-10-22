@@ -113,6 +113,7 @@ public class GameSceneManager : MonoBehaviour
     {
         ScrollBar.size = 0.4f;
         Network.Enqueue(new C.RequestMapInformation { });
+        Inventory.gameObject.SetActive(false);
     }
 
     void Update()

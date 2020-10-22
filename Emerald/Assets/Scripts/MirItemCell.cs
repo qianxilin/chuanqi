@@ -633,7 +633,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
                 break;
         }
 
-        GameScene.UseItemTime = Time.time + 300;
+        GameScene.UseItemTime = Time.time + 0.3f;
         PlayItemSound();
     }
 
