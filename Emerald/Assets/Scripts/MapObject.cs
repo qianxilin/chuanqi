@@ -88,7 +88,7 @@ public class MapObject : MonoBehaviour
 
             if (Vector3.Distance(StartPosition, newpos) > TargetDistance)
             {
-                transform.position = TargetPosition;
+                transform.position = new Vector3(TargetPosition.x, transform.position.y, TargetPosition.z);
                 IsMoving = false;
                 SetAction();
                 return;
