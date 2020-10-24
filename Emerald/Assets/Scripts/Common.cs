@@ -198,11 +198,11 @@ public enum IntelligentCreatureType : byte
 //TODO: add 2 missing frames in to blank frames, remove 2 duplicate frames (leaving no blanks and 2 duplicates)
 public enum Monster : ushort
 {
-    Guard = 0,
-    TaoistGuard = 1,
-    Guard2 = 2,
-    Hen = 3,
-    Deer = 4,
+    Hen = 0,
+    Deer = 1,
+    Guard = 2,
+    TaoistGuard = 3,
+    Guard2 = 4,    
     Scarecrow = 5,
     HookingCat = 6,
     RakingCat = 7,

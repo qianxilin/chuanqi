@@ -10,6 +10,7 @@ using Network = EmeraldNetwork.Network;
 using C = ClientPackets;
 using S = ServerPackets;
 using Image = UnityEngine.UI.Image;
+using Color = UnityEngine.Color;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -66,10 +67,16 @@ public class GameSceneManager : MonoBehaviour
         {
             if (value == mouseObject) return;
             if (mouseObject != null)
+            {
                 mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", 0);
+                mouseObject.ObjectRenderer.materials[1].SetColor("_ASEOutlineColor", Color.clear);
+            }
             mouseObject = value;
             if (mouseObject != null)
-                mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", 0.03f);
+            {
+                mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", mouseObject.OutlineWidth);
+                mouseObject.ObjectRenderer.materials[1].SetColor("_ASEOutlineColor", Color.red);
+            }
         }
     }
 

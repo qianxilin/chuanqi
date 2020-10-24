@@ -19,6 +19,8 @@ public class MapObject : MonoBehaviour
     public GameObject Model;
     [Range(0f, 10f)]
     public float MoveSpeed;
+    [Range(0f, 10f)]
+    public float OutlineWidth;
 
     public string Name;
     public int Light;

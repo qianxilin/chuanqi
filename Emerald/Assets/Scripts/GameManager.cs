@@ -221,7 +221,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        monster = Instantiate(MonsterModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<MonsterObject>();
+        if ((int)p.Image >= MonsterModels.Count)
+            monster = Instantiate(MonsterModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<MonsterObject>();
+        else
+            monster = Instantiate(MonsterModels[(int)p.Image], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<MonsterObject>();
         monster.Name = p.Name;
         monster.ObjectID = p.ObjectID;
         monster.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
