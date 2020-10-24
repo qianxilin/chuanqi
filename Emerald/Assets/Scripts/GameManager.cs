@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.IO;
 using Network = EmeraldNetwork.Network;
 using S = ServerPackets;
@@ -114,6 +116,30 @@ public class GameManager : MonoBehaviour
         User.Player.Camera.SetActive(true);
 
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
+    }
+
+    public void LogOutSuccess(S.LogOutSuccess p)
+    {
+        CleanUp();
+        SceneManager.UnloadScene("GameScene");
+        SceneManager.LoadScene("LoginNew");           
+    }
+
+    private void CleanUp()
+    {
+        Tooltip.cam = null;
+
+        User.gameObject.SetActive(false);
+        User.Player = null;
+        User.Inventory = new UserItem[46];
+        User.Equipment = new UserItem[14];
+        UserGameObject = null;
+
+        foreach (var ob in ObjectList.ToArray())
+            Destroy(ob.Value.gameObject);
+        ObjectList.Clear();
+
+        CurrentScene = null;
     }
 
     public void MapChanged(S.MapChanged p)

@@ -35,6 +35,7 @@ public class GameSceneManager : MonoBehaviour
     public TMP_Text StatsDisplay;
     public Renderer HPGlobe;
     public Renderer MPGlobe;
+    public MirMessageBox MessageBox;
 
     [HideInInspector]
     public InventoryController Inventory;
@@ -404,6 +405,16 @@ public class GameSceneManager : MonoBehaviour
             $"HP: {User.HP}/{User.MaxHP}" + Environment.NewLine +
             $"MP: {User.MP}/{User.MaxMP}" + Environment.NewLine +
             $"Luck: {User.Luck}";
+    }
+
+    public void LogOut_Click()
+    {
+        MessageBox.Show($"Return to Character Select?", true, true);
+        MessageBox.OK += () =>
+        {
+            Network.Enqueue(new C.LogOut());
+            FindObjectOfType<LoadScreenManager>().Show();
+        };
     }
 
 

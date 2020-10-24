@@ -70,7 +70,12 @@ public class CharSelManager : MonoBehaviour
     private GameObject inactiveLocation;
     private GameObject previewLocation;
 
-    void Start()
+    void Awake()
+    {        
+        Network.CharSelManager = this;
+    }
+
+    public void OnLoaded()
     {
         activeLocation = GameObject.Find("ActiveLocation");
         inactiveLocation = GameObject.Find("InactiveLocation");
@@ -78,11 +83,7 @@ public class CharSelManager : MonoBehaviour
         loginCamera = GameObject.Find("LoginCamera");
         LoginPosition = GameObject.Find("LoginCameraPosition").transform;
         CharSelPosition = GameObject.Find("CharSelCameraPosition").transform;
-        Network.CharSelManager = this;
-    }
 
-    public void OnLoaded()
-    {
         loginCamera.gameObject.SetActive(false);
         loginCamera.transform.SetPositionAndRotation(CharSelPosition.position, CharSelPosition.rotation);
         loginCamera.gameObject.SetActive(true);
@@ -94,6 +95,7 @@ public class CharSelManager : MonoBehaviour
         LogOutButton.gameObject.SetActive(true);
         GameManager.gameStage = GameStage.Select;
         Network.Enqueue(new C.RequestCharacters { });
+        FindObjectOfType<LoadScreenManager>().Hide();
     }
 
     public void ClearCreateBox()

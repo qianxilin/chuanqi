@@ -18,12 +18,27 @@ public class LoadScreenManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadScene(string sceneName)
+    public void Show()
     {
         slider.value = 0;
         canvas.gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        canvas.gameObject.SetActive(false);
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        Show();
 
         StartCoroutine(BeginLoad(sceneName));
+    }
+
+    void Update()
+    {
+        transform.SetAsLastSibling();
     }
 
     private IEnumerator BeginLoad(string sceneName)
@@ -40,7 +55,7 @@ public class LoadScreenManager : MonoBehaviour
 
         slider.value = operation.progress;
         operation = null;
-        canvas.gameObject.SetActive(false);
+        Hide();
         Network.Enqueue(new C.MapLoaded { });
     }    
 }

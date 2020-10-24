@@ -309,6 +309,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.UserInformation:
                     UserInformation((S.UserInformation)p);
                     break;
+                case (short)ServerPacketIds.LogOutSuccess:
+                    LogOutSuccess((S.LogOutSuccess)p);
+                    break;
                 case (short)ServerPacketIds.BaseStatsInfo:
                     BaseStatsInfo((S.BaseStatsInfo)p);
                     break;
@@ -585,6 +588,10 @@ namespace EmeraldNetwork
         public static void UserInformation(S.UserInformation p)
         {
             gameManager.UserInformation(p);
+        }
+        public static void LogOutSuccess(S.LogOutSuccess p)
+        {
+            gameManager.LogOutSuccess(p);
         }
         public static void BaseStatsInfo(S.BaseStatsInfo p)
         {

@@ -773,6 +773,7 @@ namespace Server.MirNetwork
         }
         private void RequestCharacters()
         {
+            MessageQueue.Enqueue(SessionID + ", " + IPAddress + ", Characters.");
             if (Stage != GameStage.Select) return;
 
             Envir.RequestCharacters(this);

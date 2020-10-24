@@ -14,7 +14,7 @@ public class LoginSceneChange : MonoBehaviour
     {
         loginCamera = GameObject.Find("LoginCamera");
     }
-    void ChangeScene()
+    public void ChangeScene()
     {
         audioFader.Begin();
 

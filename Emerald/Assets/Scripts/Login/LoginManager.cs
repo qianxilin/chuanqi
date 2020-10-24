@@ -32,6 +32,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField ChangeNewPassword;
     public TMP_InputField ChangeConfirmPassword;
     //Misc
+    public GameObject LoadingScreen;
     public MirMessageBox MessageBox;
     public AudioSource audioSource;
 
@@ -39,8 +40,14 @@ public class LoginManager : MonoBehaviour
 
     void Awake()
     {
-        if (GameManager.gameStage == GameStage.None)
-            GameManagement.SetActive(true);
+        switch (GameManager.gameStage)
+        {
+            case GameStage.None:
+                GameManagement.SetActive(true);
+                LoadingScreen.SetActive(true);
+                break;
+        }
+            
     }
 
     // Start is called before the first frame update
@@ -51,16 +58,23 @@ public class LoginManager : MonoBehaviour
 
     public void OnLoaded()
     {
-        loginshown = false;
-        LeftDoor.SetBool("openGate", false);
-        RightDoor.SetBool("openGate", false);
-        Camera.SetBool("openGate", false);
-        DoorFX.Stop();
-        LoginBox.SetActive(false);
-        RegisterBox.SetActive(false);
-        ConnectBox.SetActive(true);
-        audioSource.GetComponent<AudioFader>().Reset();
-        audioSource.Play();
+        if (GameManager.gameStage == GameStage.Game)
+        {
+            Camera.GetComponent<LoginSceneChange>().ChangeScene();
+        }
+        else
+        {
+            loginshown = false;
+            LeftDoor.SetBool("openGate", false);
+            RightDoor.SetBool("openGate", false);
+            Camera.SetBool("openGate", false);
+            DoorFX.Stop();
+            LoginBox.SetActive(false);
+            RegisterBox.SetActive(false);
+            ConnectBox.SetActive(true);
+            audioSource.GetComponent<AudioFader>().Reset();
+            audioSource.Play();
+        }
     }
 
     // Update is called once per frame
