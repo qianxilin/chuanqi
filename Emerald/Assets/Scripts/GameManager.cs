@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
         User.Player.Class = p.Class;
         User.Player.Gender = p.Gender;
         User.Level = p.Level;
+        User.Experience = p.Experience;
+        User.MaxExperience = p.MaxExperience;
 
         User.HP = p.HP;
         User.MP = p.MP;
@@ -284,7 +286,10 @@ public class GameManager : MonoBehaviour
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
             if (ob is ItemObject)
+            {
+                ObjectList.Remove(p.ObjectID);
                 Destroy(ob.gameObject);
+            }
             else
                 ob.gameObject.SetActive(false);
             CurrentScene.Cells[(int)ob.CurrentLocation.x, (int)ob.CurrentLocation.y].RemoveObject(ob);

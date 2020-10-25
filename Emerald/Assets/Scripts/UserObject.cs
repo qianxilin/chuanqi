@@ -54,7 +54,46 @@ public class UserObject : MonoBehaviour
     public ushort CurrentHandWeight, MaxHandWeight,
                   CurrentWearWeight, MaxWearWeight;
     public ushort CurrentBagWeight, MaxBagWeight;
-    public long Experience, MaxExperience;
+
+    private long experience;
+    public long Experience
+    {
+        get { return experience; }
+        set
+        {
+            if (experience == value) return;
+
+            experience = value;
+
+            if (maxexperience == 0) return;
+
+            float percent = experience / (float)maxexperience;
+            if (percent > 1) percent = 1;
+            if (percent < 0) percent = 0;
+
+            GameScene.ExperienceBar.fillAmount = percent;
+        }
+    }
+
+    private long maxexperience;
+    public long MaxExperience
+    {
+        get { return maxexperience; }
+        set
+        {
+            if (maxexperience == value) return;
+
+            maxexperience = value;
+
+            if (maxexperience == 0) return;
+
+            float percent = experience / (float)maxexperience;
+            if (percent > 1) percent = 1;
+            if (percent < 0) percent = 0;
+
+            GameScene.ExperienceBar.fillAmount = percent;
+        }
+    }
     public byte LifeOnHit;
 
     public byte MagicResist, PoisonResist, HealthRecovery, SpellRecovery, PoisonRecovery, CriticalRate, CriticalDamage, Holy, Freezing, PoisonAttack, HpDrainRate;
