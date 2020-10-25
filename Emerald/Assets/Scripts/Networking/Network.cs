@@ -315,6 +315,12 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.BaseStatsInfo:
                     BaseStatsInfo((S.BaseStatsInfo)p);
                     break;
+                case (short)ServerPacketIds.GainExperience:
+                    GainExperience((S.GainExperience)p);
+                    break;
+                case (short)ServerPacketIds.LevelChanged:
+                    LevelChanged((S.LevelChanged)p);
+                    break;
                 case (short)ServerPacketIds.UserLocation:
                     UserLocation((S.UserLocation)p);
                     break;
@@ -602,6 +608,14 @@ namespace EmeraldNetwork
         public static void BaseStatsInfo(S.BaseStatsInfo p)
         {
             gameManager.BaseStatsInfo(p);
+        }
+        public static void GainExperience(S.GainExperience p)
+        {
+            gameManager.GainExperience(p);
+        }
+        public static void LevelChanged(S.LevelChanged p)
+        {
+            gameManager.LevelChanged(p);
         }
         public static void UserLocation(S.UserLocation p)
         {

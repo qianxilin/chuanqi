@@ -161,6 +161,22 @@ public class GameManager : MonoBehaviour
         User.RefreshStats();
     }
 
+    public void GainExperience(S.GainExperience p)
+    {
+        User.Experience += p.Amount;
+        GameScene.ChatController.ReceiveChat($"Experience Gained {p.Amount}", ChatType.System);
+    }
+
+    public void LevelChanged(S.LevelChanged p)
+    {
+        User.Level = p.Level;
+        User.Experience = p.Experience;
+        User.MaxExperience = p.MaxExperience;
+        User.RefreshStats();
+        GameScene.UpdateCharacterIcon();
+        GameScene.ChatController.ReceiveChat("Congratulations! You have leveled up. Your HP and MP have been restored.", ChatType.System);
+    }
+
     public void UserLocation(S.UserLocation p)
     {
         NextAction = 0;
