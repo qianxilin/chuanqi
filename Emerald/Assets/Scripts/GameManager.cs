@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     public List<GameObject> WeaponModels;
 
     public List<GameObject> MonsterModels;
-    public List<GameObject> ItemModels;
 
     private static MirDirection MouseDirection;
     private static float MouseDistance;
@@ -270,12 +269,8 @@ public class GameManager : MonoBehaviour
 
     public void ObjectItem(S.ObjectItem p)
     {
-        ItemObject item = null;
-
-        if (p.Image >= ItemModels.Count)
-            item = Instantiate(ItemModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<ItemObject>();
-        else
-            item = Instantiate(ItemModels[p.Image], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<ItemObject>();
+        GameObject model = Instantiate(Resources.Load($"{p.Image}"), CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity) as GameObject;
+        ItemObject item = model.GetComponent<ItemObject>();
         item.Name = p.Name;
         item.ObjectID = p.ObjectID;
         item.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);

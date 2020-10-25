@@ -329,6 +329,7 @@ MonoBehaviour:
   Name: 
   Light: 0
   Dead: 0
+  Blocking: 1
   HealthTime: 0
   IsMoving: 0
   TargetPosition: {x: 0, y: 0, z: 0}
@@ -419,7 +420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.13899998}
+  m_AnchoredPosition: {x: 0, y: 1.3}
   m_SizeDelta: {x: 40, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3593486748843431987
