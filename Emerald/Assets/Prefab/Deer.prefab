@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd08bdc941ae8564eb3c7223cc21f27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectRenderer: {fileID: 0}
+  ObjectRenderer: {fileID: 307281757715020765}
   NameLabelObject: {fileID: 8972585348359723467, guid: fb59f2525fca14345afceae9453fb40a,
     type: 3}
   NameLocation: {fileID: 2465188362939274373}
@@ -672,6 +672,7 @@ MonoBehaviour:
   Name: 
   Light: 0
   Dead: 0
+  Blocking: 1
   HealthTime: 0
   IsMoving: 0
   TargetPosition: {x: 0, y: 0, z: 0}

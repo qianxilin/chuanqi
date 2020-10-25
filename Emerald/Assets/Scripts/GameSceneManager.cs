@@ -48,6 +48,7 @@ public class GameSceneManager : MonoBehaviour
     public bool PickedUpGold;
     [HideInInspector]
     public float UseItemTime;
+    public float PickUpTime;
 
     private MapObject targetObject;
     public MapObject TargetObject
@@ -68,16 +69,10 @@ public class GameSceneManager : MonoBehaviour
         {
             if (value == mouseObject) return;
             if (mouseObject != null)
-            {
-                mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", 0);
-                mouseObject.ObjectRenderer.materials[1].SetColor("_ASEOutlineColor", Color.clear);
-            }
+                mouseObject.OnDeSelect();
             mouseObject = value;
             if (mouseObject != null)
-            {
-                mouseObject.ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", mouseObject.OutlineWidth);
-                mouseObject.ObjectRenderer.materials[1].SetColor("_ASEOutlineColor", Color.red);
-            }
+                mouseObject.OnSelect();
         }
     }
 
@@ -151,9 +146,37 @@ public class GameSceneManager : MonoBehaviour
 
         MouseObject = GetMouseObject();
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (Time.time > PickUpTime)
+            {
+                PickUpTime = Time.time + 0.2f;
+                Network.Enqueue(new C.PickUp());
+            }
+        }
+
         if (Input.GetMouseButton(0) && !eventSystem.IsPointerOverGameObject())
         {
             GameManager.User.CanRun = false;
+
+            if (SelectedCell != null)
+            {
+                SelectedItemImage.gameObject.SetActive(false);
+
+                MessageBox.Show($"Drop {SelectedCell.Item.Name}?", true, true);
+                MessageBox.OK += () =>
+                {
+                    Network.Enqueue(new C.DropItem { UniqueID = SelectedCell.Item.UniqueID, Count = 1 });
+                    SelectedCell.Locked = true;
+                    SelectedCell = null;
+                };
+                MessageBox.Cancel += () =>
+                {
+                    SelectedCell = null;
+                };
+                return;
+            }
+
             if (MouseObject != null)
             {
                 switch (MouseObject.gameObject.layer)
@@ -208,7 +231,7 @@ public class GameSceneManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selection = hit.transform;
-            if (selection.gameObject.layer == 9/*Monster*/)
+            if (selection.gameObject.layer == 9/*Monster*/ || selection.gameObject.layer == 13/*Item*/)
                 return selection.GetComponent<MapObject>();
         }
 
@@ -355,7 +378,25 @@ public class GameSceneManager : MonoBehaviour
         if (!p.Success) return;
         if (cell.Item.Count > 1) cell.Item.Count--;
         else cell.Item = null;
-        //User.RefreshStats();
+        User.RefreshStats();
+    }
+
+    public void DropItem(S.DropItem p)
+    {
+        MirItemCell cell = GetCell(Inventory.Cells, p.UniqueID) ?? GetCell(BeltCells, p.UniqueID);
+
+        if (cell == null) return;
+
+        cell.Locked = false;
+
+        if (!p.Success) return;
+
+        if (p.Count == cell.Item.Count)
+            cell.Item = null;
+        else
+            cell.Item.Count -= p.Count;
+
+        User.RefreshStats();
     }
 
     public void NewMagic(S.NewMagic p)

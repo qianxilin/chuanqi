@@ -27,6 +27,8 @@ public class MapObject : MonoBehaviour
     [HideInInspector]
     public bool Dead;
 
+    public bool Blocking = true;
+
     private byte percentHealth;
     public byte PercentHealth
     {
@@ -67,8 +69,7 @@ public class MapObject : MonoBehaviour
 
     public virtual void Start()
     {
-        CurrentAction = MirAction.Standing;
-        ObjectRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        CurrentAction = MirAction.Standing;        
         NameLabel = Instantiate(NameLabelObject, NameLocation.position, Quaternion.identity, gameObject.transform).GetComponent<TMP_Text>();
         SetNameLabel();
     }
@@ -105,5 +106,17 @@ public class MapObject : MonoBehaviour
     public void SetNameLabel()
     {
         NameLabel.text = Name;
+    }
+
+    public virtual void OnSelect()
+    {
+        ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", OutlineWidth);
+        ObjectRenderer.materials[1].SetColor("_ASEOutlineColor", Color.red);
+    }
+
+    public virtual void OnDeSelect()
+    {
+        ObjectRenderer.materials[1].SetFloat("_ASEOutlineWidth", 0);
+        ObjectRenderer.materials[1].SetColor("_ASEOutlineColor", Color.clear);
     }
 }

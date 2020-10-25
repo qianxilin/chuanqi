@@ -107,6 +107,7 @@ public class PlayerObject : MapObject
     public override void Start()
     {        
         base.Start();
+        ObjectRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
     public override void SetAction()

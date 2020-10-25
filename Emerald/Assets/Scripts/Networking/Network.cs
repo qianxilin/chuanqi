@@ -327,6 +327,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectMonster:
                     ObjectMonster((S.ObjectMonster)p);
                     break;
+                case (short)ServerPacketIds.ObjectItem:
+                    ObjectItem((S.ObjectItem)p);
+                    break;
                 case (short)ServerPacketIds.ObjectRemove:
                     ObjectRemove((S.ObjectRemove)p);
                     break;
@@ -371,6 +374,9 @@ namespace EmeraldNetwork
                     break;
                 case (short)ServerPacketIds.UseItem:
                     UseItem((S.UseItem)p);
+                    break;
+                case (short)ServerPacketIds.DropItem:
+                    DropItem((S.DropItem)p);
                     break;
                 case (short)ServerPacketIds.PlayerUpdate:
                     UpdatePlayer((S.PlayerUpdate)p);
@@ -613,6 +619,10 @@ namespace EmeraldNetwork
         {
             gameManager.ObjectMonster(p);
         }
+        public static void ObjectItem(S.ObjectItem p)
+        {
+            gameManager.ObjectItem(p);
+        }
         public static void ObjectRemove(S.ObjectRemove p)
         {
             gameManager.ObjectRemove(p);
@@ -672,6 +682,10 @@ namespace EmeraldNetwork
         public static void UseItem(S.UseItem p)
         {
             GameManager.GameScene.UseItem(p);
+        }
+        public static void DropItem(S.DropItem p)
+        {
+            GameManager.GameScene.DropItem(p);
         }
         public static void NewMagic(S.NewMagic p)
         {

@@ -26,6 +26,22 @@ public class Cell
 
         if (CellObjects.Count == 0) CellObjects = null;
     }
+    public bool Empty
+    {
+        get
+        {
+            if (CellObjects != null)
+                for (int i = 0; i < CellObjects.Count; i++)
+                {
+                    MapObject ob = CellObjects[i];
+
+                    if (ob.Blocking)
+                        return false;
+                }
+
+            return true;
+        }
+    }
 }
 
 public class MirScene : MonoBehaviour

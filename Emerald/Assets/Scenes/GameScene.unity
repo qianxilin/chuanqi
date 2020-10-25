@@ -9913,6 +9913,7 @@ MonoBehaviour:
   - {fileID: 40540455}
   PickedUpGold: 0
   UseItemTime: 0
+  PickUpTime: 0
   NextHitTime: 0
 --- !u!1 &559825994
 GameObject:
@@ -18998,7 +18999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1222830118
@@ -30099,7 +30100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 628, y: 197}
   m_SizeDelta: {x: 428, y: 551}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121219934

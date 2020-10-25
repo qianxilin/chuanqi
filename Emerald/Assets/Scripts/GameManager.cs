@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> WeaponModels;
 
     public List<GameObject> MonsterModels;
+    public List<GameObject> ItemModels;
 
     private static MirDirection MouseDirection;
     private static float MouseDistance;
@@ -264,15 +265,33 @@ public class GameManager : MonoBehaviour
         }
         else
             CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
-        ObjectList.Add(p.ObjectID, monster);
-        
+        ObjectList.Add(p.ObjectID, monster);        
+    }
+
+    public void ObjectItem(S.ObjectItem p)
+    {
+        ItemObject item = null;
+
+        if (p.Image >= ItemModels.Count)
+            item = Instantiate(ItemModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<ItemObject>();
+        else
+            item = Instantiate(ItemModels[p.Image], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<ItemObject>();
+        item.Name = p.Name;
+        item.ObjectID = p.ObjectID;
+        item.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+
+        CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(item);
+        ObjectList.Add(p.ObjectID, item);
     }
 
     public void ObjectRemove(S.ObjectRemove p)
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
         {
-            ob.gameObject.SetActive(false);
+            if (ob is ItemObject)
+                Destroy(ob.gameObject);
+            else
+                ob.gameObject.SetActive(false);
             CurrentScene.Cells[(int)ob.CurrentLocation.x, (int)ob.CurrentLocation.y].RemoveObject(ob);
         }
     }
@@ -532,7 +551,7 @@ public class GameManager : MonoBehaviour
 
     static bool CanWalk(Vector2 location)
     {
-        return CurrentScene.Cells[(int)location.x, (int)location.y].walkable && CurrentScene.Cells[(int)location.x, (int)location.y].CellObjects == null;
+        return CurrentScene.Cells[(int)location.x, (int)location.y].walkable && CurrentScene.Cells[(int)location.x, (int)location.y].Empty;
     }    
 
     public class NetworkInfo

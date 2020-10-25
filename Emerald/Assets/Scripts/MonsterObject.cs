@@ -56,7 +56,7 @@ public class MonsterObject : MapObject
                     break;
                 case MirAction.Die:
                     AudioSource.PlayClipAtPoint(DeathSound, gameObject.transform.position);
-                    GameManager.CurrentScene.Cells[(int)CurrentLocation.x, (int)CurrentLocation.y].RemoveObject(this);
+                    Blocking = false;
                     Dead = true;
                     break;
             }
