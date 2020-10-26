@@ -352,6 +352,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DamageIndicator(S.DamageIndicator p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            switch (p.Type)
+            {
+                case DamageType.Hit:
+                case DamageType.Critical:
+                    GameScene.ShowDamage(ob.transform.position + new Vector3(0, 1f), p.Damage);
+                    break;
+            }            
+        }
+    }
+
     public void ObjectDied(S.ObjectDied p)
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))

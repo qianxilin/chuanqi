@@ -9899,6 +9899,8 @@ MonoBehaviour:
   HPGlobe: {fileID: 400287733}
   MPGlobe: {fileID: 465018913}
   MessageBox: {fileID: 1222830118}
+  DamagePopup: {fileID: 8777219049196118356, guid: a765f81e1888a2c45b068e7f080c767a,
+    type: 3}
   Inventory: {fileID: 0}
   ItemToolTip: {fileID: 675349350}
   SelectedItemImage: {fileID: 838068041}
@@ -18600,7 +18602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 486, y: 6.9}
+  m_AnchoredPosition: {x: 486, y: 6.9000015}
   m_SizeDelta: {x: 432, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160745593

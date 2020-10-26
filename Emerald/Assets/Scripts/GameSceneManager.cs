@@ -37,6 +37,7 @@ public class GameSceneManager : MonoBehaviour
     public Renderer HPGlobe;
     public Renderer MPGlobe;
     public MirMessageBox MessageBox;
+    public GameObject DamagePopup;
 
     [HideInInspector]
     public InventoryController Inventory;
@@ -457,6 +458,12 @@ public class GameSceneManager : MonoBehaviour
             Network.Enqueue(new C.LogOut());
             FindObjectOfType<LoadScreenManager>().Show();
         };
+    }
+
+    public void ShowDamage(Vector3 location, int damage)
+    {
+        DamagePopup popup = Instantiate(DamagePopup, location, Quaternion.identity).GetComponent<DamagePopup>();
+        popup.SetDamage(damage);
     }
 
 
