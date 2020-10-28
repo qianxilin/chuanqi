@@ -352,6 +352,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ObjectHealth(S.ObjectHealth p)
+    {
+        if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))
+        {
+            ob.PercentHealth = p.Percent;
+        }
+    }
+
     public void DamageIndicator(S.DamageIndicator p)
     {
         if (ObjectList.TryGetValue(p.ObjectID, out MapObject ob))

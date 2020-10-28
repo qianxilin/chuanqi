@@ -9901,6 +9901,10 @@ MonoBehaviour:
   MessageBox: {fileID: 1222830118}
   DamagePopup: {fileID: 8777219049196118356, guid: a765f81e1888a2c45b068e7f080c767a,
     type: 3}
+  RedHealthBar: {fileID: 6778446232296911919, guid: af924490c98914340a7fc4ec10df8699,
+    type: 3}
+  GreenHealthBar: {fileID: 7931675766487711685, guid: f8f8ba9854f656543a7d2369d7a93efc,
+    type: 3}
   Inventory: {fileID: 0}
   ItemToolTip: {fileID: 675349350}
   SelectedItemImage: {fileID: 838068041}

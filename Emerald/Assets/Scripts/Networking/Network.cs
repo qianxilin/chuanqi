@@ -354,6 +354,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectStruck:
                     ObjectStruck((S.ObjectStruck)p);
                     break;
+                case (short)ServerPacketIds.ObjectHealth:
+                    ObjectHealth((S.ObjectHealth)p);
+                    break;
                 case (short)ServerPacketIds.DamageIndicator:
                     DamageIndicator((S.DamageIndicator)p);
                     break;
@@ -663,6 +666,10 @@ namespace EmeraldNetwork
         public static void ObjectStruck(S.ObjectStruck p)
         {
             gameManager.ObjectStruck(p);
+        }
+        public static void ObjectHealth(S.ObjectHealth p)
+        {
+            gameManager.ObjectHealth(p);
         }
         public static void DamageIndicator(S.DamageIndicator p)
         {

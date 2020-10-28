@@ -10,6 +10,12 @@ public class MonsterObject : MapObject
     public AudioClip StruckSound;
     public AudioClip DeathSound;
 
+    public override void Start()
+    {
+        base.Start();
+        HealthBar = Instantiate(GameScene.RedHealthBar, NameLabel.transform).GetComponent<Renderer>();
+    }
+
     public override void SetAction()
     {
         if (ActionFeed.Count == 0)
@@ -57,6 +63,8 @@ public class MonsterObject : MapObject
                 case MirAction.Die:
                     AudioSource.PlayClipAtPoint(DeathSound, gameObject.transform.position);
                     Blocking = false;
+                    if (HealthBar != null)
+                        HealthBar.gameObject.SetActive(false);
                     Dead = true;
                     break;
             }

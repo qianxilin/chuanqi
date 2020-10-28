@@ -38,6 +38,8 @@ public class GameSceneManager : MonoBehaviour
     public Renderer MPGlobe;
     public MirMessageBox MessageBox;
     public GameObject DamagePopup;
+    public GameObject RedHealthBar;
+    public GameObject GreenHealthBar;
 
     [HideInInspector]
     public InventoryController Inventory;

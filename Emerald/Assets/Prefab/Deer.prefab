@@ -664,6 +664,7 @@ MonoBehaviour:
   NameLabelObject: {fileID: 8972585348359723467, guid: fb59f2525fca14345afceae9453fb40a,
     type: 3}
   NameLocation: {fileID: 2465188362939274373}
+  HealthBar: {fileID: 0}
   NameLabel: {fileID: 177940762220530538, guid: fb59f2525fca14345afceae9453fb40a,
     type: 3}
   Model: {fileID: 3866362151738514288}

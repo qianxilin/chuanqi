@@ -14,6 +14,7 @@ public class MapObject : MonoBehaviour
     public Renderer ObjectRenderer;
     public GameObject NameLabelObject;
     public Transform NameLocation;
+    public Renderer HealthBar;
     [HideInInspector]
     public TMP_Text NameLabel;
     public GameObject Model;
@@ -37,6 +38,9 @@ public class MapObject : MonoBehaviour
         {
             if (percentHealth == value) return;
             percentHealth = value;
+
+            if (HealthBar != null)
+                HealthBar.material.SetFloat("_Fill", value / 100F);
 
             if (this != GameManager.User.Player) return;
 

@@ -108,6 +108,7 @@ public class PlayerObject : MapObject
     {        
         base.Start();
         ObjectRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        HealthBar = Instantiate(GameScene.GreenHealthBar, NameLabel.transform).GetComponent<Renderer>();
     }
 
     public override void SetAction()
