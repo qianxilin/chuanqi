@@ -200,10 +200,10 @@ public enum Monster : ushort
 {
     Hen = 0,
     Deer = 1,
-    Guard = 2,
-    TaoistGuard = 3,
+    Scarecrow = 2,
+    ScarecrowBlue = 3,
     Guard2 = 4,    
-    Scarecrow = 5,
+    Guard = 5,
     HookingCat = 6,
     RakingCat = 7,
     Yob = 8,
@@ -5409,6 +5409,7 @@ public class BaseStats
                 HpGainRate = 3.25F;
                 MpGainRate = 0;
                 BagWeightGain = 4F; //done
+                WearWeightGain = 33F;
                 WearWeightGain = 33F;
                 HandWeightGain = 30F;
                 MinAc = 0;

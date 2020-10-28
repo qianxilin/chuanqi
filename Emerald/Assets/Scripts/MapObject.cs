@@ -14,7 +14,7 @@ public class MapObject : MonoBehaviour
     public Renderer ObjectRenderer;
     public GameObject NameLabelObject;
     public Transform NameLocation;
-    public Renderer HealthBar;
+    protected Renderer HealthBar;
     [HideInInspector]
     public TMP_Text NameLabel;
     public GameObject Model;
