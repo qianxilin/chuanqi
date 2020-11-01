@@ -117,7 +117,7 @@ public class UserObject : MonoBehaviour
     void Update()
     {
         float delta = Input.GetAxis("Mouse ScrollWheel");
-        if (delta != 0)
+        if (delta != 0 && !GameScene.eventSystem.IsPointerOverGameObject())
             Player.UpdateCamera(delta);
     }
 
