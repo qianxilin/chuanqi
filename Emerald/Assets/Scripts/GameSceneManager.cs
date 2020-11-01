@@ -235,8 +235,14 @@ public class GameSceneManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selection = hit.transform;
-            if (selection.gameObject.layer == 9/*Monster*/ || selection.gameObject.layer == 13/*Item*/)
-                return selection.GetComponent<MapObject>();
+
+            switch (selection.gameObject.layer)
+            {
+                case 9: //Monster
+                    return selection.GetComponentInParent<MapObject>();
+                case 13: //Item
+                    return selection.GetComponent<MapObject>();
+            }
         }
 
         return null;
