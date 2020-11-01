@@ -114,6 +114,13 @@ public class UserObject : MonoBehaviour
         GameManager.User = this;
     }
 
+    void Update()
+    {
+        float delta = Input.GetAxis("Mouse ScrollWheel");
+        if (delta != 0)
+            Player.UpdateCamera(delta);
+    }
+
     private void MPUpdated()
     {
         float percent = (byte)(mp / (float)maxmp * 100);

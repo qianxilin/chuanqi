@@ -159,7 +159,6 @@ MonoBehaviour:
   NameLabelObject: {fileID: 8972585348359723467, guid: e35d53eb7d2d0c143a86037f33b2f579,
     type: 3}
   NameLocation: {fileID: 6531817618612059206}
-  HealthBar: {fileID: 0}
   NameLabel: {fileID: 0}
   Model: {fileID: 8447126569704725765}
   MoveSpeed: 1.4

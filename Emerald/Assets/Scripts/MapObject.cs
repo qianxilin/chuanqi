@@ -78,7 +78,7 @@ public class MapObject : MonoBehaviour
         SetNameLabel();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (CurrentAction == MirAction.Standing)
         {

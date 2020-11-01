@@ -411,7 +411,7 @@ public class GameManager : MonoBehaviour
     static void MouseUpdate()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 30);
+        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 10);
 
         MouseDistance = Vector2.Distance(mousePosition, middle);
 

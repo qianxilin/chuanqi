@@ -10,7 +10,8 @@ public class PlayerObject : MapObject
     [HideInInspector]
     public GameManager gameManager;
 
-    public GameObject Camera;    
+    public GameObject Camera;
+    private float camerazoom;
     [HideInInspector]
     public MirClass Class;
     [HideInInspector]
@@ -109,6 +110,18 @@ public class PlayerObject : MapObject
         base.Start();
         ObjectRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         HealthBar = Instantiate(GameScene.GreenHealthBar, NameLabel.transform).GetComponent<Renderer>();
+        Camera.transform.LookAt(Model.transform);
+    }
+
+    public void UpdateCamera(float delta)
+    {
+        float oldzoom = camerazoom;
+        camerazoom = Mathf.Clamp(camerazoom + delta * 4f, -0.5f, 12f);
+        float moved = camerazoom - oldzoom;
+        if (moved == 0) return;
+
+        Camera.transform.Translate(0f, -moved, moved);
+        Camera.transform.LookAt(Model.transform);
     }
 
     public override void SetAction()
