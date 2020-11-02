@@ -12,7 +12,7 @@ public class OutputMapGrid : MonoBehaviour
     {
         if (Application.isEditor)
         {
-            AstarPath path = GameObject.Find("A*").GetComponent<AstarPath>();
+            AstarPath path = GetComponent<AstarPath>();
             if (path != null)
             {
                 Transform startPoint = GameObject.Find("StartPoint").transform;

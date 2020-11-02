@@ -3,7 +3,12 @@ guid: 2a84765e4fc547846a8cba9ade532ad8
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PMT_Light_snow
+    second: {fileID: 2100000, guid: f9721964daf8f3a4cb24fad49c3747f8, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
