@@ -29,11 +29,11 @@ public class LoadScreenManager : MonoBehaviour
         canvas.gameObject.SetActive(false);
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName, string fileName)
     {
         Show();
 
-        StartCoroutine(BeginLoad(sceneName));
+        StartCoroutine(BeginLoad(sceneName, fileName));
     }
 
     void Update()
@@ -41,7 +41,7 @@ public class LoadScreenManager : MonoBehaviour
         transform.SetAsLastSibling();
     }
 
-    private IEnumerator BeginLoad(string sceneName)
+    private IEnumerator BeginLoad(string sceneName, string fileName)
     {       
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
@@ -53,6 +53,7 @@ public class LoadScreenManager : MonoBehaviour
             yield return null;
         }
 
+        GameManager.CurrentScene.LoadMap(fileName);
         slider.value = operation.progress;
         operation = null;
         Hide();

@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static bool UIDragging;
 
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -78,7 +79,14 @@ public class GameManager : MonoBehaviour
 
     public void MapInformation(S.MapInformation p)
     {
-        FindObjectOfType<LoadScreenManager>().LoadScene(p.FileName);
+        foreach (var ob in ObjectList.ToArray())
+            Destroy(ob.Value.gameObject);
+        ObjectList.Clear();
+
+        if (CurrentScene != null && CurrentScene.gameObject.scene.name == p.SceneName)
+            CurrentScene.LoadMap(p.FileName);
+        else
+            FindObjectOfType<LoadScreenManager>().LoadScene(p.SceneName, p.FileName);
     }
 
     public void UserInformation(S.UserInformation p)
@@ -146,12 +154,14 @@ public class GameManager : MonoBehaviour
 
     public void MapChanged(S.MapChanged p)
     {
-        if (p.FileName != CurrentScene.gameObject.scene.name)
+        if (p.FileName != CurrentScene.FileName)
         {
-            //Load new scene
+            CurrentScene.LoadMap(p.FileName);
         }
 
-        User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        ClearAction();
+
+        User.Player.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);        
         UserGameObject.transform.position = CurrentScene.Cells[(int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y].position;
     }
 
@@ -585,6 +595,16 @@ public class GameManager : MonoBehaviour
     {
         if (Time.time > User.LastRunTime + 1f)
             User.CanRun = false;
+    }
+
+    void ClearAction()
+    {
+        GameScene.QueuedAction = null;
+        InputDelay = 0;
+        NextAction = 0;
+        User.Player.ActionFeed.Clear();        
+        User.Player.IsMoving = false;
+        User.Player.CurrentAction = MirAction.Standing;
     }
 
     static bool CanWalk(Vector2 location)

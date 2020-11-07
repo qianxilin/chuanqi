@@ -19,7 +19,7 @@ namespace Server.MirDatabase
         }
 
         public int Index;
-        public string FileName = string.Empty, Title = string.Empty;
+        public string FileName = string.Empty, Title = string.Empty, SceneName = string.Empty;
         public ushort MiniMap, BigMap, Music;
         public LightSetting Light;
         public byte MapDarkLight = 0, MineIndex = 0;
@@ -49,6 +49,8 @@ namespace Server.MirDatabase
         {
             Index = reader.ReadInt32();
             FileName = reader.ReadString();
+            if (Envir.LoadVersion > 79)
+                SceneName = reader.ReadString();
             Title = reader.ReadString();
             MiniMap = reader.ReadUInt16();
             Light = (LightSetting) reader.ReadByte();
@@ -123,6 +125,7 @@ namespace Server.MirDatabase
         {
             writer.Write(Index);
             writer.Write(FileName);
+            writer.Write(SceneName);
             writer.Write(Title);
             writer.Write(MiniMap);
             writer.Write((byte)Light);

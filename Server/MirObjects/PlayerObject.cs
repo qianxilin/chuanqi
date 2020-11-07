@@ -2283,6 +2283,7 @@ namespace Server.MirObjects
             Enqueue(new S.MapChanged
             {
                 FileName = CurrentMap.Info.FileName,
+                SceneName = CurrentMap.Info.SceneName,
                 Title = CurrentMap.Info.Title,
                 MiniMap = CurrentMap.Info.MiniMap,
                 BigMap = CurrentMap.Info.BigMap,
@@ -2338,6 +2339,7 @@ namespace Server.MirObjects
             Enqueue(new S.MapChanged
             {
                 FileName = CurrentMap.Info.FileName,
+                SceneName = CurrentMap.Info.SceneName,
                 Title = CurrentMap.Info.Title,
                 MiniMap = CurrentMap.Info.MiniMap,
                 BigMap = CurrentMap.Info.BigMap,
@@ -2442,6 +2444,7 @@ namespace Server.MirObjects
             Enqueue(new S.MapInformation
             {
                 FileName = CurrentMap.Info.FileName,
+                SceneName = CurrentMap.Info.SceneName,
                 Title = CurrentMap.Info.Title,
                 MiniMap = CurrentMap.Info.MiniMap,
                 Lights = CurrentMap.Info.Light,
@@ -9770,6 +9773,7 @@ namespace Server.MirObjects
             Enqueue(new S.MapChanged
             {
                 FileName = CurrentMap.Info.FileName,
+                SceneName = CurrentMap.Info.SceneName,
                 Title = CurrentMap.Info.Title,
                 MiniMap = CurrentMap.Info.MiniMap,
                 BigMap = CurrentMap.Info.BigMap,
@@ -9823,6 +9827,7 @@ namespace Server.MirObjects
             Enqueue(new S.MapChanged
             {
                 FileName = CurrentMap.Info.FileName,
+                SceneName = CurrentMap.Info.SceneName,
                 Title = CurrentMap.Info.Title,
                 MiniMap = CurrentMap.Info.MiniMap,
                 BigMap = CurrentMap.Info.BigMap,

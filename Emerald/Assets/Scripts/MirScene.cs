@@ -49,15 +49,21 @@ public class MirScene : MonoBehaviour
     private int Width;
     private int Height;
     public Cell[,] Cells;
+    public string FileName;
 
     // Start is called before the first frame update
     void Awake()
     {
-        GameManager.CurrentScene = this;
+        GameManager.CurrentScene = this;        
+    }
 
-        string fileName = Path.Combine(Directory.GetCurrentDirectory(), "Maps", gameObject.scene.name + ".map");
+    public void LoadMap(string fName)
+    {
+        string fileName = Path.Combine(Directory.GetCurrentDirectory(), "Maps", fName + ".map");
         if (File.Exists(fileName))
         {
+            FileName = fName;
+
             byte[] fileBytes = File.ReadAllBytes(fileName);
             int offSet = 0;
             Width = BitConverter.ToInt32(fileBytes, offSet);

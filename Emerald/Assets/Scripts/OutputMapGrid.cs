@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class OutputMapGrid : MonoBehaviour
 {
+    public GameObject StartPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,13 +16,10 @@ public class OutputMapGrid : MonoBehaviour
             AstarPath path = GetComponent<AstarPath>();
             if (path != null)
             {
-                Transform startPoint = GameObject.Find("StartPoint").transform;
-                var node = path.GetNearest(startPoint.position).node;
+                var node = path.GetNearest(StartPoint.transform.position).node;
                 List<Pathfinding.GraphNode> reachableNodes = Pathfinding.PathUtilities.GetReachableNodes(node);
 
-                Scene scene = SceneManager.GetActiveScene();
-
-                using (BinaryWriter writer = new BinaryWriter(File.Open(@".\Maps\" + scene.name + ".umap", FileMode.Create)))
+                using (BinaryWriter writer = new BinaryWriter(File.Open(@".\Maps\" + gameObject.name + ".umap", FileMode.Create)))
                 {
                     writer.Write(path.data.gridGraph.width);
                     writer.Write(path.data.gridGraph.depth);

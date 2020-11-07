@@ -439,6 +439,7 @@ namespace ServerPackets
         }
 
         public string FileName = string.Empty;
+        public string SceneName = string.Empty;
         public string Title = string.Empty;
         public ushort MiniMap, BigMap, Music;
         public LightSetting Lights;
@@ -448,6 +449,7 @@ namespace ServerPackets
         protected override void ReadPacket(BinaryReader reader)
         {
             FileName = reader.ReadString();
+            SceneName = reader.ReadString();
             Title = reader.ReadString();
             MiniMap = reader.ReadUInt16();
             BigMap = reader.ReadUInt16();
@@ -462,6 +464,7 @@ namespace ServerPackets
         protected override void WritePacket(BinaryWriter writer)
         {
             writer.Write(FileName);
+            writer.Write(SceneName);
             writer.Write(Title);
             writer.Write(MiniMap);
             writer.Write(BigMap);
@@ -2530,6 +2533,7 @@ namespace ServerPackets
         }
 
         public string FileName = string.Empty;
+        public string SceneName = string.Empty;
         public string Title = string.Empty;
         public ushort MiniMap, BigMap, Music;
         public LightSetting Lights;
@@ -2541,6 +2545,7 @@ namespace ServerPackets
         protected override void ReadPacket(BinaryReader reader)
         {
             FileName = reader.ReadString();
+            SceneName = reader.ReadString();
             Title = reader.ReadString();
             MiniMap = reader.ReadUInt16();
             BigMap = reader.ReadUInt16();
@@ -2553,6 +2558,7 @@ namespace ServerPackets
         protected override void WritePacket(BinaryWriter writer)
         {
             writer.Write(FileName);
+            writer.Write(SceneName);
             writer.Write(Title);
             writer.Write(MiniMap);
             writer.Write(BigMap);

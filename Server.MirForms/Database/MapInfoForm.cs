@@ -107,6 +107,7 @@ namespace Server
 
             MapIndexTextBox.Text = mi.Index.ToString();
             FileNameTextBox.Text = mi.FileName;
+            SceneNameTextBox.Text = mi.SceneName;
             MapNameTextBox.Text = mi.Title;
             MiniMapTextBox.Text = mi.MiniMap.ToString();
             BigMapTextBox.Text = mi.BigMap.ToString();
@@ -146,6 +147,7 @@ namespace Server
 
                 if (MapIndexTextBox.Text != mi.Index.ToString()) MapIndexTextBox.Text = string.Empty;
                 if (FileNameTextBox.Text != mi.FileName) FileNameTextBox.Text = string.Empty;
+                if (SceneNameTextBox.Text != mi.SceneName) SceneNameTextBox.Text = string.Empty;
                 if (MapNameTextBox.Text != mi.Title) MapNameTextBox.Text = string.Empty;
                 if (MiniMapTextBox.Text != mi.MiniMap.ToString()) MiniMapTextBox.Text = string.Empty;
                 if (BigMapTextBox.Text != mi.BigMap.ToString()) BigMapTextBox.Text = string.Empty;
@@ -1708,6 +1710,14 @@ namespace Server
             if (ActiveControl != sender) return;
             for (int i = 0; i < _selectedMapInfos.Count; i++)
                 _selectedMapInfos[i].NoReincarnation = NoReincarnation.Checked;
+        }
+
+        private void SceneNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ActiveControl != sender) return;
+
+            for (int i = 0; i < _selectedMapInfos.Count; i++)
+                _selectedMapInfos[i].SceneName = ActiveControl.Text;
         }
     }
 }
