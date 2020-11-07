@@ -161,7 +161,7 @@ MonoBehaviour:
   NameLocation: {fileID: 6531817618612059206}
   NameLabel: {fileID: 0}
   Model: {fileID: 8447126569704725765}
-  MoveSpeed: 1.4
+  MoveSpeed: 1.2
   OutlineWidth: 0
   Name: 
   Light: 0
