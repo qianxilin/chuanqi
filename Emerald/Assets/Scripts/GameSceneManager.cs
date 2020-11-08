@@ -232,7 +232,8 @@ public class GameSceneManager : MonoBehaviour
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        int mask = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Item"));
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
             var selection = hit.transform;
 
