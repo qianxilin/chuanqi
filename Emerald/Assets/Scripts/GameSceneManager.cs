@@ -18,6 +18,7 @@ public class GameSceneManager : MonoBehaviour
     {
         get { return GameManager.User; }
     }
+    private int TargettableLayerMask;
 
     public TMP_InputField ChatBar;      
     public Scrollbar ScrollBar;
@@ -113,7 +114,8 @@ public class GameSceneManager : MonoBehaviour
 
     void Awake()
     {
-        GameManager.GameScene = this;             
+        GameManager.GameScene = this;
+        TargettableLayerMask = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Item"));
     }
 
     void Start()
@@ -232,8 +234,7 @@ public class GameSceneManager : MonoBehaviour
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        int mask = (1 << LayerMask.NameToLayer("Monster")) | (1 << LayerMask.NameToLayer("Item"));
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, TargettableLayerMask))
         {
             var selection = hit.transform;
 
