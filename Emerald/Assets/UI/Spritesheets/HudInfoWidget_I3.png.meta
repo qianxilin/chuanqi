@@ -104,6 +104,12 @@ TextureImporter:
   - first:
       213: 9005021316361149537
     second: HudInfoWidget_I3_29
+  - first:
+      213: -5218908013776582733
+    second: HudInfoWidget_I3_30
+  - first:
+      213: -1447212696765229252
+    second: HudInfoWidget_I3_31
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -144,7 +150,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -814,6 +820,48 @@ TextureImporter:
       bones: []
       spriteID: 16cd6843d2348fc70800000000000000
       internalID: 9005021316361149537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_30
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 55
+        width: 112
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b7486bffc6b297b0800000000000000
+      internalID: -5218908013776582733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HudInfoWidget_I3_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 55
+        width: 110
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c379fde48b77aebe0800000000000000
+      internalID: -1447212696765229252
       vertices: []
       indices: 
       edges: []
