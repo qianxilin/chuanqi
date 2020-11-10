@@ -161,6 +161,38 @@ public class GameSceneManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            if (Input.GetMouseButton(0))
+            {
+                if (!eventSystem.IsPointerOverGameObject() && CanAttack())
+                {
+                    GameManager.InputDelay = Time.time + 0.5f;
+                    NextHitTime = Time.time + 1.6f;
+                    QueuedAction = new QueuedAction { Action = MirAction.Attack, Direction = GameManager.MouseUpdate(), Location = User.Player.CurrentLocation };                   
+                }
+                return;
+            }
+            else if (TargetObject != null && !(TargetObject is MonsterObject) && !TargetObject.Dead && TargetObject.gameObject.activeSelf && CanAttack())
+            {
+                Point self = new Point((int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y);
+                Point targ = new Point((int)TargetObject.CurrentLocation.x, (int)TargetObject.CurrentLocation.y);
+                if (Functions.InRange(self, targ, 1))
+                {
+                    NextHitTime = Time.time + 1.6f;
+                    MirDirection direction = Functions.DirectionFromPoint(self, targ);
+                    QueuedAction = new QueuedAction { Action = MirAction.Attack, Direction = direction, Location = User.Player.CurrentLocation };
+                    return;
+                }
+
+                MirDirection targetdirection = Functions.DirectionFromPoint(self, targ);
+
+                if (!CanWalk(targetdirection)) return;
+
+                QueuedAction = new QueuedAction { Action = MirAction.Walking, Direction = targetdirection, Location = ClientFunctions.VectorMove(User.Player.CurrentLocation, targetdirection, 1) };
+            }
+        }
+
         if (Input.GetMouseButton(0) && !eventSystem.IsPointerOverGameObject())
         {
             GameManager.User.CanRun = false;
@@ -203,7 +235,7 @@ public class GameSceneManager : MonoBehaviour
         else
         {
             GameManager.User.CanRun = false;
-            if (TargetObject != null && !TargetObject.Dead && TargetObject.gameObject.activeSelf && CanAttack())
+            if (TargetObject != null && TargetObject is MonsterObject && !TargetObject.Dead && TargetObject.gameObject.activeSelf && CanAttack())
             {
                 Point self = new Point((int)User.Player.CurrentLocation.x, (int)User.Player.CurrentLocation.y);
                 Point targ = new Point((int)TargetObject.CurrentLocation.x, (int)TargetObject.CurrentLocation.y);

@@ -418,7 +418,7 @@ public class GameManager : MonoBehaviour
         ProcessScene();
     }
 
-    static void MouseUpdate()
+    public static MirDirection MouseUpdate()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 10);
@@ -432,6 +432,8 @@ public class GameManager : MonoBehaviour
         angle = 360 - angle;
 
         MouseDirection = Functions.MirDrectionFromAngle(angle);
+
+        return MouseDirection;
     }
 
     private const float turnRange = 60f;
