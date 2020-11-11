@@ -333,6 +333,9 @@ namespace EmeraldNetwork
                 case (short)ServerPacketIds.ObjectMonster:
                     ObjectMonster((S.ObjectMonster)p);
                     break;
+                case (short)ServerPacketIds.ObjectNpc:
+                    ObjectNPC((S.ObjectNPC)p);
+                    break;
                 case (short)ServerPacketIds.ObjectItem:
                     ObjectItem((S.ObjectItem)p);
                     break;
@@ -638,6 +641,10 @@ namespace EmeraldNetwork
         public static void ObjectMonster(S.ObjectMonster p)
         {
             gameManager.ObjectMonster(p);
+        }
+        public static void ObjectNPC(S.ObjectNPC p)
+        {
+            gameManager.ObjectNPC(p);
         }
         public static void ObjectItem(S.ObjectItem p)
         {

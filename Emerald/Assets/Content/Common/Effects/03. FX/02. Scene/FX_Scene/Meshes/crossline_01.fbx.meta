@@ -3,7 +3,12 @@ guid: 2c7e941098a8a5e42a8f058847d0c1df
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PMT_Light
+    second: {fileID: 2100000, guid: f1c05c89d252d1741ba4c01ade11889f, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

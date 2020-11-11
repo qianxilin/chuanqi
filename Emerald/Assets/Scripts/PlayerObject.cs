@@ -11,6 +11,7 @@ public class PlayerObject : MapObject
     public GameManager gameManager;
 
     public GameObject Camera;
+    public GameObject MiniMapCamera;
     private float camerazoom;
     [HideInInspector]
     public MirClass Class;

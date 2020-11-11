@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> WeaponModels;
 
     public List<GameObject> MonsterModels;
+    public List<GameObject> NPCModels;
 
     private static MirDirection MouseDirection;
     private static float MouseDistance;
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour
 
         ObjectList.Add(p.ObjectID, User.Player);
         User.Player.Camera.SetActive(true);
+        User.Player.MiniMapCamera.SetActive(true);
 
         Tooltip.cam = User.Player.Camera.GetComponent<Camera>();
     }
@@ -293,6 +295,37 @@ public class GameManager : MonoBehaviour
         else
             CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(monster);
         ObjectList.Add(p.ObjectID, monster);        
+    }
+
+    public void ObjectNPC(S.ObjectNPC p)
+    {
+        MapObject ob;
+        NPCObject npc;
+
+        if (ObjectList.TryGetValue(p.ObjectID, out ob))
+        {
+            npc = (NPCObject)ob;
+            npc.Name = p.Name;
+            npc.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+            npc.Direction = p.Direction;
+            npc.transform.position = CurrentScene.Cells[p.Location.X, p.Location.Y].position;
+            npc.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+            npc.gameObject.SetActive(true);
+            CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(npc);
+            return;
+        }
+
+        if (p.Image >= NPCModels.Count)
+            npc = Instantiate(NPCModels[0], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<NPCObject>();
+        else
+            npc = Instantiate(NPCModels[p.Image], CurrentScene.Cells[p.Location.X, p.Location.Y].position, Quaternion.identity).GetComponent<NPCObject>();
+        npc.Name = p.Name;
+        npc.ObjectID = p.ObjectID;
+        npc.CurrentLocation = new Vector2(p.Location.X, p.Location.Y);
+        npc.Direction = p.Direction;
+        npc.Model.transform.rotation = ClientFunctions.GetRotation(p.Direction);
+        CurrentScene.Cells[p.Location.X, p.Location.Y].AddObject(npc);
+        ObjectList.Add(p.ObjectID, npc);
     }
 
     public void ObjectItem(S.ObjectItem p)
