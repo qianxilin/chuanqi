@@ -98,10 +98,10 @@ public class GameManager : MonoBehaviour
         User.Player = UserGameObject.GetComponent<PlayerObject>();
         User.Player.ObjectID = p.ObjectID;
         User.Player.ObjectID = p.ObjectID;
-        User.Player.Name = p.Name;
-        User.Player.Class = p.Class;
+        User.SetName(p.Name);
+        User.SetClass(p.Class);
         User.Player.Gender = p.Gender;
-        User.Level = p.Level;
+        User.SetLevel(p.Level);
         User.Experience = p.Experience;
         User.MaxExperience = p.MaxExperience;
 
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
 
     public void LevelChanged(S.LevelChanged p)
     {
-        User.Level = p.Level;
+        User.SetLevel(p.Level);
         User.Experience = p.Experience;
         User.MaxExperience = p.MaxExperience;
         User.RefreshStats();

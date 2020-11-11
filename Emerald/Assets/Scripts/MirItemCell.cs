@@ -17,8 +17,9 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
         get { return GameManager.User; }
     }
 
-    private Image ItemImage;
+    public Image ItemImage;
     public Sprite IconImage;
+    public Image HighlightImage;
 
     private static Color VisibleColor = new Color(255, 255, 255, 255);
     private static Color HideColor = new Color(255, 255, 255, 0);
@@ -121,7 +122,6 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
-        ItemImage = gameObject.GetComponent<Image>();
         Redraw();
     }
 
@@ -1083,6 +1083,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
 
     public void ShowTooltip()
     {
+        HighlightImage.gameObject.SetActive(true);
         if (Item == null) return;
         GameScene.ItemToolTip.Item = Item;
         GameScene.ItemToolTip.Show();
@@ -1090,6 +1091,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
 
     public void HideTooltip()
     {
+        HighlightImage.gameObject.SetActive(false);
         GameScene.ItemToolTip.Hide();
     }
 }

@@ -121,6 +121,28 @@ public class UserObject : MonoBehaviour
             Player.UpdateCamera(delta);
     }
 
+    public void SetName(string name)
+    {
+        GameScene.CharacterDialog.SetPlayerNameText(name);
+
+        if (Player == null) return;
+        Player.Name = name;
+    }
+
+    public void SetLevel(ushort level)
+    {
+        GameScene.CharacterDialog.SetLevelText(level);
+        Level = level;
+    }
+
+    public void SetClass(MirClass c)
+    {
+        GameScene.CharacterDialog.SetClassText(c);
+
+        if (Player == null) return;
+        Player.Class = c;
+    }
+
     private void MPUpdated()
     {
         float percent = (byte)(mp / (float)maxmp * 100);

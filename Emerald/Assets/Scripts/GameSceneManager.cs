@@ -41,6 +41,8 @@ public class GameSceneManager : MonoBehaviour
     public GameObject DamagePopup;
     public GameObject RedHealthBar;
     public GameObject GreenHealthBar;
+    [SerializeField]
+    public CharacterWindow CharacterDialog;
 
     [HideInInspector]
     public InventoryController Inventory;
