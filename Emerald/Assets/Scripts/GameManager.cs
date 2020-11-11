@@ -421,7 +421,7 @@ public class GameManager : MonoBehaviour
     public static MirDirection MouseUpdate()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2 + 10);
+        Vector2 middle = new Vector2(Screen.width / 2, Screen.height / 2);
 
         MouseDistance = Vector2.Distance(mousePosition, middle);
 
@@ -602,11 +602,12 @@ public class GameManager : MonoBehaviour
     void ClearAction()
     {
         GameScene.QueuedAction = null;
-        InputDelay = 0;
+        InputDelay = Time.time + 0.5f;
         NextAction = 0;
         User.Player.ActionFeed.Clear();        
         User.Player.IsMoving = false;
         User.Player.CurrentAction = MirAction.Standing;
+        User.Player.GetComponentInChildren<Animator>().Play("Idle", -1, 0f);
     }
 
     static bool CanWalk(Vector2 location)
