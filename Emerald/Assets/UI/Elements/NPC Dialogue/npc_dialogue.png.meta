@@ -8,6 +8,27 @@ TextureImporter:
   - first:
       213: -7517653993727453333
     second: npc_dialogue_1
+  - first:
+      213: -7977551241361130762
+    second: npc_dialogue_2
+  - first:
+      213: -3891744579002945780
+    second: npc_dialogue_3
+  - first:
+      213: -7127777191637942203
+    second: npc_dialogue_4
+  - first:
+      213: 3595286311209361589
+    second: npc_dialogue_5
+  - first:
+      213: -2172796775867288911
+    second: npc_dialogue_6
+  - first:
+      213: -6230859010168476766
+    second: npc_dialogue_7
+  - first:
+      213: -7161276587526287142
+    second: npc_dialogue_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -101,7 +122,7 @@ TextureImporter:
         width: 671
         height: 154
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -122,7 +143,7 @@ TextureImporter:
         width: 671
         height: 134
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -130,6 +151,153 @@ TextureImporter:
       bones: []
       spriteID: b67149fd58deba790800000000000000
       internalID: -7517653993727453333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_2
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 138
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fa7131b96b0a4190800000000000000
+      internalID: -7977551241361130762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_3
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 138
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f2afbbceebdf9c0800000000000000
+      internalID: -3891744579002945780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 138
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5400a46a86c051d90800000000000000
+      internalID: -7127777191637942203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 138
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b06575f9d505e130800000000000000
+      internalID: 3595286311209361589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_6
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 138
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b2f05528dca8d1e0800000000000000
+      internalID: -2172796775867288911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_7
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 186
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2abad552eba8789a0800000000000000
+      internalID: -6230859010168476766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npc_dialogue_8
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 173
+        width: 670
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad09c2eb2e80e9c90800000000000000
+      internalID: -7161276587526287142
       vertices: []
       indices: 
       edges: []
