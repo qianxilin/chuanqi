@@ -19,7 +19,7 @@ public class OutputMapGrid : MonoBehaviour
                 var node = path.GetNearest(StartPoint.transform.position).node;
                 List<Pathfinding.GraphNode> reachableNodes = Pathfinding.PathUtilities.GetReachableNodes(node);
 
-                using (BinaryWriter writer = new BinaryWriter(File.Open(@".\Maps\" + gameObject.name + ".umap", FileMode.Create)))
+                using (BinaryWriter writer = new BinaryWriter(File.Open(@".\Maps\" + gameObject.name + ".map", FileMode.Create)))
                 {
                     writer.Write(path.data.gridGraph.width);
                     writer.Write(path.data.gridGraph.depth);
