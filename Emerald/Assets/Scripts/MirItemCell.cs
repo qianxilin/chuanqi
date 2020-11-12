@@ -122,6 +122,7 @@ public class MirItemCell : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
+        ItemImage.rectTransform.sizeDelta = GetComponent<RectTransform>().sizeDelta;
         Redraw();
     }
 
